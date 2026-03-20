@@ -13,6 +13,13 @@ function createWindow() {
     height: 900,
     backgroundColor: '#0A0800',
     show: false,
+    frame: false,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+      color: '#0A0800',
+      symbolColor: '#EAB308',
+      height: 36
+    },
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       contextIsolation: true,

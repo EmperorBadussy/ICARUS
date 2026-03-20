@@ -137,7 +137,26 @@ export default function App() {
   if (!booted) return <BootSequence onComplete={() => setBooted(true)} />
 
   return (
-    <div className="w-full h-full flex" style={{ background: '#0A0800' }}>
+    <div className="w-full h-full flex flex-col" style={{ background: '#0A0800' }}>
+      {/* Custom drag bar — replaces Windows title bar */}
+      <div
+        className="w-full h-9 flex items-center px-4 select-none shrink-0"
+        style={{
+          WebkitAppRegion: 'drag' as any,
+          background: 'rgba(10,8,0,0.95)',
+          borderBottom: '1px solid rgba(234,179,8,0.08)',
+          zIndex: 999
+        }}
+      >
+        <Feather size={14} className="text-gold-core mr-2" style={{ color: '#EAB308' }} />
+        <span style={{ fontFamily: "'Orbitron', monospace", fontSize: '0.6rem', color: '#EAB308', letterSpacing: '0.2em', fontWeight: 700 }}>
+          ICARUS
+        </span>
+        <span style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '0.5rem', color: 'rgba(234,179,8,0.3)', marginLeft: '8px' }}>
+          v1.0.0
+        </span>
+      </div>
+      <div className="flex-1 flex overflow-hidden">
       <WaxParticles />
       <Sidebar />
       <main className="flex-1 h-full overflow-hidden relative" style={{ zIndex: 1 }}>
@@ -154,6 +173,7 @@ export default function App() {
           </motion.div>
         </AnimatePresence>
       </main>
+      </div>
     </div>
   )
 }
