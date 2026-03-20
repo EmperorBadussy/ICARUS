@@ -213,20 +213,20 @@ const FLIPPER_SCRIPT = path.join(__dirname, '..', '..', 'src', 'main', 'flipper-
 
 function runFlipperCommand(args: string, options?: { input?: string; timeout?: number }): string {
   const timeout = options?.timeout || 5000
-  // Try python3 first, fall back to python
-  try {
-    return execSync(`python3 "${FLIPPER_SCRIPT}" ${args}`, {
-      timeout,
-      input: options?.input,
-      encoding: 'utf-8'
-    }).trim()
-  } catch {
-    return execSync(`python "${FLIPPER_SCRIPT}" ${args}`, {
-      timeout,
-      input: options?.input,
-      encoding: 'utf-8'
-    }).trim()
+  const cmds = ['python', 'python3', 'py']
+  for (const cmd of cmds) {
+    try {
+      return execSync(`${cmd} "${FLIPPER_SCRIPT}" ${args}`, {
+        timeout,
+        input: options?.input,
+        encoding: 'utf-8',
+        windowsHide: true
+      }).trim()
+    } catch {
+      continue
+    }
   }
+  return JSON.stringify({ error: 'Python not found' })
 }
 
 ipcMain.handle('flipper:detect', async () => {
