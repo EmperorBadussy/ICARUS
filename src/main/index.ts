@@ -3,6 +3,7 @@ import { join } from 'path'
 import * as path from 'path'
 import { readFile, writeFile } from 'fs/promises'
 import * as fs from 'fs'
+import { execSync } from 'child_process'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -199,98 +200,65 @@ ipcMain.handle('clipboard:write', async (_e, text: string) => {
   }
 })
 
-// === Flipper Zero IPC Handlers ===
+// === Flipper Zero Serial IPC Handlers ===
 
-function listPayloadFiles(dir: string): Array<{name: string, path: string, category: string, size: number}> {
-  const results: Array<{name: string, path: string, category: string, size: number}> = []
-  if (!fs.existsSync(dir)) return results
+const FLIPPER_SCRIPT = path.join(__dirname, '..', '..', 'src', 'main', 'flipper-serial.py')
 
-  const entries = fs.readdirSync(dir, { withFileTypes: true })
-  for (const entry of entries) {
-    if (entry.isDirectory()) {
-      const subEntries = fs.readdirSync(path.join(dir, entry.name))
-      for (const file of subEntries) {
-        const filePath = path.join(dir, entry.name, file)
-        const stat = fs.statSync(filePath)
-        if (stat.isFile() && file.endsWith('.txt')) {
-          results.push({ name: file, path: filePath, category: entry.name, size: stat.size })
-        }
-      }
-    } else if (entry.isFile() && entry.name.endsWith('.txt')) {
-      const filePath = path.join(dir, entry.name)
-      const stat = fs.statSync(filePath)
-      results.push({ name: entry.name, path: filePath, category: 'uncategorized', size: stat.size })
-    }
+function runFlipperCommand(args: string, options?: { input?: string; timeout?: number }): string {
+  const timeout = options?.timeout || 5000
+  // Try python3 first, fall back to python
+  try {
+    return execSync(`python3 "${FLIPPER_SCRIPT}" ${args}`, {
+      timeout,
+      input: options?.input,
+      encoding: 'utf-8'
+    }).trim()
+  } catch {
+    return execSync(`python "${FLIPPER_SCRIPT}" ${args}`, {
+      timeout,
+      input: options?.input,
+      encoding: 'utf-8'
+    }).trim()
   }
-  return results
 }
 
 ipcMain.handle('flipper:detect', async () => {
-  if (process.platform === 'win32') {
-    const drives = 'DEFGHIJKLMNOPQRSTUVWXYZ'.split('')
-    for (const letter of drives) {
-      const badusb = `${letter}:\\badusb`
-      const ext = `${letter}:\\ext`
-      try {
-        if (fs.existsSync(badusb) || fs.existsSync(ext)) {
-          return { found: true, path: `${letter}:\\`, type: 'sd' }
-        }
-        const extBadusb = `${letter}:\\ext\\badusb`
-        if (fs.existsSync(extBadusb)) {
-          return { found: true, path: `${letter}:\\ext`, type: 'ext' }
-        }
-      } catch {}
-    }
+  try {
+    const result = runFlipperCommand('detect')
+    return JSON.parse(result)
+  } catch {
+    return { found: false, port: null }
   }
-  return { found: false, path: null, type: null }
 })
 
-ipcMain.handle('flipper:list-deployed', async (_event, flipperPath: string) => {
-  const badusb = path.join(flipperPath, 'ext', 'badusb')
-  if (!fs.existsSync(badusb)) {
-    const alt = path.join(flipperPath, 'badusb')
-    if (!fs.existsSync(alt)) return []
-    return listPayloadFiles(alt)
+ipcMain.handle('flipper:list-deployed', async () => {
+  try {
+    const result = runFlipperCommand('list', { timeout: 10000 })
+    return JSON.parse(result)
+  } catch {
+    return []
   }
-  return listPayloadFiles(badusb)
 })
 
-ipcMain.handle('flipper:deploy', async (_event, flipperPath: string, filename: string, content: string, category: string) => {
-  let badusb = path.join(flipperPath, 'ext', 'badusb')
-  if (!fs.existsSync(badusb)) {
-    badusb = path.join(flipperPath, 'badusb')
+ipcMain.handle('flipper:deploy', async (_event, category: string, filename: string, content: string) => {
+  try {
+    const result = runFlipperCommand(`deploy "${category}" "${filename}"`, {
+      input: content,
+      timeout: 10000
+    })
+    return JSON.parse(result)
+  } catch (e) {
+    return { success: false, error: String(e) }
   }
-  const categoryDir = path.join(badusb, category)
-  fs.mkdirSync(categoryDir, { recursive: true })
-
-  const filePath = path.join(categoryDir, filename)
-  fs.writeFileSync(filePath, content, 'utf-8')
-  return { success: true, path: filePath }
 })
 
-ipcMain.handle('flipper:deploy-batch', async (_event, flipperPath: string, payloads: Array<{filename: string, content: string, category: string}>) => {
-  let badusb = path.join(flipperPath, 'ext', 'badusb')
-  if (!fs.existsSync(badusb)) {
-    badusb = path.join(flipperPath, 'badusb')
-    fs.mkdirSync(badusb, { recursive: true })
+ipcMain.handle('flipper:remove', async (_event, filepath: string) => {
+  try {
+    const result = runFlipperCommand(`remove "${filepath}"`)
+    return JSON.parse(result)
+  } catch {
+    return { success: false }
   }
-
-  let deployed = 0
-  for (const p of payloads) {
-    const categoryDir = path.join(badusb, p.category)
-    fs.mkdirSync(categoryDir, { recursive: true })
-    fs.writeFileSync(path.join(categoryDir, p.filename), p.content, 'utf-8')
-    deployed++
-  }
-  return { success: true, count: deployed }
-})
-
-ipcMain.handle('flipper:remove', async (_event, filePath: string) => {
-  if (fs.existsSync(filePath)) {
-    fs.unlinkSync(filePath)
-    return { success: true }
-  }
-  return { success: false }
 })
 
 app.whenReady().then(createWindow)

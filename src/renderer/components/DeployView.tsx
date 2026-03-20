@@ -70,14 +70,24 @@ function convertToFlipperFormat(script: string): string {
   return lines.join('\n')
 }
 
-function formatSize(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`
-  return `${(bytes / 1024).toFixed(1)} KB`
+function formatSize(size: string | number): string {
+  if (typeof size === 'string') {
+    // Parse serial format like "1234b"
+    const match = size.match(/^(\d+)b?$/i)
+    if (match) {
+      const bytes = parseInt(match[1])
+      if (bytes < 1024) return `${bytes} B`
+      return `${(bytes / 1024).toFixed(1)} KB`
+    }
+    return size
+  }
+  if (size < 1024) return `${size} B`
+  return `${(size / 1024).toFixed(1)} KB`
 }
 
 export default function DeployView() {
   const soundEnabled = useAppStore(s => s.soundEnabled)
-  const [flipper, setFlipper] = useState<FlipperDevice>({ found: false, path: null, type: null })
+  const [flipper, setFlipper] = useState<FlipperDevice>({ found: false, port: null })
   const [deployed, setDeployed] = useState<DeployedPayload[]>([])
   const [scanning, setScanning] = useState(false)
   const [search, setSearch] = useState('')
@@ -115,8 +125,8 @@ export default function DeployView() {
     try {
       const result = await window.icarus.detectFlipper()
       setFlipper(result as FlipperDevice)
-      if (result.found && result.path) {
-        const files = await window.icarus.listDeployed(result.path)
+      if (result.found) {
+        const files = await window.icarus.listDeployed()
         setDeployed(files)
         if (soundEnabled) playOkBeep()
       } else {
@@ -124,22 +134,22 @@ export default function DeployView() {
         if (soundEnabled) playWarnTone()
       }
     } catch {
-      setFlipper({ found: false, path: null, type: null })
+      setFlipper({ found: false, port: null })
       if (soundEnabled) playWarnTone()
     }
     setScanning(false)
   }, [soundEnabled])
 
   const refreshDeployed = useCallback(async () => {
-    if (!flipper.found || !flipper.path) return
+    if (!flipper.found) return
     try {
-      const files = await window.icarus.listDeployed(flipper.path)
+      const files = await window.icarus.listDeployed()
       setDeployed(files)
     } catch {}
   }, [flipper])
 
   const deploySingle = useCallback(async (script: DuckyScript) => {
-    if (!flipper.found || !flipper.path) return
+    if (!flipper.found) return
     setDeployingIds(prev => new Set(prev).add(script.id))
     setFlyingPayload(script.id)
 
@@ -147,7 +157,7 @@ export default function DeployView() {
     const filename = `${script.id}.txt`
 
     try {
-      await window.icarus.deployPayload(flipper.path!, filename, content, script.category)
+      await window.icarus.deployPayload(script.category, filename, content)
       setDeployedIds(prev => new Set(prev).add(script.id))
       if (soundEnabled) playOkBeep()
       await refreshDeployed()
@@ -174,19 +184,17 @@ export default function DeployView() {
   }, [flipper, soundEnabled, refreshDeployed])
 
   const deploySelected = useCallback(async () => {
-    if (!flipper.found || !flipper.path || selected.size === 0) return
+    if (!flipper.found || selected.size === 0) return
     const scripts = DUCKY_SCRIPTS.filter(s => selected.has(s.id))
     setBatchProgress({ total: scripts.length, done: 0 })
 
-    const payloads = scripts.map(s => ({
-      filename: `${s.id}.txt`,
-      content: s.format === 'ducky' ? convertToFlipperFormat(s.script) : s.script,
-      category: s.category
-    }))
-
     try {
-      await window.icarus.deployBatch(flipper.path!, payloads)
-      setBatchProgress({ total: scripts.length, done: scripts.length })
+      for (let i = 0; i < scripts.length; i++) {
+        const s = scripts[i]
+        const content = s.format === 'ducky' ? convertToFlipperFormat(s.script) : s.script
+        await window.icarus.deployPayload(s.category, `${s.id}.txt`, content)
+        setBatchProgress({ total: scripts.length, done: i + 1 })
+      }
       if (soundEnabled) playOkBeep()
       setSelected(new Set())
       await refreshDeployed()
@@ -198,19 +206,17 @@ export default function DeployView() {
   }, [flipper, selected, soundEnabled, refreshDeployed])
 
   const deployAll = useCallback(async () => {
-    if (!flipper.found || !flipper.path) return
+    if (!flipper.found) return
     const scripts = DUCKY_SCRIPTS
     setBatchProgress({ total: scripts.length, done: 0 })
 
-    const payloads = scripts.map(s => ({
-      filename: `${s.id}.txt`,
-      content: s.format === 'ducky' ? convertToFlipperFormat(s.script) : s.script,
-      category: s.category
-    }))
-
     try {
-      await window.icarus.deployBatch(flipper.path!, payloads)
-      setBatchProgress({ total: scripts.length, done: scripts.length })
+      for (let i = 0; i < scripts.length; i++) {
+        const s = scripts[i]
+        const content = s.format === 'ducky' ? convertToFlipperFormat(s.script) : s.script
+        await window.icarus.deployPayload(s.category, `${s.id}.txt`, content)
+        setBatchProgress({ total: scripts.length, done: i + 1 })
+      }
       if (soundEnabled) playOkBeep()
       await refreshDeployed()
     } catch {
@@ -255,7 +261,10 @@ export default function DeployView() {
     scanForFlipper()
   }, [])
 
-  const totalDeployedSize = deployed.reduce((acc, p) => acc + p.size, 0)
+  const totalDeployedSize = deployed.reduce((acc, p) => {
+    const match = String(p.size).match(/^(\d+)b?$/i)
+    return acc + (match ? parseInt(match[1]) : 0)
+  }, 0)
 
   return (
     <div className="h-full flex flex-col">
@@ -272,13 +281,13 @@ export default function DeployView() {
                 style={flipper.found ? { boxShadow: '0 0 8px #4ADE80' } : { boxShadow: '0 0 8px #EF4444' }}
               />
               <span className="text-xs font-mono text-text-secondary">
-                {flipper.found ? 'FLIPPER CONNECTED' : 'NO FLIPPER DETECTED'}
+                {flipper.found ? `FLIPPER CONNECTED` : 'NO FLIPPER DETECTED'}
               </span>
             </motion.div>
-            {flipper.found && flipper.path && (
+            {flipper.found && flipper.port && (
               <span className="text-xs font-mono text-text-tertiary flex items-center gap-1">
-                <HardDrive className="w-3 h-3" />
-                {flipper.path}
+                <Usb className="w-3 h-3" />
+                {flipper.port} @ 230400
               </span>
             )}
           </div>
@@ -552,7 +561,7 @@ export default function DeployView() {
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-xs font-display text-gold tracking-wider flex items-center gap-1.5">
                 <Usb className="w-3.5 h-3.5" />
-                FLIPPER SD CARD
+                FLIPPER SERIAL
               </h3>
               {deployed.length > 0 && (
                 <button
@@ -587,7 +596,7 @@ export default function DeployView() {
                 </motion.div>
                 <p className="text-xs font-mono text-text-tertiary mb-1">No Flipper detected</p>
                 <p className="text-[10px] font-mono text-text-tertiary/50">
-                  Insert Flipper Zero SD card and click SCAN
+                  Connect Flipper Zero via USB and click SCAN
                 </p>
               </div>
             ) : deployed.length === 0 ? (

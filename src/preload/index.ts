@@ -7,8 +7,7 @@ contextBridge.exposeInMainWorld('icarus', {
   validateScript: (script: string) => ipcRenderer.invoke('payload:validate', script),
   copyToClipboard: (text: string) => ipcRenderer.invoke('clipboard:write', text),
   detectFlipper: () => ipcRenderer.invoke('flipper:detect'),
-  listDeployed: (path: string) => ipcRenderer.invoke('flipper:list-deployed', path),
-  deployPayload: (path: string, filename: string, content: string, category: string) => ipcRenderer.invoke('flipper:deploy', path, filename, content, category),
-  deployBatch: (path: string, payloads: any[]) => ipcRenderer.invoke('flipper:deploy-batch', path, payloads),
+  listDeployed: () => ipcRenderer.invoke('flipper:list-deployed'),
+  deployPayload: (category: string, filename: string, content: string) => ipcRenderer.invoke('flipper:deploy', category, filename, content),
   removePayload: (filePath: string) => ipcRenderer.invoke('flipper:remove', filePath)
 })

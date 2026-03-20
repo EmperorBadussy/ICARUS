@@ -33,15 +33,14 @@ export interface SimulationStep {
 
 export interface FlipperDevice {
   found: boolean
-  path: string | null
-  type: 'sd' | 'ext' | null
+  port: string | null
 }
 
 export interface DeployedPayload {
   name: string
   path: string
   category: string
-  size: number
+  size: string
 }
 
 declare global {
@@ -52,10 +51,9 @@ declare global {
       encodePayload: (script: string, method: string) => Promise<string>
       validateScript: (script: string) => Promise<{ valid: boolean; errors: string[] }>
       copyToClipboard: (text: string) => Promise<void>
-      detectFlipper: () => Promise<{ found: boolean; path: string | null; type: string | null }>
-      listDeployed: (path: string) => Promise<Array<{ name: string; path: string; category: string; size: number }>>
-      deployPayload: (path: string, filename: string, content: string, category: string) => Promise<{ success: boolean; path: string }>
-      deployBatch: (path: string, payloads: Array<{ filename: string; content: string; category: string }>) => Promise<{ success: boolean; count: number }>
+      detectFlipper: () => Promise<{ found: boolean; port: string | null }>
+      listDeployed: () => Promise<Array<{ name: string; path: string; category: string; size: string }>>
+      deployPayload: (category: string, filename: string, content: string) => Promise<{ success: boolean; path: string }>
       removePayload: (filePath: string) => Promise<{ success: boolean }>
     }
   }
