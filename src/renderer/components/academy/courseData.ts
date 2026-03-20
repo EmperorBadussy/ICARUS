@@ -46,7 +46,8 @@ export const ACHIEVEMENTS: Achievement[] = [
   { id: 'ENGINEER', name: 'Engineer', description: 'Complete Payload Engineering track', icon: '⚙️' },
   { id: 'INFILTRATOR', name: 'Infiltrator', description: 'Complete Advanced Delivery track', icon: '🎯' },
   { id: 'DEFENDER', name: 'Defender', description: 'Complete Defense & Detection track', icon: '🛡️' },
-  { id: 'WINGS_COMPLETE', name: 'Wings Complete', description: 'Complete all learning tracks', icon: '🦅' },
+  { id: 'FLIPPER_MASTER', name: 'Flipper Master', description: 'Complete the Flipper Zero Mastery track', icon: '🐬' },
+  { id: 'WINGS_COMPLETE', name: 'Wings Complete', description: 'Complete all 5 learning tracks', icon: '🦅' },
   { id: 'CHALLENGE_HUNTER', name: 'Challenge Hunter', description: 'Complete 2 challenges', icon: '⚔️' },
   { id: 'PERFECT_FLIGHT', name: 'Perfect Flight', description: 'Complete all challenges', icon: '🏆' },
   { id: 'STREAK_3', name: '3-Day Streak', description: 'Maintain a 3-day learning streak', icon: '🔥' },
@@ -1541,6 +1542,405 @@ USB security maps to several compliance requirements:
           correctAnswer: 1,
           explanation: 'Forensic evidence (memory dump, disk image) must be captured BEFORE any remediation. Reformatting destroys evidence needed to understand the attack scope and improve defenses.',
           hints: ['Evidence is volatile — it can be lost', 'You need to understand what happened to prevent it again']
+        }
+      ]
+    }
+  },
+  {
+    id: 'flipper',
+    name: 'Flipper Zero Mastery',
+    description: 'Master Flipper Zero hardware, BadBT wireless payloads, and BLE attack vectors',
+    icon: '🐬',
+    lessons: [
+      {
+        id: 'flip-1',
+        title: 'What is Flipper Zero',
+        trackId: 'flipper',
+        xp: 30,
+        content: `# What is Flipper Zero?
+
+Flipper Zero is a **portable multi-tool for penetration testers** and hardware enthusiasts. It packs an impressive array of radio and hardware capabilities into a pocket-sized device with a playful dolphin mascot.
+
+## Hardware Overview
+
+### Core Processor
+- **STM32WB55** — dual-core ARM Cortex-M4 (64 MHz) + Cortex-M0+ for radio
+- 1MB Flash, 256KB SRAM
+- Built-in BLE 5.4 radio stack on the M0+ core
+- Low power consumption for extended battery life
+
+### Radio Capabilities
+
+| Radio | Chip | Frequency | Use Cases |
+|-------|------|-----------|-----------|
+| **Sub-GHz** | CC1101 | 300-928 MHz | Garage doors, car remotes, weather stations, IoT sensors |
+| **BLE 5.4** | Built-in STM32WB55 | 2.4 GHz | BadBT, BLE spam, beacon spoofing |
+| **NFC** | ST25R3916 | 13.56 MHz | Card emulation, reading, writing |
+| **RFID** | Custom analog | 125 kHz | Access cards, EM4100, HID Prox |
+| **IR** | Built-in LED + receiver | Infrared | TV remotes, AC units, projectors |
+
+### GPIO & Hardware
+- 18 GPIO pins for external modules
+- 3.3V and 5V power output
+- UART, SPI, I2C support
+- 1-Wire protocol support
+- iButton reader/emulator
+
+## Momentum Firmware
+
+**Momentum** is a custom firmware that significantly extends Flipper Zero's capabilities:
+
+- **BLE Spam** — broadcast Apple, Android, and Windows pairing notifications
+- **BadBT enhancements** — improved BLE HID keyboard emulation
+- **Extended Sub-GHz** — unlocked frequency ranges (region-dependent)
+- **Custom protocols** — additional Sub-GHz decoders
+- **UI improvements** — custom animations, themes, and dolphin levels
+
+### Installing Momentum
+1. Download from the Momentum GitHub releases
+2. Extract to SD card or flash via qFlipper
+3. Reboot Flipper — firmware auto-updates
+
+## How BadBT Works
+
+**BadBT** (Bad Bluetooth) uses BLE HID keyboard emulation to inject keystrokes wirelessly:
+
+1. Flipper Zero advertises as a **Bluetooth keyboard**
+2. Target device **pairs** with the Flipper (requires user acceptance)
+3. Once paired, Flipper sends **keystroke injection** via BLE HID
+4. Target OS processes keystrokes exactly like a physical keyboard
+
+### Key Differences from BadUSB
+- **Wireless** — no physical cable connection needed
+- **Range** — up to ~50 meters line of sight
+- **Pairing** — requires initial Bluetooth pairing (user must accept)
+- **Persistence** — once paired, can reconnect automatically
+- **Stealth** — no visible USB device plugged into target
+
+### BadBT Payload Format
+BadBT payloads use a modified DuckyScript format stored as \`.txt\` files on the SD card:
+\`\`\`
+REM BadBT Payload for Flipper Zero
+ID 20:00:00:00:00:00 Flipper_Keyboard
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -w hidden
+ENTER
+\`\`\`
+
+---
+
+**Important**: BadBT attacks require the target to accept Bluetooth pairing. Social engineering the pairing acceptance is a critical part of the attack.`
+      },
+      {
+        id: 'flip-2',
+        title: 'BadBT vs BadUSB',
+        trackId: 'flipper',
+        xp: 35,
+        content: `# BadBT vs BadUSB
+
+Both BadBT and BadUSB exploit HID keyboard trust, but they use fundamentally different transport layers. Understanding when to use each is critical for effective payload delivery.
+
+## Transport Layer Comparison
+
+| Aspect | BadUSB | BadBT |
+|--------|--------|-------|
+| **Connection** | Physical USB cable | Wireless Bluetooth Low Energy |
+| **Range** | 0m (physical contact) | ~50m line of sight |
+| **Pairing** | None required — auto-trusted | Requires user to accept BT pairing |
+| **Speed** | Very fast (1000+ chars/sec) | Moderate (~200-400 chars/sec) |
+| **Detection** | USB device enumeration logs | BLE connection logs |
+| **Persistence** | Only while plugged in | Can reconnect after initial pairing |
+| **Physical Evidence** | Visible USB device in port | No visible hardware on target |
+| **OS Support** | Universal — all USB-capable devices | Most modern OS with BLE support |
+| **Power** | Powered by target USB port | Battery-powered (Flipper ~7 days) |
+
+## When to Use BadUSB
+
+### Best Scenarios
+- **Brief physical access** — plug in, execute, remove in seconds
+- **Locked workstations** — some USB attacks can work on lock screens
+- **Maximum speed** — when payload must execute as fast as possible
+- **No user interaction** — no pairing prompt to accept
+- **Air-gapped systems** — no wireless connectivity on target
+
+### Devices
+- USB Rubber Ducky (Hak5)
+- Bash Bunny
+- O.MG Cable
+- Flipper Zero (via USB)
+- DigiSpark / Arduino Leonardo
+
+## When to Use BadBT
+
+### Best Scenarios
+- **No physical access** to USB ports (locked in a cabinet, port blocked)
+- **Wireless delivery** — attack from across the room, hallway, or parking lot
+- **Post-pairing persistence** — maintain access after initial social engineering
+- **Mobile targets** — attack smartphones and tablets without USB-C/Lightning access
+- **Stealth** — no visible hardware connected to target device
+
+### Limitations
+- Target must accept Bluetooth pairing dialog
+- Slower keystroke injection than USB
+- BLE range affected by walls, interference
+- Some enterprise environments block BLE pairing
+- Cannot attack devices with Bluetooth disabled
+
+## How ICARUS DEPLOY Module Works
+
+The DEPLOY module in ICARUS bridges both worlds:
+
+### DuckyScript to Flipper Conversion
+1. **Write payload** in ICARUS using standard DuckyScript
+2. **Click Deploy > Flipper Zero** in the DEPLOY module
+3. ICARUS **auto-converts** syntax differences:
+   - Adds \`ID\` line for BLE device identification
+   - Adjusts timing for BLE latency (adds ~50ms to delays)
+   - Converts incompatible commands to Flipper equivalents
+4. **Syncs to SD card** — copies to \`/badbt/\` directory on Flipper SD
+5. **Organizes by category** — payloads sorted into folders matching ICARUS categories
+
+### Conversion Example
+**ICARUS DuckyScript (BadUSB):**
+\`\`\`
+REM WiFi Grabber
+DELAY 500
+GUI r
+DELAY 300
+STRING cmd
+ENTER
+\`\`\`
+
+**Auto-converted for Flipper BadBT:**
+\`\`\`
+REM WiFi Grabber (converted by ICARUS)
+ID 20:00:00:00:00:00 ICARUS_KB
+DELAY 1000
+GUI r
+DELAY 500
+STRING cmd
+ENTER
+\`\`\`
+
+Note the added \`ID\` line and increased delays to account for BLE latency.
+
+## Detection Difficulty
+
+### BadUSB Detection
+- **USB device enumeration** logged by OS
+- **Typing speed** anomaly detection possible
+- **Physical observation** — device visible in USB port
+- **USB device whitelisting** can block unknown HIDs
+- **Difficulty**: Moderate — visible and logged
+
+### BadBT Detection
+- **BLE connection** may or may not be logged depending on OS
+- **No physical evidence** on the target device
+- **Typing speed** slightly more natural due to BLE latency
+- **BLE scanning** required to detect rogue keyboards
+- **Difficulty**: Hard — invisible and less commonly monitored
+
+---
+
+**Takeaway**: BadUSB is faster and more reliable but requires physical access. BadBT is stealthier and wireless but requires social engineering the pairing step. The best operators know when to use each.`
+      },
+      {
+        id: 'flip-3',
+        title: 'BLE Attack Vectors',
+        trackId: 'flipper',
+        xp: 35,
+        content: `# BLE Attack Vectors
+
+Flipper Zero's built-in BLE 5.4 radio enables several attack vectors beyond BadBT. Understanding these techniques — and their limitations — is essential for modern wireless pentesting.
+
+## BLE Spam Attacks
+
+BLE spam floods the 2.4 GHz band with crafted advertisement packets that trigger pairing notifications on nearby devices.
+
+### Apple BLE Spam
+Exploits Apple's **Proximity Pairing** protocol:
+- Broadcasts fake **AirPods**, **Apple TV**, **HomePod** pairing requests
+- Triggers persistent notification popups on iPhones and iPads
+- Can cause UI disruption and confusion
+- Range: ~30-50 meters
+
+### Android BLE Spam
+Exploits Google's **Fast Pair** protocol:
+- Broadcasts fake **Google device** pairing notifications
+- Triggers popup on Android phones with Fast Pair enabled
+- Some Android versions allow dismissing permanently
+- Most effective on Android 6.0+
+
+### Windows BLE Spam
+Exploits Microsoft's **Swift Pair** protocol:
+- Broadcasts fake **Bluetooth peripheral** discovery notifications
+- Triggers "New device found" popups in Windows 10/11
+- Can be disabled via Settings > Bluetooth > Swift Pair
+- Effective in corporate environments with default settings
+
+### BLE Spam Impact
+| Target | Effect | Mitigation |
+|--------|--------|------------|
+| Apple iOS | Persistent popups, potential DoS | Disable Bluetooth (Control Center) |
+| Android | Fast Pair notifications | Disable Fast Pair in Settings |
+| Windows | Swift Pair popups | Disable Swift Pair in Bluetooth settings |
+
+## Beacon Spoofing
+
+### AirTag Spoofing
+- Broadcast fake **Apple AirTag** signals
+- Appears in nearby users' Find My app
+- Can trigger "AirTag Following You" alerts
+- Used for social engineering or confusion
+
+### iBeacon Spoofing
+- Broadcast **iBeacon** advertisement packets
+- Triggers location-based actions in apps configured for beacons
+- Used in retail environments for unauthorized promotions
+- Can interfere with legitimate beacon infrastructure
+
+### Eddystone Spoofing
+- Google's beacon format (largely deprecated)
+- **Eddystone-URL** — broadcasts URLs that appear in Chrome notifications
+- **Eddystone-UID** — broadcasts unique identifiers
+- Less impactful since Google deprecated Physical Web
+
+### Find My Network Spoofing
+- Broadcast fake **Apple Find My** compatible signals
+- Devices appear in the Find My ecosystem
+- Can create phantom device locations
+- Research implications for tracking and privacy
+
+## What Flipper Zero CAN'T Do
+
+Understanding limitations is as important as knowing capabilities:
+
+### Not Possible with Flipper Zero BLE
+- **BLE MITM attacks** — Flipper acts as a peripheral only, cannot intercept connections between two other devices
+- **Bluetooth Classic** — the STM32WB55 only supports BLE (Low Energy), not BR/EDR (Classic Bluetooth)
+- **Active BLE sniffing** — cannot capture packets from other BLE connections passively (no promiscuous mode)
+- **WPA/WiFi attacks** — no WiFi radio (unless using external ESP32 GPIO module)
+- **Long-range BLE** — effective range ~50m, not suitable for surveillance from distance
+- **BLE 5.0+ extended features** — limited advertising sets and periodic advertising support
+
+### Common Misconceptions
+| Myth | Reality |
+|------|---------|
+| "Flipper can hack any Bluetooth device" | Only BLE peripherals; cannot crack pairing |
+| "Flipper can intercept BLE traffic" | No promiscuous mode; can only advertise and connect |
+| "Flipper can jam Bluetooth" | No RF jamming capability; only BLE advertisement flooding |
+| "Flipper can clone BLE devices" | Can spoof advertisements but not replicate secure connections |
+
+## Momentum Firmware BLE Features
+
+Momentum firmware adds several BLE capabilities beyond stock:
+
+### BLE Spam App
+- **All-in-one BLE spam** with protocol selection
+- Adjustable transmission power
+- Cycle through multiple device types
+- Randomized or fixed MAC addresses
+
+### BadBT Enhancements
+- **Improved pairing** — faster connection establishment
+- **Multiple profiles** — switch between saved BLE keyboard identities
+- **Extended key support** — additional HID keycodes
+- **MAC randomization** — change BLE address between attacks
+
+### Custom BLE Apps
+- **BLE Scanner** — detect nearby BLE devices and services
+- **BLE Beacon** — create custom beacon broadcasts
+- **BLE Keyboard** — manual BLE keyboard mode for live typing
+
+## Defensive Considerations
+
+### Detecting BLE Attacks
+- **BLE scanners** (nRF Connect, Wireshark with BLE sniffer) to detect anomalous advertisements
+- **Volume anomalies** — sudden spike in BLE advertisements indicates spam
+- **MAC address analysis** — randomized MACs from single source
+- **Enterprise BLE monitoring** — dedicated BLE IDS/IPS solutions
+
+### Mitigation
+1. Disable unnecessary Bluetooth when not in use
+2. Turn off Fast Pair / Swift Pair in settings
+3. Ignore unexpected pairing requests
+4. Use enterprise Bluetooth management policies
+5. Deploy BLE monitoring in sensitive areas
+
+---
+
+**Key principle**: Flipper Zero's BLE is powerful for advertising-based attacks and HID emulation, but it is NOT a full Bluetooth hacking platform. It cannot sniff, jam, or MITM established BLE connections.`
+      }
+    ],
+    challenge: {
+      id: 'flip-challenge',
+      trackId: 'flipper',
+      title: 'Pick the Right Tool',
+      description: 'Given 5 scenarios, choose whether to use BadUSB, BadBT, BLE spam, or beacon spoofing',
+      type: 'multiple-choice',
+      xp: 50,
+      questions: [
+        {
+          prompt: 'You have 10 seconds of physical access to an unlocked Windows laptop with USB ports available. You need to run a PowerShell reverse shell. What do you use?',
+          options: [
+            'BadBT — pair via Bluetooth and inject keystrokes',
+            'BadUSB — plug in a Rubber Ducky for instant keystroke injection',
+            'BLE spam — flood the device with pairing requests',
+            'Beacon spoofing — trick the device with fake AirTags'
+          ],
+          correctAnswer: 1,
+          explanation: 'With brief physical access and available USB ports, BadUSB is the fastest option. No pairing required, instant enumeration, and maximum typing speed. BadBT would waste time on the pairing dialog.',
+          hints: ['You only have 10 seconds', 'BadUSB requires no pairing or user interaction']
+        },
+        {
+          prompt: 'A target leaves their iPhone on a conference table while getting coffee. USB ports are covered by a port lock. You are sitting 3 meters away. How do you deliver a payload?',
+          options: [
+            'BadUSB — remove the port lock and plug in',
+            'BadBT — send a BLE keyboard pairing request to the iPhone',
+            'BLE spam — flood with Apple popup notifications',
+            'Beacon spoofing — create a fake AirTag near their device'
+          ],
+          correctAnswer: 1,
+          explanation: 'BadBT is the correct choice. USB ports are locked, but you can send a BLE keyboard pairing request wirelessly. If the target accepts pairing when they return (social engineering), you can inject keystrokes remotely.',
+          hints: ['USB ports are physically locked', 'You need to deliver keystrokes wirelessly', 'The target needs to accept pairing first']
+        },
+        {
+          prompt: 'You want to disrupt a corporate presentation by causing persistent notification popups on all nearby iPhones. What technique do you use?',
+          options: [
+            'BadUSB — plug into each phone individually',
+            'BadBT — pair with each phone as a keyboard',
+            'BLE spam — broadcast Apple Proximity Pairing advertisements',
+            'Beacon spoofing — create fake iBeacons'
+          ],
+          correctAnswer: 2,
+          explanation: 'BLE spam broadcasting fake Apple Proximity Pairing packets will trigger persistent popup notifications on all nearby iPhones simultaneously, without requiring any pairing or physical access.',
+          hints: ['You want to affect ALL nearby iPhones at once', 'No pairing or physical access needed', 'Apple devices respond to Proximity Pairing advertisements']
+        },
+        {
+          prompt: 'You need to test if employees will plug in unknown USB devices. You have a Flipper Zero and a USB Rubber Ducky. Which do you use for a USB drop test?',
+          options: [
+            'Flipper Zero BadBT — leave it near desks broadcasting pairing requests',
+            'USB Rubber Ducky — leave disguised USB drives in the parking lot',
+            'Flipper Zero BadUSB — plug the Flipper directly into target machines',
+            'BLE spam — see if employees investigate Bluetooth notifications'
+          ],
+          correctAnswer: 1,
+          explanation: 'A classic USB drop test uses physical USB drives (like a Rubber Ducky) left in strategic locations. The goal is to test if employees plug in unknown USB devices. This is a social engineering test, not a technical exploit.',
+          hints: ['A drop test measures human behavior', 'You want employees to FIND and PLUG IN the device', 'The device needs to look like a normal USB drive']
+        },
+        {
+          prompt: 'A colleague claims their Flipper Zero can perform a man-in-the-middle attack on a BLE connection between a smartwatch and a phone. Is this correct?',
+          options: [
+            'Yes — Flipper Zero can intercept any BLE connection',
+            'Yes — but only with Momentum firmware installed',
+            'No — Flipper Zero can only act as a BLE peripheral, not intercept connections between other devices',
+            'No — but it can jam the connection to force a disconnect'
+          ],
+          correctAnswer: 2,
+          explanation: 'Flipper Zero cannot perform BLE MITM attacks. Its STM32WB55 chip acts as a BLE peripheral only — it can advertise and connect to devices, but cannot intercept or sniff traffic between two other devices. It also cannot jam RF signals.',
+          hints: ['Think about the Flipper BLE hardware limitations', 'Can the Flipper insert itself between two existing connections?', 'The STM32WB55 is a peripheral-mode BLE radio']
         }
       ]
     }

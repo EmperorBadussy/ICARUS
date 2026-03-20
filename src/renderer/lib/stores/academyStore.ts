@@ -60,6 +60,7 @@ export const useAcademyStore = create<AcademyState>()(
         const engLessons = ['eng-1', 'eng-2', 'eng-3']
         const advLessons = ['adv-1', 'adv-2', 'adv-3']
         const defLessons = ['def-1', 'def-2', 'def-3']
+        const flipLessons = ['flip-1', 'flip-2', 'flip-3']
 
         if (fundLessons.every(l => newCompleted.includes(l)) && !newAchievements.includes('SCRIPTER')) {
           newAchievements.push('SCRIPTER')
@@ -73,8 +74,11 @@ export const useAcademyStore = create<AcademyState>()(
         if (defLessons.every(l => newCompleted.includes(l)) && !newAchievements.includes('DEFENDER')) {
           newAchievements.push('DEFENDER')
         }
+        if (flipLessons.every(l => newCompleted.includes(l)) && !newAchievements.includes('FLIPPER_MASTER')) {
+          newAchievements.push('FLIPPER_MASTER')
+        }
 
-        const allLessons = [...fundLessons, ...engLessons, ...advLessons, ...defLessons]
+        const allLessons = [...fundLessons, ...engLessons, ...advLessons, ...defLessons, ...flipLessons]
         if (allLessons.every(l => newCompleted.includes(l)) && !newAchievements.includes('WINGS_COMPLETE')) {
           newAchievements.push('WINGS_COMPLETE')
         }
@@ -91,7 +95,7 @@ export const useAcademyStore = create<AcademyState>()(
         if (newCompleted.length >= 2 && !newAchievements.includes('CHALLENGE_HUNTER')) {
           newAchievements.push('CHALLENGE_HUNTER')
         }
-        if (newCompleted.length >= 4 && !newAchievements.includes('PERFECT_FLIGHT')) {
+        if (newCompleted.length >= 5 && !newAchievements.includes('PERFECT_FLIGHT')) {
           newAchievements.push('PERFECT_FLIGHT')
         }
 
