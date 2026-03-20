@@ -24,6 +24,12 @@ const RISK_COLORS: Record<string, string> = {
   critical: '#EF4444'
 }
 
+const FORMAT_FILTERS = [
+  { id: 'all', label: 'ALL' },
+  { id: 'ducky', label: 'DUCKY' },
+  { id: 'flipper', label: 'FLIPPER' },
+]
+
 const OS_ICONS: Record<string, typeof Monitor> = {
   windows: Monitor,
   macos: Apple,
@@ -36,7 +42,11 @@ function highlightDucky(code: string): JSX.Element[] {
     let className = ''
     if (trimmed.startsWith('REM ')) className = 'ducky-comment'
     else if (trimmed.startsWith('STRING ')) className = 'ducky-string'
-    else if (trimmed.startsWith('DELAY ') || trimmed.startsWith('DEFAULT_DELAY ')) className = 'ducky-delay'
+    else if (trimmed.startsWith('WAIT_FOR_BUTTON_PRESS')) className = 'ducky-flipper'
+    else if (trimmed.startsWith('DEFAULT_DELAY ') || trimmed.startsWith('STRINGDELAY ') || trimmed.startsWith('STRING_DELAY ')) className = 'ducky-flipper'
+    else if (/^(HOLD|RELEASE)\s/.test(trimmed) || trimmed === 'HOLD' || trimmed === 'RELEASE') className = 'ducky-flipper'
+    else if (/^(ALTCHAR|ALTSTRING|ALTCODE|SYSRQ)\s/.test(trimmed)) className = 'ducky-flipper'
+    else if (trimmed.startsWith('DELAY ')) className = 'ducky-delay'
     else if (/^(GUI|WINDOWS|ALT|CTRL|CONTROL|SHIFT|ENTER|TAB|ESCAPE|ESC|CAPSLOCK|DELETE|BACKSPACE|SPACE|MENU|F\d+|REPEAT|DOWNARROW|UPARROW|LEFTARROW|RIGHTARROW|UP|DOWN|LEFT|RIGHT|HOME|END|INSERT|PAGEUP|PAGEDOWN|PRINTSCREEN|NUMLOCK|SCROLLLOCK|PAUSE|BREAK)/.test(trimmed)) className = 'ducky-command'
 
     return (
@@ -51,6 +61,7 @@ function highlightDucky(code: string): JSX.Element[] {
 export default function WingsView() {
   const [search, setSearch] = useState('')
   const [activeCategory, setActiveCategory] = useState('all')
+  const [activeFormat, setActiveFormat] = useState('all')
   const [selectedScript, setSelectedScript] = useState<DuckyScript | null>(null)
   const [copyFeedback, setCopyFeedback] = useState(false)
   const { setActiveView, setForgeScript } = useAppStore()
@@ -59,6 +70,11 @@ export default function WingsView() {
     let scripts = DUCKY_SCRIPTS
     if (activeCategory !== 'all') {
       scripts = scripts.filter(s => s.category === activeCategory)
+    }
+    if (activeFormat === 'flipper') {
+      scripts = scripts.filter(s => s.format === 'flipper' || s.flipperCompat)
+    } else if (activeFormat === 'ducky') {
+      scripts = scripts.filter(s => s.format === 'ducky')
     }
     if (search.trim()) {
       const q = search.toLowerCase()
@@ -69,7 +85,7 @@ export default function WingsView() {
       )
     }
     return scripts
-  }, [search, activeCategory])
+  }, [search, activeCategory, activeFormat])
 
   const handleCopy = async (script: string) => {
     try {
@@ -140,6 +156,25 @@ export default function WingsView() {
           <Shield className="w-5 h-5 text-gold" />
           <h1 className="font-display text-lg text-gold glow-text tracking-wider">WINGS</h1>
           <span className="text-xs text-text-tertiary font-mono">Script Library</span>
+          <div className="flex items-center gap-1 ml-4">
+            {FORMAT_FILTERS.map(f => (
+              <button
+                key={f.id}
+                onClick={() => setActiveFormat(f.id)}
+                className={`px-3 py-1 text-[10px] font-display rounded-md border transition-all ${
+                  activeFormat === f.id
+                    ? f.id === 'flipper'
+                      ? 'bg-orange-500/20 border-orange-500/40 text-orange-400'
+                      : f.id === 'ducky'
+                        ? 'bg-yellow-500/20 border-yellow-500/40 text-yellow-400'
+                        : 'bg-gold/10 border-gold/30 text-gold'
+                    : 'border-gold-muted/20 text-text-tertiary hover:text-text-secondary hover:border-gold-muted/30'
+                }`}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
           <div className="flex-1" />
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" />
@@ -182,13 +217,23 @@ export default function WingsView() {
                   </span>
                 </div>
                 <p className="text-[11px] text-text-tertiary font-body line-clamp-2 mb-3">{script.description}</p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span
                     className="text-[10px] font-mono px-1.5 py-0.5 rounded"
                     style={{ color: catColor(script.category), border: `1px solid ${catColor(script.category)}30` }}
                   >
                     {script.category}
                   </span>
+                  {script.format === 'flipper' && (
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded text-orange-400 border border-orange-400/30 bg-orange-400/10">
+                      FLIPPER
+                    </span>
+                  )}
+                  {script.format === 'ducky' && script.flipperCompat && (
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded text-green-400 border border-green-400/30 bg-green-400/10">
+                      FLIPPER OK
+                    </span>
+                  )}
                   <div className="flex gap-1 ml-auto">
                     {script.targetOS.map(os => {
                       const Icon = OS_ICONS[os] || Terminal
@@ -244,6 +289,16 @@ export default function WingsView() {
                         <span key={os} className="text-xs font-mono text-text-tertiary px-1.5 py-0.5 bg-bg-void/50 rounded">{os}</span>
                       ))}
                     </div>
+                    {selectedScript.format === 'flipper' && (
+                      <span className="text-xs font-mono px-2 py-0.5 rounded text-orange-400 border border-orange-400/40 bg-orange-400/10">
+                        FLIPPER ZERO
+                      </span>
+                    )}
+                    {selectedScript.format === 'ducky' && selectedScript.flipperCompat && (
+                      <span className="text-xs font-mono px-2 py-0.5 rounded text-green-400 border border-green-400/40 bg-green-400/10">
+                        FLIPPER COMPAT
+                      </span>
+                    )}
                     <span className="text-xs font-mono text-text-tertiary">{selectedScript.executionTime}</span>
                     <span className="text-xs font-mono text-text-tertiary">Detection: {selectedScript.detectionDifficulty}</span>
                   </div>

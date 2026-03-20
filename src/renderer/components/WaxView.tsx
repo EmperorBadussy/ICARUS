@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Shield, Copy, ArrowRight, Gauge, Shuffle, Clock, MessageSquareOff, Variable, Zap, Minimize2 } from 'lucide-react'
+import { Shield, Copy, ArrowRight, Gauge, Shuffle, Clock, MessageSquareOff, Variable, Zap, Minimize2, Download } from 'lucide-react'
 
 const ENCODING_OPTIONS = [
   { id: 'char-split', label: 'String Splitting', icon: Shuffle, description: 'Break STRING commands into character-by-character typing' },
@@ -8,6 +8,7 @@ const ENCODING_OPTIONS = [
   { id: 'strip-comments', label: 'Comment Stripping', icon: MessageSquareOff, description: 'Remove all REM (comment) lines' },
   { id: 'compress', label: 'Payload Compression', icon: Minimize2, description: 'Minimize delays, remove blank lines' },
   { id: 'keystroke-jitter', label: 'Keystroke Jitter', icon: Zap, description: 'Randomize timing between all keystrokes (50-200ms)' },
+  { id: 'flipper-convert', label: 'Flipper Zero Export', icon: Download, description: 'Convert to Flipper Zero BadUSB format (.txt for /badusb/ on SD)' },
 ]
 
 export default function WaxView() {
@@ -29,7 +30,49 @@ export default function WaxView() {
 
     let result = input
     for (const method of selectedMethods) {
-      if (method === 'keystroke-jitter') {
+      if (method === 'flipper-convert') {
+        // Convert standard DuckyScript to Flipper Zero BadUSB format
+        const lines = result.split('\n')
+        const converted: string[] = []
+        let hasDefaultDelay = false
+
+        for (const line of lines) {
+          const trimmed = line.trim()
+          if (trimmed.startsWith('DEFAULT_DELAY')) {
+            hasDefaultDelay = true
+          }
+        }
+
+        // Add DEFAULT_DELAY if not present
+        if (!hasDefaultDelay) {
+          converted.push('DEFAULT_DELAY 20')
+        }
+
+        for (const line of lines) {
+          const trimmed = line.trim()
+          // Replace WINDOWS with GUI (Flipper prefers GUI)
+          if (trimmed.startsWith('WINDOWS ')) {
+            converted.push(line.replace('WINDOWS ', 'GUI '))
+          }
+          // Replace CONTROL with CTRL
+          else if (trimmed.startsWith('CONTROL ')) {
+            converted.push(line.replace('CONTROL ', 'CTRL '))
+          }
+          // Replace ESC with ESCAPE
+          else if (trimmed === 'ESC') {
+            converted.push('ESCAPE')
+          }
+          // BREAK -> PAUSE (Flipper uses PAUSE)
+          else if (trimmed === 'BREAK') {
+            converted.push('PAUSE')
+          }
+          else {
+            converted.push(line)
+          }
+        }
+
+        result = converted.join('\n')
+      } else if (method === 'keystroke-jitter') {
         // Client-side: add random delays between all lines
         const lines = result.split('\n')
         const jittered: string[] = []
@@ -190,15 +233,36 @@ export default function WaxView() {
                 <span className="text-xs font-display text-text-tertiary tracking-wider">OUTPUT (ENCODED)</span>
                 <span className="text-[10px] font-mono text-text-tertiary/50 ml-auto">{output.split('\n').length} lines</span>
                 {output && (
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCopy}
-                    className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono text-gold bg-gold/10 rounded border border-gold/20 hover:bg-gold/20"
-                  >
-                    <Copy className="w-3 h-3" />
-                    {copyFeedback ? 'Copied!' : 'Copy'}
-                  </motion.button>
+                  <>
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleCopy}
+                      className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono text-gold bg-gold/10 rounded border border-gold/20 hover:bg-gold/20"
+                    >
+                      <Copy className="w-3 h-3" />
+                      {copyFeedback ? 'Copied!' : 'Copy'}
+                    </motion.button>
+                    {selectedMethods.includes('flipper-convert') && (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => {
+                          const blob = new Blob([output], { type: 'text/plain' })
+                          const url = URL.createObjectURL(blob)
+                          const a = document.createElement('a')
+                          a.href = url
+                          a.download = 'payload.txt'
+                          a.click()
+                          URL.revokeObjectURL(url)
+                        }}
+                        className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-mono text-orange-400 bg-orange-400/10 rounded border border-orange-400/20 hover:bg-orange-400/20"
+                      >
+                        <Download className="w-3 h-3" />
+                        Flipper .txt
+                      </motion.button>
+                    )}
+                  </>
                 )}
               </div>
               <div className="flex-1 bg-bg-void/20 p-4 overflow-y-auto font-mono text-xs text-text-primary leading-relaxed whitespace-pre-wrap">

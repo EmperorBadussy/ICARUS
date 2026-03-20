@@ -11,6 +11,8 @@ export interface DuckyScript {
   detectionDifficulty: 'easy' | 'moderate' | 'hard' | 'very-hard'
   script: string
   notes?: string
+  format: 'ducky' | 'flipper'
+  flipperCompat?: boolean
 }
 
 export interface TargetProfile {

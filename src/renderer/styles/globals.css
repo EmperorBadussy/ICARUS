@@ -214,6 +214,7 @@ input:focus, textarea:focus, select:focus {
 .ducky-delay { color: #22D3EE; }
 .ducky-special { color: #FB923C; }
 .ducky-number { color: #A78BFA; }
+.ducky-flipper { color: #F97316; font-weight: 600; }
 
 .crt-overlay {
   background: repeating-linear-gradient(
