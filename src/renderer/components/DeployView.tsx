@@ -18,7 +18,8 @@ const CATEGORIES = [
   { id: 'exfiltration', label: 'EXFIL', color: '#EC4899' },
   { id: 'network', label: 'NETWORK', color: '#06B6D4' },
   { id: 'evasion', label: 'EVASION', color: '#10B981' },
-  { id: 'pranks', label: 'PRANKS', color: '#FACC15' }
+  { id: 'pranks', label: 'PRANKS', color: '#FACC15' },
+  { id: 'test', label: 'TEST', color: '#22D3EE' }
 ]
 
 const RISK_COLORS: Record<string, string> = {
@@ -159,8 +160,9 @@ export default function DeployView() {
     try {
       await window.icarus.deployPayload(script.category, filename, content)
       setDeployedIds(prev => new Set(prev).add(script.id))
+      // Optimistic update — add to deployed list without serial refresh
+      setDeployed(prev => [...prev, { name: filename, path: `/ext/badusb/${script.category}/${filename}`, category: script.category, size: `${content.length}b` }])
       if (soundEnabled) playOkBeep()
-      await refreshDeployed()
     } catch {
       if (soundEnabled) playWarnTone()
     }
@@ -173,15 +175,7 @@ export default function DeployView() {
       })
       setFlyingPayload(null)
     }, 600)
-
-    setTimeout(() => {
-      setDeployedIds(prev => {
-        const next = new Set(prev)
-        next.delete(script.id)
-        return next
-      })
-    }, 2000)
-  }, [flipper, soundEnabled, refreshDeployed])
+  }, [flipper, soundEnabled])
 
   const deploySelected = useCallback(async () => {
     if (!flipper.found || selected.size === 0) return
@@ -197,7 +191,8 @@ export default function DeployView() {
       }
       if (soundEnabled) playOkBeep()
       setSelected(new Set())
-      await refreshDeployed()
+      // One refresh at the end instead of per-deploy
+      refreshDeployed()
     } catch {
       if (soundEnabled) playWarnTone()
     }

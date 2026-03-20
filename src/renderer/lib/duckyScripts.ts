@@ -4145,5 +4145,441 @@ ENTER
 DELAY 1000
 STRING $out = "$env:TEMP\\av_enum.txt"; "=== REGISTERED AV ===" | Out-File $out; Get-WmiObject -Namespace "root\\SecurityCenter2" -Class AntiVirusProduct -ErrorAction SilentlyContinue | Select-Object displayName, productState, pathToSignedProductExe | Format-List | Out-String | Out-File $out -Append; "=== DEFENDER STATUS ===" | Out-File $out -Append; Get-MpComputerStatus -ErrorAction SilentlyContinue | Select-Object AMServiceEnabled, AntispywareEnabled, AntivirusEnabled, RealTimeProtectionEnabled, BehaviorMonitorEnabled, IoavProtectionEnabled, NISEnabled, OnAccessProtectionEnabled | Format-List | Out-String | Out-File $out -Append; "=== SECURITY PROCESSES ===" | Out-File $out -Append; $avProcs = @('MsMpEng','MpCmdRun','csfalconservice','cb','CylanceSvc','SentinelAgent','SentinelServiceHost','bdagent','avp','kavfs','ekrn','avgnt','avscan','mbam','WRSA','savservice','SEPMasterService','ccSvcHst','tmlisten','ntrtscan','ds_agent','xagt','taniumclient','lacuna','elastic-agent','winlogbeat','filebeat','sysmon'); Get-Process | Where-Object { $avProcs -contains $_.Name } | Select-Object Name, Id, Path | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== SECURITY SERVICES ===" | Out-File $out -Append; Get-Service | Where-Object { $_.DisplayName -match 'defend|sentinel|crowd|carbon|cylance|kaspersky|norton|mcafee|sophos|trend|elastic|sysmon|splunk' } | Select-Object Name, DisplayName, Status | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
 ENTER`
+  },
+
+  // ==================== PRANKS (Flipper Zero BadUSB) ====================
+  // Inspired by community scripts from UberGuidoZ, I-Am-Jakoby, and others
+  {
+    id: 'prank-evil-goose',
+    name: '[Flipper] Evil Goose',
+    category: 'pranks',
+    description: 'Opens a fullscreen animated goose that honks and chases the cursor. Harmless prank that opens a fun website in the browser.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Evil Goose - A goose takes over the screen
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://www.staggeringbeauty.com/
+ENTER
+DELAY 2000
+F11`
+  },
+  {
+    id: 'prank-jump-scare',
+    name: '[Flipper] Jump Scare',
+    category: 'pranks',
+    description: 'Downloads a scary painting image and sets it as the desktop wallpaper. Harmless prank that changes wallpaper to The Scream.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Jump Scare Wallpaper
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "$url='https://upload.wikimedia.org/wikipedia/en/d/dd/The_Scream.jpg'; $path=\\"$env:TEMP\\scare.jpg\\"; (New-Object Net.WebClient).DownloadFile($url,$path); Add-Type -TypeDefinition 'using System.Runtime.InteropServices; public class W{[DllImport(\\"user32.dll\\")] public static extern int SystemParametersInfo(int a,int b,string c,int d);}'; [W]::SystemParametersInfo(20,0,$path,3)"
+ENTER`
+  },
+  {
+    id: 'prank-rage-popups',
+    name: '[Flipper] Rage Popups',
+    category: 'pranks',
+    description: 'Spawns infinite popup message boxes with a goose virus warning. Harmless prank that creates annoying but closeable dialog boxes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Infinite Rage Popups
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "while($true){[System.Windows.Forms.MessageBox]::Show('Your computer has been infected with a goose virus. Honk.','GOOSE ALERT','OK','Warning'); Start-Sleep -Milliseconds 100}"
+ENTER`
+  },
+  {
+    id: 'prank-wallpaper-troll',
+    name: '[Flipper] Wallpaper Troll',
+    category: 'pranks',
+    description: 'Takes a screenshot of the desktop, flips it upside down, and sets it as the wallpaper. Harmless prank that makes the desktop look inverted.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Upside Down Desktop
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 800
+STRING Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $b = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds; $bmp = New-Object Drawing.Bitmap($b.Width,$b.Height); $g = [Drawing.Graphics]::FromImage($bmp); $g.CopyFromScreen($b.Location,[Drawing.Point]::Empty,$b.Size); $bmp.RotateFlip('Rotate180FlipNone'); $bmp.Save("$env:TEMP\\flipped.bmp"); Add-Type 'using System.Runtime.InteropServices; public class W{[DllImport("user32.dll")] public static extern int SystemParametersInfo(int a,int b,string c,int d);}'; [W]::SystemParametersInfo(20,0,"$env:TEMP\\flipped.bmp",3)
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'prank-adv-rickroll',
+    name: '[Flipper] ADV Rick Roll',
+    category: 'pranks',
+    description: 'Plays Rick Roll triggered by ANY mouse movement. Harmless prank that waits silently until the user moves their mouse, then opens the classic video.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Advanced Rick Roll - triggers on mouse move
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Windows.Forms; $pos=[System.Windows.Forms.Cursor]::Position; while([System.Windows.Forms.Cursor]::Position -eq $pos){Start-Sleep -Milliseconds 100}; Start-Process 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'"
+ENTER`
+  },
+  {
+    id: 'prank-we-found-you',
+    name: '[Flipper] We Found You',
+    category: 'pranks',
+    description: 'Opens Google Maps at the target machine GPS location. Harmless prank that shows the user their approximate location on a map.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM We Found You - Shows target location on map
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Device; $w = New-Object System.Device.Location.GeoCoordinateWatcher; $w.Start(); Start-Sleep -Seconds 5; if($w.Position.Location.IsUnknown){Start-Process 'https://www.google.com/maps'}else{$lat=$w.Position.Location.Latitude; $lon=$w.Position.Location.Longitude; Start-Process \\"https://www.google.com/maps?q=$lat,$lon\\"}; $w.Stop()"
+ENTER`
+  },
+  {
+    id: 'prank-endless-notepad',
+    name: '[Flipper] Endless Notepad',
+    category: 'pranks',
+    description: 'Opens 50 notepad windows in rapid succession. Harmless prank that floods the taskbar with notepad instances.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Notepad Bomb
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "1..50 | ForEach-Object { Start-Process notepad; Start-Sleep -Milliseconds 200 }"
+ENTER`
+  },
+  {
+    id: 'prank-voice-insult',
+    name: '[Flipper] Voice Insult',
+    category: 'pranks',
+    description: 'Computer speaks a roast at full volume using text-to-speech. Harmless prank that maxes volume and delivers a funny monologue.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Roast TTS
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "$vol = New-Object -ComObject WScript.Shell; 1..50 | ForEach-Object { $vol.SendKeys([char]175) }; Add-Type -AssemblyName System.Speech; $s = New-Object System.Speech.Synthesis.SpeechSynthesizer; $s.Speak('Excuse me. I have taken control of this computer. Your passwords are weak. Your browser history is concerning. And your desktop organization is an absolute disgrace. Please do better. Thank you.')"
+ENTER`
+  },
+  {
+    id: 'prank-disco-lights',
+    name: '[Flipper] Disco Lights',
+    category: 'pranks',
+    description: 'Rapidly toggles Caps Lock, Num Lock, and Scroll Lock LEDs on the keyboard. Harmless prank that creates a disco light effect.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Keyboard Disco
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Add-Type -AssemblyName System.Windows.Forms; 1..200 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait('{CAPSLOCK}'); Start-Sleep -Milliseconds 50; [System.Windows.Forms.SendKeys]::SendWait('{NUMLOCK}'); Start-Sleep -Milliseconds 50; [System.Windows.Forms.SendKeys]::SendWait('{SCROLLLOCK}'); Start-Sleep -Milliseconds 50 }"
+ENTER`
+  },
+  {
+    id: 'prank-desktop-earthquake',
+    name: '[Flipper] Desktop Earthquake',
+    category: 'pranks',
+    description: 'Rapidly moves the foreground window around the screen randomly. Harmless prank that makes windows shake like an earthquake.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Desktop Earthquake
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Add-Type @'\`nusing System;using System.Runtime.InteropServices;public class W{[DllImport(\\"user32.dll\\")] public static extern bool MoveWindow(IntPtr h,int x,int y,int w,int ht,bool r);[DllImport(\\"user32.dll\\")] public static extern IntPtr GetForegroundWindow();}'@; $r = New-Object Random; 1..30 | ForEach-Object { [W]::MoveWindow([W]::GetForegroundWindow(), $r.Next(0,800), $r.Next(0,600), 800, 600, $true); Start-Sleep -Milliseconds 100 }"
+ENTER`
+  },
+  {
+    id: 'prank-fake-hacker',
+    name: '[Flipper] Fake Hacker Terminal',
+    category: 'pranks',
+    description: 'Opens a green-on-black terminal with fake hacking text scrolling. Harmless prank that displays movie-style hacking animation.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Fake Hacking Terminal
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 800
+STRING $Host.UI.RawUI.BackgroundColor='Black';$Host.UI.RawUI.ForegroundColor='Green';Clear-Host;$msgs=@('Initializing kernel exploit...','Bypassing firewall...','Decrypting password hashes...','Injecting shellcode...','Escalating privileges...','Accessing mainframe...','Downloading classified files...','Covering tracks...','HACK COMPLETE.');foreach($m in $msgs){Write-Host "[$(Get-Date -f 'HH:mm:ss')] $m";Start-Sleep -Milliseconds (Get-Random -Min 500 -Max 2000)};Write-Host "\`n[ACCESS GRANTED]" -ForegroundColor Red
+ENTER`
+  },
+  {
+    id: 'prank-youtube-tripwire',
+    name: '[Flipper] YouTube Tripwire',
+    category: 'pranks',
+    description: 'Opens a surprise YouTube video the instant the mouse moves. Harmless prank that silently waits then launches a video.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM YouTube Tripwire
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Windows.Forms; $p=[System.Windows.Forms.Cursor]::Position; while([System.Windows.Forms.Cursor]::Position -eq $p){Start-Sleep -Milliseconds 50}; Start-Process 'https://www.youtube.com/watch?v=hBe0LIB_Bxg'"
+ENTER`
+  },
+  {
+    id: 'prank-cursor-chaos',
+    name: '[Flipper] Cursor Chaos',
+    category: 'pranks',
+    description: 'Makes the mouse cursor move erratically on its own for a few seconds. Harmless prank that jiggles the cursor randomly.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Cursor Chaos
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Windows.Forms; $r=New-Object Random; 1..100 | ForEach-Object { $x=[System.Windows.Forms.Cursor]::Position.X+$r.Next(-20,20); $y=[System.Windows.Forms.Cursor]::Position.Y+$r.Next(-20,20); [System.Windows.Forms.Cursor]::Position=New-Object Drawing.Point($x,$y); Start-Sleep -Milliseconds 50 }"
+ENTER`
+  },
+  {
+    id: 'prank-ghost-typer',
+    name: '[Flipper] Ghost Typer',
+    category: 'pranks',
+    description: 'Types spooky messages in whatever application is currently focused. Harmless prank that slowly types creepy text then reveals the joke.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Ghost Typer
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 3000
+STRING I can see you...
+DELAY 2000
+STRING I know what you did...
+DELAY 2000
+STRING Check behind you...
+DELAY 3000
+STRING Just kidding. Lock your computer next time.`
+  },
+  {
+    id: 'prank-subscribe-bomb',
+    name: '[Flipper] Subscribe Bomb',
+    category: 'pranks',
+    description: 'Opens 10 different popular YouTube music videos in separate browser tabs. Harmless prank that floods the browser with video tabs.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM YouTube Tab Bomb
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "$urls=@('https://www.youtube.com/watch?v=dQw4w9WgXcQ','https://www.youtube.com/watch?v=hBe0LIB_Bxg','https://www.youtube.com/watch?v=ZZ5LpwO-An4','https://www.youtube.com/watch?v=9bZkp7q19f0','https://www.youtube.com/watch?v=kJQP7kiw5Fk','https://www.youtube.com/watch?v=RgKAFK5djSk','https://www.youtube.com/watch?v=JGwWNGJdvx8','https://www.youtube.com/watch?v=fJ9rUzIMcZQ','https://www.youtube.com/watch?v=3tmd-ClpJxA','https://www.youtube.com/watch?v=60ItHLz5WEA'); foreach($u in $urls){Start-Process $u; Start-Sleep -Milliseconds 500}"
+ENTER`
+  },
+  {
+    id: 'prank-fake-bsod',
+    name: '[Flipper] Blue Screen Fake',
+    category: 'pranks',
+    description: 'Opens a fullscreen fake Blue Screen of Death that looks convincingly real. Harmless prank using a fake update website.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Fake Blue Screen of Death
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://fakeupdate.net/win10/
+ENTER
+DELAY 3000
+F11`
+  },
+  {
+    id: 'prank-speak-everything',
+    name: '[Flipper] Speak Everything',
+    category: 'pranks',
+    description: 'Enables Windows Narrator so the PC reads everything on screen out loud. Harmless prank that activates the built-in accessibility feature.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~2s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Enable Narrator (speaks everything)
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI CTRL ENTER`
+  },
+  {
+    id: 'prank-invert-colors',
+    name: '[Flipper] Invert Colors',
+    category: 'pranks',
+    description: 'Inverts all screen colors using the Windows Magnifier color inversion shortcut. Harmless prank that makes everything look like a photo negative.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Invert Screen Colors
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Start-Process magnify.exe; Start-Sleep -Seconds 1; Add-Type -AssemblyName System.Windows.Forms; [System.Windows.Forms.SendKeys]::SendWait('^%i')"
+ENTER`
+  },
+  {
+    id: 'prank-wifi-disconnect',
+    name: '[Flipper] WiFi Disconnect Loop',
+    category: 'pranks',
+    description: 'Disconnects and reconnects WiFi repeatedly 5 times. Harmless prank that causes intermittent network drops.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~40s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM WiFi Flicker
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "1..5 | ForEach-Object { netsh wlan disconnect; Start-Sleep -Seconds 3; netsh wlan connect name=(netsh wlan show profiles | Select-String ':(.+)$' | Select-Object -First 1).Matches.Groups[1].Value.Trim(); Start-Sleep -Seconds 5 }"
+ENTER`
+  },
+  {
+    id: 'prank-ps-ascii-art',
+    name: '[Flipper] PS Draw',
+    category: 'pranks',
+    description: 'Opens PowerShell and draws ASCII art of a face with a funny message. Harmless prank that displays art in the console.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM PowerShell ASCII Art
+WAIT_FOR_BUTTON_PRESS
+DEFAULT_DELAY 20
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 800
+STRING $Host.UI.RawUI.BackgroundColor='Black';$Host.UI.RawUI.ForegroundColor='Cyan';Clear-Host;Write-Host @"
+DELAY 100
+ENTER
+STRING    __|__
+STRING   |     |
+STRING   | O O |
+STRING   |  ^  |
+STRING   | \\_/ |
+STRING   |_____|
+STRING  /|     |\\
+STRING / |     | \\
+STRING   |     |
+STRING   |     |
+STRING   d     b
+ENTER
+STRING "@
+ENTER
+STRING Write-Host "\`nI HAVE TAKEN OVER THIS COMPUTER\`nJust kidding. But seriously, lock your workstation." -ForegroundColor Yellow
+ENTER`
   }
 ]
