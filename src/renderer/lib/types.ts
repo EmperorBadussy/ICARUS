@@ -1,4 +1,4 @@
-export type ViewId = 'wings' | 'forge' | 'flight' | 'wax' | 'sun' | 'academy' | 'deploy' | 'loot'
+export type ViewId = 'wings' | 'forge' | 'flight' | 'wax' | 'sun' | 'academy' | 'deploy' | 'loot' | 'ble-tools'
 
 export interface DuckyScript {
   id: string
