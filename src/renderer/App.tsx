@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Feather, Hammer, Plane, Shield, Sun, GraduationCap, Volume2, VolumeX
+  Feather, Hammer, Plane, Shield, Sun, GraduationCap, Volume2, VolumeX, Usb
 } from 'lucide-react'
 import { useAppStore } from './lib/stores/app'
 import type { ViewId } from './lib/types'
@@ -13,6 +13,7 @@ import FlightView from './components/FlightView'
 import WaxView from './components/WaxView'
 import SunView from './components/SunView'
 import AcademyView from './components/academy/AcademyView'
+import DeployView from './components/DeployView'
 
 const NAV_ITEMS: { id: ViewId; icon: typeof Feather; label: string; fullLabel: string }[] = [
   { id: 'wings', icon: Feather, label: 'WINGS', fullLabel: 'Script Library' },
@@ -21,6 +22,7 @@ const NAV_ITEMS: { id: ViewId; icon: typeof Feather; label: string; fullLabel: s
   { id: 'wax', icon: Shield, label: 'WAX', fullLabel: 'Encoder' },
   { id: 'sun', icon: Sun, label: 'SUN', fullLabel: 'Target Config' },
   { id: 'academy', icon: GraduationCap, label: 'ACADEMY', fullLabel: 'Training' },
+  { id: 'deploy', icon: Usb, label: 'DEPLOY', fullLabel: 'Flipper Sync' },
 ]
 
 function Sidebar() {
@@ -107,6 +109,7 @@ function ViewRenderer({ view }: { view: ViewId }) {
     case 'wax': return <WaxView />
     case 'sun': return <SunView />
     case 'academy': return <AcademyView />
+    case 'deploy': return <DeployView />
   }
 }
 
@@ -118,8 +121,8 @@ export default function App() {
     const handleKey = (e: KeyboardEvent) => {
       if (e.altKey) {
         const num = parseInt(e.key)
-        if (num >= 1 && num <= 6) {
-          const views: ViewId[] = ['wings', 'forge', 'flight', 'wax', 'sun', 'academy']
+        if (num >= 1 && num <= 7) {
+          const views: ViewId[] = ['wings', 'forge', 'flight', 'wax', 'sun', 'academy', 'deploy']
           setActiveView(views[num - 1])
         }
       }
