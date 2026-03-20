@@ -3,7 +3,7 @@ export type ViewId = 'wings' | 'forge' | 'flight' | 'wax' | 'sun' | 'academy' | 
 export interface DuckyScript {
   id: string
   name: string
-  category: 'recon' | 'credentials' | 'reverse-shells' | 'persistence' | 'exfiltration' | 'network' | 'evasion' | 'pranks'
+  category: 'recon' | 'credentials' | 'reverse-shells' | 'persistence' | 'exfiltration' | 'network' | 'evasion' | 'pranks' | 'test'
   description: string
   targetOS: ('windows' | 'macos' | 'linux')[]
   riskLevel: 'low' | 'medium' | 'high' | 'critical'
