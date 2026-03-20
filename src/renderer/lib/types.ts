@@ -1,4 +1,4 @@
-export type ViewId = 'wings' | 'forge' | 'flight' | 'wax' | 'sun' | 'academy' | 'deploy'
+export type ViewId = 'wings' | 'forge' | 'flight' | 'wax' | 'sun' | 'academy' | 'deploy' | 'loot'
 
 export interface DuckyScript {
   id: string
@@ -43,6 +43,17 @@ export interface DeployedPayload {
   size: string
 }
 
+export interface LootSession {
+  session: string  // e.g., "DESKTOP-ABC_20260320_1530"
+  path: string
+  files: Array<{name: string, size: string}>
+}
+
+export interface LootFile {
+  content: string
+  path: string
+}
+
 declare global {
   interface Window {
     icarus: {
@@ -55,6 +66,8 @@ declare global {
       listDeployed: () => Promise<Array<{ name: string; path: string; category: string; size: string }>>
       deployPayload: (category: string, filename: string, content: string) => Promise<{ success: boolean; path: string }>
       removePayload: (filePath: string) => Promise<{ success: boolean }>
+      listLoot: () => Promise<LootSession[]>
+      pullLoot: (filepath: string) => Promise<LootFile>
     }
   }
 }

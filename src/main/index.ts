@@ -261,6 +261,24 @@ ipcMain.handle('flipper:remove', async (_event, filepath: string) => {
   }
 })
 
+ipcMain.handle('flipper:list-loot', async () => {
+  try {
+    const result = runFlipperCommand('list-loot', { timeout: 15000 })
+    return JSON.parse(result)
+  } catch {
+    return []
+  }
+})
+
+ipcMain.handle('flipper:pull-loot', async (_event, filepath: string) => {
+  try {
+    const result = runFlipperCommand(`pull-loot "${filepath}"`, { timeout: 10000 })
+    return JSON.parse(result)
+  } catch (e) {
+    return { content: '', path: filepath, error: String(e) }
+  }
+})
+
 app.whenReady().then(createWindow)
 
 app.on('window-all-closed', () => {

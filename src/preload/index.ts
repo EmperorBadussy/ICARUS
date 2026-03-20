@@ -9,5 +9,7 @@ contextBridge.exposeInMainWorld('icarus', {
   detectFlipper: () => ipcRenderer.invoke('flipper:detect'),
   listDeployed: () => ipcRenderer.invoke('flipper:list-deployed'),
   deployPayload: (category: string, filename: string, content: string) => ipcRenderer.invoke('flipper:deploy', category, filename, content),
-  removePayload: (filePath: string) => ipcRenderer.invoke('flipper:remove', filePath)
+  removePayload: (filePath: string) => ipcRenderer.invoke('flipper:remove', filePath),
+  listLoot: () => ipcRenderer.invoke('flipper:list-loot'),
+  pullLoot: (filepath: string) => ipcRenderer.invoke('flipper:pull-loot', filepath)
 })

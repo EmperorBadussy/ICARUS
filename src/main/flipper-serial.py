@@ -114,6 +114,73 @@ def cmd_remove(filepath):
     ser.close()
     print(json.dumps({"success": True}))
 
+def cmd_list_loot():
+    """List all loot files on Flipper at /ext/badusb/loot/"""
+    port = find_flipper()
+    if not port:
+        print(json.dumps({"error": "Flipper not found"}))
+        return
+
+    ser = serial.Serial(port, BAUD, timeout=2)
+    time.sleep(0.5)
+
+    loot_path = "/ext/badusb/loot"
+    response = send_command(ser, f'storage list {loot_path}', 1)
+
+    loot_items = []
+    for line in response.split('\n'):
+        line = line.strip()
+        if line.startswith('[D]'):
+            session = line[4:].strip()
+            sub_response = send_command(ser, f'storage list {loot_path}/{session}', 1)
+            files = []
+            for sub_line in sub_response.split('\n'):
+                sub_line = sub_line.strip()
+                if sub_line.startswith('[F]'):
+                    parts = sub_line[4:].strip()
+                    name_size = parts.rsplit(' ', 1)
+                    fname = name_size[0].strip()
+                    fsize = name_size[1] if len(name_size) > 1 else '0b'
+                    files.append({"name": fname, "size": fsize})
+            loot_items.append({"session": session, "path": f"{loot_path}/{session}", "files": files})
+        elif line.startswith('[F]'):
+            parts = line[4:].strip()
+            name_size = parts.rsplit(' ', 1)
+            fname = name_size[0].strip()
+            fsize = name_size[1] if len(name_size) > 1 else '0b'
+            loot_items.append({"session": "unsorted", "path": loot_path, "files": [{"name": fname, "size": fsize}]})
+
+    ser.close()
+    print(json.dumps(loot_items))
+
+def cmd_pull_loot(filepath):
+    """Read a loot file from Flipper and return its contents"""
+    port = find_flipper()
+    if not port:
+        print(json.dumps({"error": "Flipper not found"}))
+        return
+
+    ser = serial.Serial(port, BAUD, timeout=3)
+    time.sleep(0.5)
+
+    response = send_command(ser, f'storage read {filepath}', 2)
+
+    lines = response.split('\n')
+    content_lines = []
+    started = False
+    for line in lines:
+        if 'storage read' in line:
+            started = True
+            continue
+        if started and line.strip().startswith('>:'):
+            break
+        if started:
+            content_lines.append(line.rstrip())
+
+    content = '\n'.join(content_lines).strip()
+    ser.close()
+    print(json.dumps({"content": content, "path": filepath}))
+
 if __name__ == '__main__':
     command = sys.argv[1] if len(sys.argv) > 1 else 'detect'
 
@@ -130,5 +197,10 @@ if __name__ == '__main__':
     elif command == 'remove':
         filepath = sys.argv[2]
         cmd_remove(filepath)
+    elif command == 'list-loot':
+        cmd_list_loot()
+    elif command == 'pull-loot':
+        filepath = sys.argv[2]
+        cmd_pull_loot(filepath)
     else:
         print(json.dumps({"error": f"Unknown command: {command}"}))
